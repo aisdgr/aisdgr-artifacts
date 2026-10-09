@@ -19,10 +19,11 @@ current artifact semantics.
 ## Public-layout checkpoint results
 
 - 250 YAML files parsed successfully; no syntax errors were reported.
-- The five moved artifact subtrees (`rule_library/schema`,
-  `rule_library/rules`, `rule_library/ruleset`,
-  `specification_templates/templates`, and `archive/history`) have the same
-  Git tree objects as their mapped paths at legacy commit `c36fb8d…`.
+- The BRA and archive artifact subtrees (`rule_library/schema`,
+  `rule_library/rules`, `rule_library/ruleset`, and `archive/history`) have the
+  same Git tree objects as their mapped paths at legacy commit `c36fb8d…`.
+  The VSS files are byte-identical to source `templates/`, split by format into
+  `specification_templates/schema/` and `specification_templates/examples/`.
 - Thirteen relative links in 17 current/navigation Markdown files were checked;
   none were broken. Historical archive links were not rewritten and are outside
   this current-link assertion.

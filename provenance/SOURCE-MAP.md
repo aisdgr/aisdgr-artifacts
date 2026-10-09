@@ -17,7 +17,8 @@
 | `rule_library/schema/`                     | `aisdgr/schema/`  | `c36fb8d…`    | Byte-preserving move                                | BRA                  |
 | `rule_library/rules/`                      | `aisdgr/rules/`   | `c36fb8d…`    | Byte-preserving move                                | BRA                  |
 | `rule_library/ruleset/`                    | `aisdgr/ruleset/` | `c36fb8d…`    | Byte-preserving move; inherited findings documented | BRA                  |
-| `specification_templates/templates/`       | `templates/`      | `c36fb8d…`    | Byte-preserving move                                | VSS                  |
+| `specification_templates/schema/*.yaml`    | `templates/*.yaml` | `c36fb8d…`   | Byte-preserving move                                | VSS                  |
+| `specification_templates/examples/*.md`    | `templates/*.md`   | `c36fb8d…`   | Byte-preserving move                                | VSS                  |
 | `archive/history/`                         | `history/`        | `c36fb8d…`    | Byte-preserving move of complete selected snapshot  | Historical research  |
 | Repository navigation and provenance files | None              | New curation  | Newly authored                                      | Repository-level     |
 
