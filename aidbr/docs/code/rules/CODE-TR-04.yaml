@@ -1,0 +1,79 @@
+# ==============================================================================
+# CODE-TR-04.yaml
+# Existing Trace IDs MUST NOT be removed.
+# ==============================================================================
+
+rule:
+  id: CODE-TR-04
+  execution_view: traceability_engineer
+  constraint: >
+    Trace IDs present in the input artifact MUST NOT be absent 
+    from the corresponding output artifact.
+
+  # ---------------------------------------------------------------------------
+  # Boundary
+  # ---------------------------------------------------------------------------
+  boundary:
+    domain:
+      - code
+    artifact:
+      - source_code
+    rule_category:
+      - traceability
+    rule_domain:
+      - CODE
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent
+    # -------------------------------------------------------------------------
+    intent:
+      rationale:
+        - preserve_trace_continuity
+        - prevent_trace_erasure
+        - maintain_audit_chain_integrity
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_generator
+      human:
+        - code_regulator
+      system:
+        - validator
+
+    # -------------------------------------------------------------------------
+    # Applicability Context
+    # -------------------------------------------------------------------------
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - code_modification
+        - code_refactor
+        - defect_fix
+      risk: traceability
+      severity: high
+      reason:
+        - trace_id_removal
+        - loss_of_code_origin
+        - audit_chain_break
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      level: foundational
+      affected_capabilities:
+        - traceability
+        - auditability
+        - accountability

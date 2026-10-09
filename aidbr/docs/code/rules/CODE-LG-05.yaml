@@ -1,0 +1,56 @@
+# ==============================================================================
+# CODE-LG-05.yaml
+# A change summary MUST be provided.
+# ==============================================================================
+
+rule:
+  id: CODE-LG-05
+  execution_view: logging_engineer
+
+  constraint: >
+    Each code execution that results in changes
+    MUST include a change summary.
+
+  boundary:
+    domain:
+      - code
+    artifact:
+      - execution_record
+    rule_category:
+      - logging
+    rule_domain:
+      - CODE
+
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    intent:
+      rationale:
+        - preserve_change_intent
+        - enable_review_and_audit
+
+    responsibilities:
+      ai:
+        - code_executor
+      system:
+        - change_summarizer
+
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - code_change
+      risk:
+        - traceability
+      severity:
+        - medium
+      reason:
+        - missing_change_summary
+
+    governance_impact:
+      level: enforce
+      affected_capabilities:
+        - auditability
+        - reviewability

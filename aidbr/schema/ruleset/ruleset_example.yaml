@@ -1,0 +1,88 @@
+# ==============================================================================
+# ruleset_example.yaml
+# ==============================================================================
+
+ruleset:
+  id: DEV-GEN-CODE-JWT-BASELINE
+
+  # ---------------------------------------------------------------------------
+  # Included Rules
+  # ---------------------------------------------------------------------------
+  # References to individual rules by identifier.
+  # Rulesets MUST NOT modify or override rule definitions.
+  includes:
+    - rule_id: GEN-NEW-CODE-ADD-JWT
+      version: ">=1.0.0"
+
+    - rule_id: GEN-NEW-CODE-JWT-VALIDATION
+      version: ">=1.0.0"
+
+  # ---------------------------------------------------------------------------
+  # Applicability (Decision Lens)
+  # ---------------------------------------------------------------------------
+  # Describes the decision scope where this ruleset is relevant.
+  # This field defines a governance lens, NOT execution conditions.
+  applicability:
+    domain:
+      - backend_development
+      - api_design
+    system:
+      - authentication_service
+    phase:
+      - development
+    artifact:
+      - source_code
+      - api_specification
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: "1.0.0"
+    status: active
+    owner: platform_engineering
+
+    # -------------------------------------------------------------------------
+    # Intent (Optional)
+    # -------------------------------------------------------------------------
+    # Explains why this ruleset exists from a governance perspective.
+    intent:
+      domain:
+        - identity_and_access_management
+      industry:
+        - fintech
+      regulation_reference:
+        - ISO_27001
+        - ISO_42001
+      policy_category:
+        - secure_code_generation
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    # Declares governance-level accountability related to this ruleset.
+    responsibilities:
+      ai:
+        - code_generator
+      human:
+        - tech_lead
+        - security_reviewer
+      system:
+        - policy_auditor
+      committee:
+        - security_architecture_board
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    # Descriptive governance-level implications of adopting this ruleset.
+    governance_impact:
+      audit_scope:
+        - generated_source_code
+        - authentication_logic
+      reporting:
+        - jwt_usage_summary
+        - missing_claim_report
+      risk_category:
+        - authentication
+        - authorization

@@ -1,0 +1,270 @@
+# ==============================================================================
+# rule.schema.yaml
+# ID: dev-scr-rule-schema
+# Version: 1.0.0
+# Status: draft
+# Description: 
+#   Conceptual structural schema for declarative governance rules.
+#   This schema defines form and boundaries only.
+#   Rule meaning and enforcement are defined by rulesets
+#   and governance policy outside this schema. 
+# ==============================================================================
+# Conceptual Rule Schema
+#
+# This schema defines the structural boundaries for expressing
+# governance-aware constraint rules.
+#
+# Design Principles:
+# - CNL is the ONLY normative constraint representation.
+# - All other fields are descriptive and non-executable.
+# - Governance information MUST NOT influence execution behavior.
+# - This schema defines structure and allowed form only,
+#   not policy meaning or behavioral semantics.
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Schema Root
+# ------------------------------------------------------------------------------
+type: object
+description: >
+  Declarative rule definition.
+  A rule is a governance artifact expressed in structured
+  natural language. The schema defines structure only.
+  All semantics are defined outside this schema.
+
+required:
+  - rule
+
+properties:
+
+  # =============================================================================
+  # Rule
+  # =============================================================================
+  rule:
+    type: object
+    description: >
+      A rule defines a single normative constraint together with
+      its governance and interpretation context.
+      A rule MUST contain exactly one constraint.
+
+    required:
+      - id
+      - execution_view
+      - constraint
+
+    properties:
+
+      # -------------------------------------------------------------------------
+      # Rule Identifier
+      # -------------------------------------------------------------------------
+      id:
+        type: string
+        description: >
+          Unique identifier of the rule.
+          The identifier is used for reference, versioning,
+          traceability, and governance discussions.
+
+      # -------------------------------------------------------------------------
+      # Execution View
+      # -------------------------------------------------------------------------
+      execution_view:
+        type: string
+        description: >
+          Defines the interpretation viewpoint used by the LLM
+          when applying the constraint.
+          This field specifies how the constraint is interpreted,
+          NOT who is responsible, and NOT a role-playing instruction.
+
+      # -------------------------------------------------------------------------
+      # Constraint (Normative Core)
+      # -------------------------------------------------------------------------
+      constraint:
+        type: string
+        description: >
+          The sole normative constraint expressed in Controlled Natural Language (CNL).
+          This is the ONLY field that may contain mandatory or prohibitive language
+          such as MUST, MUST NOT, SHALL, or SHALL NOT.
+          All constraint behavior MUST be derived from this field.
+
+      # -------------------------------------------------------------------------
+      # Boundary
+      # -------------------------------------------------------------------------
+      boundary:
+        type: map
+        description: >
+          Declares the decision scope in which the constraint is applicable.
+          Boundary is descriptive and declarative.
+          It MUST NOT introduce conditions, execution logic,
+          or control flow semantics.
+
+        value:
+          oneOf:
+            - type: string
+            - type: list
+              item:
+                type: string
+            - type: object
+              description: >
+                Enterprise- or domain-defined boundary attributes.
+                Keys and values are fully customizable.
+              additionalProperties:
+                oneOf:
+                  - type: string
+                  - type: list
+                    item:
+                      type: string
+
+      # -------------------------------------------------------------------------
+      # Governance
+      # -------------------------------------------------------------------------
+      governance:
+        type: object
+        description: >
+          Governance metadata associated with the rule.
+          Governance information is descriptive and MUST NOT
+          participate in constraint execution or control flow.
+
+        required:
+          - version
+          - status
+          - owner
+
+        properties:
+
+          # ---------------------------------------------------------------------
+          # Governance Version
+          # ---------------------------------------------------------------------
+          version:
+            type: string
+            description: >
+              Version of the governance definition for this rule.
+              Used for auditability and lifecycle tracking.
+
+          # ---------------------------------------------------------------------
+          # Governance Status
+          # ---------------------------------------------------------------------
+          status:
+            type: string
+            description: >
+              Current governance status of the rule
+              (e.g., active, deprecated, draft).
+
+          # ---------------------------------------------------------------------
+          # Governance Owner
+          # ---------------------------------------------------------------------
+          owner:
+            type: string
+            description: >
+              Organization or authority responsible
+              for governing this rule.
+
+          # ---------------------------------------------------------------------
+          # Intent (Optional Governance Annotation)
+          # ---------------------------------------------------------------------
+          intent:
+            type: map
+            description: >
+              Optional governance annotation describing
+              why the rule exists.
+              Intent is informational and non-normative.
+              It MUST NOT introduce conditions,
+              execution logic, or risk evaluation.
+
+            value:
+              oneOf:
+                - type: string
+                - type: list
+                  item:
+                    type: string
+                - type: object
+                  description: >
+                    Organization-defined intent attributes.
+                    Used for rationale, policy alignment,
+                    or governance explanation.
+                  additionalProperties:
+                    oneOf:
+                      - type: string
+                      - type: list
+                        item:
+                          type: string
+
+          # ---------------------------------------------------------------------
+          # Responsibilities
+          # ---------------------------------------------------------------------
+          responsibilities:
+            type: map
+            description: >
+              Declares accountability of stakeholders
+              related to the rule.
+              Responsibilities do NOT affect execution behavior
+              and do NOT imply control authority.
+
+            value:
+              type: object
+              additionalProperties:
+                type: list
+                item:
+                  type: string
+
+          # ---------------------------------------------------------------------
+          # Applicability Context
+          # ---------------------------------------------------------------------
+          applicability_context:
+            type: map
+            description: >
+              Descriptive context used for governance interpretation.
+              This field describes WHEN the rule is relevant
+              from a governance perspective.
+              It MUST NOT be interpreted as a condition or trigger.
+
+            value:
+              oneOf:
+                - type: string
+                - type: list
+                  item:
+                    type: string
+                - type: object
+                  description: >
+                    Organization-defined contextual attributes.
+                    Used for risk description, scenarios,
+                    or classification.
+                  additionalProperties:
+                    oneOf:
+                      - type: string
+                      - type: list
+                        item:
+                          type: string
+
+          # ---------------------------------------------------------------------
+          # Governance Impact
+          # ---------------------------------------------------------------------
+          governance_impact:
+            type: map
+            description: >
+              Governance-level interpretation of outcomes,
+              implications, and evidence expectations.
+              This field is descriptive and non-executable.
+              It MUST NOT be interpreted as an action or instruction.
+
+            value:
+              oneOf:
+                - type: string
+                - type: list
+                  item:
+                    type: string
+                - type: object
+                  description: >
+                    Organization-defined impact attributes,
+                    such as classifications, reporting expectations,
+                    or audit implications.
+                  additionalProperties:
+                    oneOf:
+                      - type: string
+                      - type: list
+                        item:
+                          type: string
+
+# ------------------------------------------------------------------------------
+# Validation Constraints
+# ------------------------------------------------------------------------------
+additionalProperties: false

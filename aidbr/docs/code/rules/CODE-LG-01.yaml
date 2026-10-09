@@ -1,0 +1,79 @@
+# ==============================================================================
+# CODE-LG-01.yaml
+# Each execution MUST produce a locatable execution record.
+# ==============================================================================
+
+rule:
+  id: CODE-LG-01
+  execution_view: logging_engineer
+
+  constraint: >
+    Each code execution MUST produce
+    a locatable execution record.
+
+  # ---------------------------------------------------------------------------
+  # Boundary
+  # ---------------------------------------------------------------------------
+  boundary:
+    domain:
+      - code
+    artifact:
+      - execution_record
+    rule_category:
+      - logging
+    rule_domain:
+      - CODE
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent
+    # -------------------------------------------------------------------------
+    intent:
+      rationale:
+        - ensure_execution_observability
+        - prevent_untraceable_execution
+        - enable_post_execution_audit
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_executor
+      system:
+        - execution_logger
+        - record_locator
+
+    # -------------------------------------------------------------------------
+    # Applicability Context
+    # -------------------------------------------------------------------------
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - code_execution
+      risk:
+        - auditability
+        - governance
+      severity:
+        - medium
+      reason:
+        - missing_execution_record
+        - non_locatable_record
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      level: enforce
+      affected_capabilities:
+        - execution_traceability
+        - auditability
+        - accountability

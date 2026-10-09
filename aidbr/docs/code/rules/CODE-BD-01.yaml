@@ -1,0 +1,79 @@
+# ==============================================================================
+# CODE-BD-01.yaml
+# Code execution MUST stop if no boundary is declared.
+# ==============================================================================
+
+rule:
+  id: CODE-BD-01
+  execution_view: boundary_engineer
+  constraint: >
+    Code execution MUST stop if no explicit boundary declaration is present.
+
+  # ---------------------------------------------------------------------------
+  # Boundary
+  # ---------------------------------------------------------------------------
+  boundary:
+    domain:
+      - code
+    artifact:
+      - source_code
+    rule_category:
+      - boundary
+    rule_domain:
+      - CODE
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent
+    # -------------------------------------------------------------------------
+    intent:
+      rationale:
+        - prevent_unbounded_modification
+        - enforce_explicit_scope
+        - eliminate_inferred_boundaries
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_generator
+      human:
+        - code_regulator
+      system:
+        - validator
+
+    # -------------------------------------------------------------------------
+    # Applicability Context
+    # -------------------------------------------------------------------------
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - code_generation
+        - code_modification
+        - code_refactor
+        - defect_fix
+      risk: boundary
+      severity: high
+      reason:
+        - boundary_missing
+        - scope_inference_risk
+        - uncontrolled_change_risk
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      level: foundational
+      affected_capabilities:
+        - boundary_enforcement
+        - auditability
+        - accountability

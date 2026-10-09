@@ -1,0 +1,150 @@
+# ==============================================================================
+# cnl.validation.yaml
+# ID: dev-scr-cnl-validation-schema
+# Version: 1.0.0
+# Status: draft
+# Description: 
+#   Structural schema for validating CNL constraint statements.
+#   Validation focuses on linguistic correctness and clarity
+#   for AI consumption, not normative enforcement.
+# ==============================================================================
+# Defines the structure of a validation result for CNL artifacts.
+#
+# Purpose:
+# - Evaluate the quality and clarity of CNL statements.
+# - Validate keyword usage, patterns, and structural integrity.
+#
+# This schema:
+# - DOES NOT impose normative obligations.
+# - DOES NOT define execution or control flow.
+#
+# Validation answers:
+# "Is this CNL statement well-formed and unambiguous for AI processing?"
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Schema Definition
+# ------------------------------------------------------------------------------
+
+type: object
+description: >
+  Validation result for CNL constraint artifacts.
+  This document reports structural and linguistic issues found
+  during CNL validation.
+
+required:
+  - target
+  - summary
+  - findings
+
+properties:
+
+  # --------------------------------------------------------------------------
+  # Target
+  # --------------------------------------------------------------------------
+  target:
+    type: object
+    description: >
+      Identifies the CNL artifact being validated.
+    required:
+      - cnl_id
+      - cnl_version
+    properties:
+      cnl_id:
+        type: string
+        description: >
+          Identifier of the validated CNL artifact.
+
+      cnl_version:
+        type: string
+        description: >
+          Version of the validated CNL artifact.
+
+  # --------------------------------------------------------------------------
+  # Summary
+  # --------------------------------------------------------------------------
+  summary:
+    type: object
+    description: >
+      Aggregated validation outcome.
+    required:
+      - status
+      - issue_count
+    properties:
+      status:
+        type: string
+        enum:
+          - ok
+          - warning
+          - failed
+        description: >
+          Overall validation status for the CNL artifact.
+
+      issue_count:
+        type: object
+        description: >
+          Count of findings by severity.
+        properties:
+          info:
+            type: integer
+          warning:
+            type: integer
+          high:
+            type: integer
+
+  # --------------------------------------------------------------------------
+  # Findings
+  # --------------------------------------------------------------------------
+  findings:
+    type: list
+    description: >
+      Detailed validation findings for specific CNL statements.
+    item:
+      type: object
+      required:
+        - id
+        - category
+        - severity
+        - message
+      properties:
+        id:
+          type: string
+          description: >
+            Unique identifier of the finding.
+
+        statement_ref:
+          type: string
+          description: >
+            Reference to the specific statement or index within the artifact.
+
+        category:
+          type: string
+          description: >
+            Classification of the issue (e.g. pattern_violation, 
+            keyword_violation, ambiguity).
+
+        location:
+          type: string
+          description: >
+            Location within the CNL artifact where the issue was found.
+
+        severity:
+          type: string
+          enum:
+            - info
+            - warning
+            - high
+          description: >
+            Severity of the validation finding.
+
+        message:
+          type: string
+          description: >
+            Human-readable explanation of the issue.
+
+        suggestion:
+          type: string
+          description: >
+            Suggested correction to align with CNL patterns.
+
+additionalProperties: false

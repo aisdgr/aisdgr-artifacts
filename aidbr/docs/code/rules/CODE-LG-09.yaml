@@ -1,0 +1,55 @@
+# ==============================================================================
+# CODE-LG-09.yaml
+# Rule violations MUST NOT be silently ignored.
+# ==============================================================================
+
+rule:
+  id: CODE-LG-09
+  execution_view: governance_observer
+
+  constraint: >
+    Rule violations MUST NOT be silently ignored
+    and MUST be explicitly recorded and reported.
+
+  boundary:
+    domain:
+      - code
+    artifact:
+      - rule_report
+    rule_category:
+      - governance
+    rule_domain:
+      - CODE
+
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    intent:
+      rationale:
+        - prevent_governance_evasion
+        - enforce_visibility_of_violations
+
+    responsibilities:
+      system:
+        - rule_enforcer
+        - report_generator
+
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - governance_enforcement
+      risk:
+        - governance
+      severity:
+        - critical
+      reason:
+        - silent_rule_violation
+
+    governance_impact:
+      level: blocking
+      affected_capabilities:
+        - governance_integrity
+        - accountability

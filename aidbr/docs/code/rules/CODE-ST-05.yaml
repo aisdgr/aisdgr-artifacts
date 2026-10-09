@@ -1,0 +1,80 @@
+# ==============================================================================
+# CODE-ST-05.yaml
+# Removal of existing behavior is forbidden unless explicitly allowed.
+# ==============================================================================
+
+rule:
+  id: CODE-ST-05
+  execution_view: structure_engineer
+
+  constraint: >
+    Code execution MUST NOT remove existing behavior
+    unless explicit permission for behavior removal
+    has been declared.
+
+  # ---------------------------------------------------------------------------
+  # Boundary
+  # ---------------------------------------------------------------------------
+  boundary:
+    domain:
+      - code
+    artifact:
+      - source_code
+    rule_category:
+      - structural_change
+    rule_domain:
+      - CODE
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent
+    # -------------------------------------------------------------------------
+    intent:
+      rationale:
+        - prevent_silent_behavior_removal
+        - preserve_backward_compatibility
+        - enforce_explicit_deprecation_intent
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_executor
+      system:
+        - behavior_validator
+        - structure_validator
+
+    # -------------------------------------------------------------------------
+    # Applicability Context
+    # -------------------------------------------------------------------------
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - behavior_removal
+      risk:
+        - architecture
+        - correctness
+      severity:
+        - high
+      reason:
+        - unauthorized_behavior_removal
+        - backward_compatibility_risk
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      level: blocking
+      affected_capabilities:
+        - behavioral_integrity
+        - backward_compatibility
+        - auditability

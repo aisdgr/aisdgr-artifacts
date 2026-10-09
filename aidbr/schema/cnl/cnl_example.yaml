@@ -1,0 +1,5 @@
+statements:
+  - "Report MUST count warning entries."
+  - "Generation MUST stop on any error."
+  - "Output MUST include a warning summary section."
+  - "Generator MUST NOT modify files outside the declared file scope."

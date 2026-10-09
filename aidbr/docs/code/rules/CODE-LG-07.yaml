@@ -1,0 +1,56 @@
+# ==============================================================================
+# CODE-LG-07.yaml
+# A rule-evaluation report MUST be generated.
+# ==============================================================================
+
+rule:
+  id: CODE-LG-07
+  execution_view: governance_observer
+
+  constraint: >
+    Each execution MUST generate a rule-evaluation report.
+
+  boundary:
+    domain:
+      - code
+    artifact:
+      - execution_record
+      - rule_report
+    rule_category:
+      - logging
+      - governance
+    rule_domain:
+      - CODE
+
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    intent:
+      rationale:
+        - expose_rule_application
+        - prevent_silent_governance
+
+    responsibilities:
+      system:
+        - rule_evaluator
+        - report_generator
+
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - rule_evaluation
+      risk:
+        - governance
+      severity:
+        - high
+      reason:
+        - missing_rule_report
+
+    governance_impact:
+      level: enforce
+      affected_capabilities:
+        - governance_visibility
+        - auditability

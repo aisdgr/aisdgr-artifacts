@@ -1,0 +1,73 @@
+# ==============================================================================
+# CODE-BD-06.yaml
+# Code MUST NOT introduce undeclared external dependencies.
+# ==============================================================================
+
+rule:
+  id: CODE-BD-06
+  execution_view: boundary_engineer
+
+  constraint: >
+    Code execution MUST NOT introduce any external dependency
+    that is not explicitly declared within the resolved execution boundary.
+
+  # ---------------------------------------------------------------------------
+  # Boundary
+  # ---------------------------------------------------------------------------
+  boundary:
+    domain:
+      - code
+    artifact:
+      - source_code
+    rule_category:
+      - boundary
+    rule_domain:
+      - CODE
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent
+    # -------------------------------------------------------------------------
+    intent:
+      rationale:
+        - prevent_implicit_dependency_introduction
+        - enforce_dependency_containment
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_executor
+      system:
+        - boundary_validator
+
+    # -------------------------------------------------------------------------
+    # Applicability Context
+    # -------------------------------------------------------------------------
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - code_execution
+      reason:
+        - undeclared_dependency
+        - boundary_violation
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      level: blocking
+      affected_capabilities:
+        - boundary_enforcement
+        - execution_safety
+        - supply_chain_integrity
+        - auditability

@@ -1,0 +1,75 @@
+# ==============================================================================
+# CODE-TR-01.yaml
+# Generated code MUST include a Trace ID.
+# ==============================================================================
+rule:
+  id: CODE-TR-01
+  execution_view: traceability_engineer
+  constraint: > 
+    Each output source code artifact that is generated or modified
+    MUST include at least one Trace ID.
+
+  # ---------------------------------------------------------------------------
+  # Boundary
+  # ---------------------------------------------------------------------------
+  boundary:
+    domain:
+      - code
+    artifact:
+      - source_code
+    rule_category:
+      - traceability
+    rule_domain:
+      - CODE
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent
+    # -------------------------------------------------------------------------
+    intent:
+      rationale:
+        - enforce_minimum_traceability
+        - prevent_orphan_code
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_generator
+      human:
+        - code_regulator
+      system:
+        - validator
+
+    # -------------------------------------------------------------------------
+    # Applicability Context
+    # -------------------------------------------------------------------------
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - code_generation
+        - code_modification
+      risk: traceability
+      severity: high
+      reason:
+        - missing_trace_id_in_code
+        - inability_to_track_code_origin
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      level: foundational
+      affected_capabilities:
+        - traceability
+        - auditability
+        - accountability

@@ -1,0 +1,9 @@
+statements:
+  - text: "Report MUST count warning entries."
+    # 報告必須計算警告條目數量。
+  - text: "Generation MUST stop on any error."
+    # 發生任何錯誤時，生成程序必須停止。
+  - text: "Output MUST include a warning summary section."
+    # 輸出內容必須包含警告摘要章節。
+  - text: "Generator MUST NOT modify files outside the declared file scope."
+    # 生成器絕不可修改宣告檔案範圍之外的檔案。

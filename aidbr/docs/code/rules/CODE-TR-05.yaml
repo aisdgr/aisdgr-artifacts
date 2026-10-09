@@ -1,0 +1,81 @@
+# ==============================================================================
+# CODE-TR-05.yaml
+# Orphan code without Trace IDs MUST NOT be generated.
+# ==============================================================================
+
+rule:
+  id: CODE-TR-05
+  execution_view: traceability_engineer
+  constraint: >
+    No output source code artifact without a Trace ID
+    MUST be generated.
+
+  # ---------------------------------------------------------------------------
+  # Boundary
+  # ---------------------------------------------------------------------------
+  boundary:
+    domain:
+      - code
+    artifact:
+      - source_code
+    rule_category:
+      - traceability
+    rule_domain:
+      - CODE
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent
+    # -------------------------------------------------------------------------
+    intent:
+      rationale:
+        - prevent_orphan_code
+        - enforce_trace_completeness
+        - ensure_governance_visibility
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_generator
+      human:
+        - code_regulator
+      system:
+        - validator
+
+    # -------------------------------------------------------------------------
+    # Applicability Context
+    # -------------------------------------------------------------------------
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - code_generation
+        - intermediate_artifact
+      risk:
+        - traceability
+        - architecture_flexibility
+      severity: medium
+      reason:
+        - orphan_code_generated
+        - delayed_trace_assignment
+        - reduced_architectural_flexibility
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      level: conditional
+      affected_capabilities:
+        - traceability
+        - auditability
+        - architectural_flexibility
+

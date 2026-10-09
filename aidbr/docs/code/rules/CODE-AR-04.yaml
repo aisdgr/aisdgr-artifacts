@@ -1,0 +1,73 @@
+# ==============================================================================
+# CODE-AR-04.yaml
+# Code execution MUST NOT modify multiple artifact types simultaneously.
+# ==============================================================================
+
+rule:
+  id: CODE-AR-04
+  execution_view: artifact_engineer
+
+  constraint: >
+    Code execution MUST NOT modify artifacts
+    belonging to more than one artifact type
+    within a single execution.
+
+  # ---------------------------------------------------------------------------
+  # Boundary
+  # ---------------------------------------------------------------------------
+  boundary:
+    domain:
+      - code
+    artifact:
+      - source_code
+    rule_category:
+      - artifact
+    rule_domain:
+      - CODE
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent
+    # -------------------------------------------------------------------------
+    intent:
+      rationale:
+        - prevent_cross_artifact_contamination
+        - enforce_single_artifact_focus
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_executor
+      system:
+        - artifact_validator
+
+    # -------------------------------------------------------------------------
+    # Applicability Context
+    # -------------------------------------------------------------------------
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - artifact_modification
+      reason:
+        - multiple_artifact_types_modified
+        - artifact_isolation_violation
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      level: blocking
+      affected_capabilities:
+        - artifact_isolation
+        - execution_safety
+        - auditability

@@ -1,0 +1,77 @@
+# ==============================================================================
+# CODE-TR-02.yaml
+# Trace IDs MUST be embedded in the actual code content.
+# ==============================================================================
+rule:
+  id: CODE-TR-02
+  execution_view: traceability_engineer
+  constraint: >
+    Trace IDs present in the output artifact MUST be embedded within
+    the source code artifact itself and MUST NOT exist solely outside
+    the source code artifact.
+
+
+  # ---------------------------------------------------------------------------
+  # Boundary
+  # ---------------------------------------------------------------------------
+  boundary:
+    domain:
+      - code
+    artifact:
+      - source_code
+    rule_category:
+      - traceability
+    rule_domain:
+      - CODE
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: 1.0.0
+    status: draft
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent
+    # -------------------------------------------------------------------------
+    intent:
+      rationale:
+        - ensure_trace_is_code_resident
+        - prevent_external_or_implicit_trace_only
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_generator
+      human:
+        - code_regulator
+      system:
+        - validator
+
+    # -------------------------------------------------------------------------
+    # Applicability Context
+    # -------------------------------------------------------------------------
+    applicability_context:
+      stage:
+        - develop
+      scope:
+        - code_generation
+        - code_modification
+      risk: traceability
+      severity: high
+      reason:
+        - trace_id_present_only_in_metadata
+        - trace_reference_not_embedded_in_code
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      level: foundational
+      affected_capabilities:
+        - traceability
+        - auditability
+        - accountability

@@ -1,0 +1,165 @@
+# ==============================================================================
+# Ruleset Validation Schema
+# ------------------------------------------------------------------------------
+# Defines the structure of a validation result for a single ruleset.
+#
+# Purpose:
+# - Evaluate ruleset structural quality and correctness
+# - Validate rule references, applicability clarity, and governance metadata
+#
+# This schema:
+# - DOES NOT execute rules
+# - DOES NOT evaluate rule behavior
+# - DOES NOT enforce governance decisions
+# - DOES NOT define workflows or control flow
+#
+# Validation answers:
+# "Is this ruleset, as a governance grouping artifact, acceptable and usable?"
+# ==============================================================================
+
+meta:
+  schema_id: ruleset-validation-schema
+  version: "1.0.0"
+  status: draft
+  description: >
+    Structural schema for validating ruleset artifacts.
+    Validation focuses on structural integrity, references,
+    and governance metadata suitability.
+    It does NOT evaluate execution or constraint semantics.
+
+# ------------------------------------------------------------------------------
+# Schema Definition
+# ------------------------------------------------------------------------------
+
+type: object
+description: >
+  Validation result for a single ruleset artifact.
+  This document reports structural and governance-related
+  issues found during ruleset validation.
+
+required:
+  - target
+  - summary
+  - findings
+
+properties:
+
+  # --------------------------------------------------------------------------
+  # Target
+  # --------------------------------------------------------------------------
+
+  target:
+    type: object
+    description: >
+      Identifies the ruleset artifact being validated.
+    required:
+      - ruleset_id
+      - ruleset_version
+    properties:
+      ruleset_id:
+        type: string
+        description: >
+          Identifier of the validated ruleset.
+
+      ruleset_version:
+        type: string
+        description: >
+          Governance version of the validated ruleset.
+
+  # --------------------------------------------------------------------------
+  # Summary
+  # --------------------------------------------------------------------------
+
+  summary:
+    type: object
+    description: >
+      Aggregated validation outcome.
+    required:
+      - status
+      - issue_count
+    properties:
+      status:
+        type: string
+        enum:
+          - ok
+          - warning
+          - failed
+        description: >
+          Overall validation status.
+
+      issue_count:
+        type: object
+        description: >
+          Count of findings by severity.
+        required:
+          - info
+          - warning
+          - high
+        properties:
+          info:
+            type: integer
+            description: >
+              Number of informational findings.
+          warning:
+            type: integer
+            description: >
+              Number of warning-level findings.
+          high:
+            type: integer
+            description: >
+              Number of high-severity findings.
+
+  # --------------------------------------------------------------------------
+  # Findings
+  # --------------------------------------------------------------------------
+
+  findings:
+    type: list
+    description: >
+      Detailed validation findings.
+    item:
+      type: object
+      required:
+        - id
+        - category
+        - severity
+        - message
+      properties:
+
+        id:
+          type: string
+          description: >
+            Unique identifier of the validation finding.
+
+        category:
+          type: string
+          description: >
+            Classification of the issue
+            (e.g. structure, reference, governance, ambiguity).
+
+        location:
+          type: string
+          description: >
+            Location within the ruleset where the issue was found
+            (e.g. includes[1].rule_id, governance.intent.domain).
+
+        severity:
+          type: string
+          enum:
+            - info
+            - warning
+            - high
+          description: >
+            Severity of the validation finding.
+
+        message:
+          type: string
+          description: >
+            Human-readable description of the issue.
+
+        suggestion:
+          type: string
+          description: >
+            Suggested improvement or correction.
+
+additionalProperties: false
