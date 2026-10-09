@@ -9,12 +9,12 @@ snapshots.
 
 ## Start here
 
-| Area | Purpose | Status |
-| --- | --- | --- |
-| [`bra/`](bra/) | BRA language, representation, rule, and ruleset artifacts | Reference implementation; source status varies by file |
-| [`vss/`](vss/) | VSS specification-template implementations | Reference templates, not a standards declaration |
-| [`archive/`](archive/) | Historical AIDDM, AIGD, and AIGM snapshots | Historical research material; not current guidance |
-| [`provenance/`](provenance/SOURCE-MAP.md) | Source mapping, exclusions, and validation findings | Repository-maintenance evidence |
+| Area                                                   | Purpose                                                   | Status                                                 |
+| ------------------------------------------------------ | --------------------------------------------------------- | ------------------------------------------------------ |
+| [`rule_library/`](rule_library/)                       | BRA language, representation, rule, and ruleset artifacts | Reference implementation; source status varies by file |
+| [`specification_templates/`](specification_templates/) | VSS specification-template implementations                | Reference templates, not a standards declaration       |
+| [`archive/`](archive/)                                 | Historical AIDDM, AIGD, and AIGM snapshots                | Historical research material; not current guidance     |
+| [`provenance/`](provenance/SOURCE-MAP.md)              | Source mapping, exclusions, and validation findings       | Repository-maintenance evidence                        |
 
 There is no `shared/` directory at this time. No imported artifact was
 confirmed as jointly normative for both BRA and VSS merely because the two
@@ -39,10 +39,11 @@ implied by a historical directory name. Terms such as `normative`, `draft`, or
 `example` retain only the meaning explicitly stated inside the source artifact;
 directory placement alone does not grant standards status.
 
-Current reference artifacts are under `bra/` and `vss/`. Files under
-`archive/` preserve historical terminology and may conflict with current
-concepts. See the [validation report](provenance/VALIDATION.md) before consuming
-rulesets programmatically.
+Current reference artifacts are under `rule_library/` and
+`specification_templates/`. Files under `archive/` preserve historical
+terminology and may conflict with current concepts. See the
+[validation report](provenance/VALIDATION.md) before consuming rulesets
+programmatically.
 
 ## License
 

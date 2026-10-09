@@ -2,24 +2,24 @@
 
 ## Source baselines
 
-| Source | Reference |
-| --- | --- |
-| Legacy artifact repository | `aisdgr/templates` (local audit path `D:\github\writings\templates`) |
-| Final legacy commit | `c36fb8df4221195b4c4a9801e8911a0af2378b83` |
-| Paper and terminology repository | [`aisdgr/papers`](https://github.com/aisdgr/papers) |
-| Papers reference inspected | `23dbcd6cdb2770c22b39e263f1a5072df922a856` |
-| Curated repository | [`aisdgr/aisdgr-artifacts`](https://github.com/aisdgr/aisdgr-artifacts) |
+| Source                           | Reference                                                               |
+| -------------------------------- | ----------------------------------------------------------------------- |
+| Legacy artifact repository       | `aisdgr/templates` (local audit path `D:\github\writings\templates`)    |
+| Final legacy commit              | `c36fb8df4221195b4c4a9801e8911a0af2378b83`                              |
+| Paper and terminology repository | [`aisdgr/papers`](https://github.com/aisdgr/papers)                     |
+| Papers reference inspected       | `23dbcd6cdb2770c22b39e263f1a5072df922a856`                              |
+| Curated repository               | [`aisdgr/aisdgr-artifacts`](https://github.com/aisdgr/aisdgr-artifacts) |
 
 ## Final-path mapping
 
-| New path | Legacy path | Source commit | Treatment | Research association |
-| --- | --- | --- | --- | --- |
-| `bra/schema/` | `aisdgr/schema/` | `c36fb8d…` | Byte-preserving move | BRA |
-| `bra/rules/` | `aisdgr/rules/` | `c36fb8d…` | Byte-preserving move | BRA |
-| `bra/ruleset/` | `aisdgr/ruleset/` | `c36fb8d…` | Byte-preserving move; inherited findings documented | BRA |
-| `vss/templates/` | `templates/` | `c36fb8d…` | Byte-preserving move | VSS |
-| `archive/history/` | `history/` | `c36fb8d…` | Byte-preserving move of complete selected snapshot | Historical research |
-| Repository navigation and provenance files | None | New curation | Newly authored | Repository-level |
+| New path                                   | Legacy path       | Source commit | Treatment                                           | Research association |
+| ------------------------------------------ | ----------------- | ------------- | --------------------------------------------------- | -------------------- |
+| `rule_library/schema/`                     | `aisdgr/schema/`  | `c36fb8d…`    | Byte-preserving move                                | BRA                  |
+| `rule_library/rules/`                      | `aisdgr/rules/`   | `c36fb8d…`    | Byte-preserving move                                | BRA                  |
+| `rule_library/ruleset/`                    | `aisdgr/ruleset/` | `c36fb8d…`    | Byte-preserving move; inherited findings documented | BRA                  |
+| `specification_templates/templates/`       | `templates/`      | `c36fb8d…`    | Byte-preserving move                                | VSS                  |
+| `archive/history/`                         | `history/`        | `c36fb8d…`    | Byte-preserving move of complete selected snapshot  | Historical research  |
+| Repository navigation and provenance files | None              | New curation  | Newly authored                                      | Repository-level     |
 
 The pre-layout reconstructed commits record selected legacy source SHAs through
 `Original-Commit`, `Original-Date`, and `Source-Branch` trailers. They form a

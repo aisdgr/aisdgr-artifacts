@@ -17,7 +17,7 @@ rules.
 
 The files are preserved from legacy source commit
 `c36fb8df4221195b4c4a9801e8911a0af2378b83`, with only the top-level path moved
-from `aisdgr/` to `bra/`. No terminology or rule semantics were silently
-rewritten during that move.
+from `aisdgr/` to `rule_library/`. No terminology or rule semantics were
+silently rewritten during that move.
 
 Paper: [Behavior Rule Architecture](https://doi.org/10.5281/zenodo.19174636).
