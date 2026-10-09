@@ -1,0 +1,150 @@
+# ==============================================================================
+# rule.validation.yaml
+# ID: dev-scr-rule-validation-schema
+# 版本: 1.0.0
+# 狀態: 草案 (draft)
+# 描述: 
+#   用於驗證 規則產物的結構定義。
+#   驗證重點在於規則的正確性及其是否適合 AI 通訊，
+#   而非執行結果。
+# ==============================================================================
+# 定義單一 規則驗證結果的結構。
+#
+# 目的：
+# - 評估規則品質與正確性
+# - 驗證結構、語言 (normative) 以及語義可用性
+#
+# 本結構定義：
+# - 「不」執行規則
+# - 「不」強制執行治理決策
+# - 「不」定義工作流或控制流
+#
+# 驗證旨在回答：
+# 「此規則作為一個 AI 約束產物，是否可接受且可用？」
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 結構定義 (Schema Definition)
+# ------------------------------------------------------------------------------
+
+type: object
+description: >
+  單一 規則產物的驗證結果。
+  此文件報告在規則驗證期間發現的結構與語義問題。
+
+required:
+  - target
+  - summary
+  - findings
+
+properties:
+
+  # --------------------------------------------------------------------------
+  # 目標 (Target)
+  # --------------------------------------------------------------------------
+
+  target:
+    type: object
+    description: >
+      識別正在被驗證的規則產物。
+    required:
+      - rule_id
+      - rule_version
+    properties:
+      rule_id:
+        type: string
+        description: >
+          受驗證規則的識別碼。
+
+      rule_version:
+        type: string
+        description: >
+          受驗證規則的版本。
+
+  # --------------------------------------------------------------------------
+  # 摘要 (Summary)
+  # --------------------------------------------------------------------------
+
+  summary:
+    type: object
+    description: >
+      聚合的驗證結果。
+    required:
+      - status
+      - issue_count
+    properties:
+      status:
+        type: string
+        enum:
+          - ok        # 通過
+          - warning   # 警告
+          - failed    # 失敗
+        description: >
+          整體的驗證狀態。
+
+      issue_count:
+        type: object
+        description: >
+          依嚴重程度分類的問題計數。
+        properties:
+          info:       # 資訊
+            type: integer
+          warning:    # 警告
+            type: integer
+          high:       # 高風險/錯誤
+            type: integer
+
+  # --------------------------------------------------------------------------
+  # 發現結果 (Findings)
+  # --------------------------------------------------------------------------
+
+  findings:
+    type: list
+    description: >
+      詳細的驗證發現項目。
+    item:
+      type: object
+      required:
+        - id
+        - category
+        - severity
+        - message
+      properties:
+        id:
+          type: string
+          description: >
+            該發現項目的唯一識別碼。
+
+        category:
+          type: string
+          description: >
+            問題分類
+            （例如：structure 結構、normative_violation 規範語言違反、ambiguity 歧義）。
+
+        location:
+          type: string
+          description: >
+            規則內發現問題的位置
+            （例如：execution.normative、execution.apply_as、
+            governance.intent、governance.applicability_context）。
+
+        severity:
+          type: string
+          enum:
+            - info    # 資訊
+            - warning # 警告
+            - high    # 高風險/錯誤
+          description: >
+            驗證發現項目的嚴重程度。
+
+        message:
+          type: string
+          description: >
+            問題的易讀描述。
+
+        suggestion:
+          type: string
+          description: >
+            建議的改進或修正方案。
+
+additionalProperties: false

@@ -1,0 +1,84 @@
+# ==============================================================================
+# rule_example.yaml
+# ==============================================================================
+
+execution:
+  id: GEN-NEW-CODE-ADD-JWT
+
+  # ---------------------------------------------------------------------------
+  # Apply As
+  # ---------------------------------------------------------------------------
+  # Professional perspective the LLM MUST adopt when applying the normative.
+  apply_as: security_engineer
+
+  # ---------------------------------------------------------------------------
+  # Normative (Normative Core)
+  # ---------------------------------------------------------------------------
+  # The ONLY normative statement in this rule.
+  normative: >
+    Generated code MUST include JWT-based authentication
+    when creating new protected API endpoints.
+
+# ---------------------------------------------------------------------------
+# Governance
+# ---------------------------------------------------------------------------
+governance:
+  version: "1.0.0"
+  status: active
+  owner: platform_security_team
+
+  # -------------------------------------------------------------------------
+  # Intent (Optional)
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - establish_authentication_baseline
+      - prevent_unauthorized_access
+    alignment:
+      - security_by_default
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - security_reviewer
+      - backend_maintainer
+    system:
+      - compliance_auditor
+    policy_reference:
+      - SEC-JWT-GENERATION-BASELINE
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  # Descriptive governance context (WHEN / situation),
+  # not an execution condition.
+  applicability_context:
+    scenario:
+      introducing_protected_api:
+        risk: security
+        severity: high
+        reason:
+          - unauthenticated_endpoint_risk
+          - token_misconfiguration_risk
+    environment:
+      - backend_service
+      - public_api
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  # Governance-level interpretation of outcomes and evidence expectations.
+  governance_impact:
+    outcome:
+      classification: authentication_required
+    evidence_expected:
+      - jwt_validation_present
+      - token_expiration_configured
+      - authorization_claims_checked
+    audit_focus:
+      - jwt_library_selection
+      - secret_key_management
