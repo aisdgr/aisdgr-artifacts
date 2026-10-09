@@ -1,0 +1,100 @@
+# ==========================================================
+# SDS Generate Policy
+# ----------------------------------------------------------
+# Purpose:
+#   Define what constitutes a VALID SDS generation.
+#   This policy governs artifact validity, not correctness.
+#
+# Core Principle:
+#   - Generation MUST always produce a document artifact.
+#   - AI is responsible for validity, humans for correctness.
+# ==========================================================
+
+version: "1.1"
+document_type: SDS
+operation: generate
+generation_mode: ai_materialization
+
+# ----------------------------------------------------------
+# 1. Validity Responsibility Model
+# ----------------------------------------------------------
+responsibility_model:
+  ai:
+    - produce_structurally_valid_document
+    - populate_available_sections_from_inputs
+  human:
+    - review_and_correct_content
+    - adjust_generate_policy_if_output_unexpected
+
+# ----------------------------------------------------------
+# 2. Artifact Generation Rule (NON-NEGOTIABLE)
+# ----------------------------------------------------------
+artifact_generation:
+  must_produce_artifact: true
+  forbid_no_output: true
+  forbid_false_success: true
+
+# ----------------------------------------------------------
+# 3. Semantic Input Handling
+# ----------------------------------------------------------
+# Semantic inputs influence CONTENT QUALITY,
+# but MUST NOT block artifact generation.
+# ----------------------------------------------------------
+semantic_inputs:
+
+  recognized_sources:
+    - SRS
+    - IM
+    - DIRECT_HUMAN_INPUT
+
+  input_absence_policy:
+    on_no_semantic_input:
+      action: generate_with_minimal_content
+      note: "Lack of semantic input affects correctness, not validity."
+
+# ----------------------------------------------------------
+# 4. Content Population Rules
+# ----------------------------------------------------------
+content_rules:
+  inference_allowed: false
+  fabrication_allowed: false
+
+  missing_content_handling:
+    strategy: explicit_empty_or_placeholder
+    placeholder_style: policy_defined
+    allow_assumptions_section: true
+
+# ----------------------------------------------------------
+# 5. Structural Validity Rules
+# ----------------------------------------------------------
+structural_validity:
+  source: SDS_Template
+  must_preserve_section_hierarchy: true
+  must_preserve_required_fields: true
+
+# ----------------------------------------------------------
+# 6. Section Rendering Rules
+# ----------------------------------------------------------
+render_policy:
+  render_all_structural_sections: true
+  omit_section_if_empty: false   # IMPORTANT: always materialize structure
+  forbid_template_only_output: false
+
+# ----------------------------------------------------------
+# 7. Failure Conditions (SYSTEM-LEVEL ONLY)
+# ----------------------------------------------------------
+failure_conditions:
+  - template_missing
+  - template_corrupted
+  - output_path_unwritable
+  - execution_engine_failure
+
+# ----------------------------------------------------------
+# 8. Explicit Non-Scope
+# ----------------------------------------------------------
+non_scope:
+  - correctness_validation
+  - business_logic_validation
+  - design_quality_assessment
+  - init_operations
+  - manual_authoring

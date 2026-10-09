@@ -1,0 +1,153 @@
+document: SDS
+version: 1.0
+role: document_structure_schema
+status: active
+
+# ==========================================================
+# Global Structural Rules
+# ==========================================================
+
+global:
+  default_visibility: human_only
+  default_executable: false
+  default_include_in_transformation: false
+
+  render_policy:
+    omit_section_if_empty: true
+    allow_section_number_gaps: true
+
+# ==========================================================
+# Section Definitions
+# ==========================================================
+
+sections:
+
+  "0":
+    name: Change History
+    visibility: human_only
+    executable: false
+    include_in_transformation: false
+
+  "1":
+    name: Purpose & Scope
+    visibility: human_only
+    executable: false
+    include_in_transformation: false
+
+  "2":
+    name: Design Overview
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    item_policy:
+      id_pattern: "^SDS-OV-[0-9]+$"
+      required_fields:
+        - description
+        - trace
+
+  "3":
+    name: Design Items
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    sub_sections:
+
+      "3.x":
+        name: Component
+        visibility: ai_read
+        executable: true
+        include_in_transformation: true
+
+        item_policy:
+          id_pattern: "^SDS-DES-[A-Za-z0-9_-]+$"
+          required_fields:
+            - description
+            - responsibilities
+            - interactions
+            - trace
+
+  "4":
+    name: Interaction & Data Flow
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    item_policy:
+      id_pattern: "^SDS-FLOW-[A-Za-z0-9_-]+$"
+      required_fields:
+        - description
+        - trace
+
+  "5":
+    name: Interfaces & Adapters
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    item_policy:
+      id_pattern: "^SDS-INT-[A-Za-z0-9_-]+$"
+      required_fields:
+        - description
+        - trace
+
+  "6":
+    name: Cross-Cutting Concerns
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    item_policy:
+      id_pattern: "^SDS-XCUT-[A-Za-z0-9_-]+$"
+      required_fields:
+        - description
+        - trace
+
+  "7":
+    name: Error Handling Strategy
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    item_policy:
+      id_pattern: "^SDS-ERR-[A-Za-z0-9_-]+$"
+      required_fields:
+        - description
+        - trace
+
+  "8":
+    name: Deployment & Operational Design
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    item_policy:
+      id_pattern: "^SDS-OPS-[A-Za-z0-9_-]+$"
+      required_fields:
+        - description
+        - trace
+
+# ==========================================================
+# Non-Executable Sections (Informative)
+# ==========================================================
+
+appendix:
+
+  "A":
+    name: Traceability Policy
+    visibility: human_only
+    executable: false
+    include_in_transformation: false
+
+  "B":
+    name: Heading & Meta-Model Rules
+    visibility: ai_policy
+    executable: false
+    include_in_transformation: false
+
+  "C":
+    name: Appendix / Notes
+    visibility: human_only
+    executable: false
+    include_in_transformation: false

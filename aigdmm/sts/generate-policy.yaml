@@ -1,0 +1,119 @@
+# ==========================================================
+# STS Generate Policy
+# ----------------------------------------------------------
+# Purpose:
+#   Define what constitutes a VALID STS generation.
+#
+# Core Principle:
+#   - Generation MUST always produce a test specification artifact.
+#   - AI guarantees validity (structure & presence), not correctness.
+#   - STS MAY be generated independently (BDD-first / TDD-first).
+# ==========================================================
+
+version: "1.1"
+document_type: STS
+operation: generate
+generation_mode: ai_materialization
+
+# ----------------------------------------------------------
+# 1. Validity Responsibility Model
+# ----------------------------------------------------------
+responsibility_model:
+  ai:
+    - produce_structurally_valid_document
+    - generate_test_scenarios_from_available_inputs
+  human:
+    - review_and_refine_test_cases
+    - align_tests_with_actual_requirements
+    - adjust_generate_policy_if_output_unexpected
+
+# ----------------------------------------------------------
+# 2. Artifact Generation Rule (NON-NEGOTIABLE)
+# ----------------------------------------------------------
+artifact_generation:
+  must_produce_artifact: true
+  forbid_no_output: true
+  forbid_false_success: true
+
+# ----------------------------------------------------------
+# 3. Semantic Input Handling
+# ----------------------------------------------------------
+# STS may be generated from multiple starting points:
+# - SRS-driven (traditional)
+# - BDD / TDD-driven (test-first)
+# - Human free-style inputs
+# ----------------------------------------------------------
+semantic_inputs:
+
+  recognized_sources:
+    - SRS
+    - SDS
+    - IM
+    - DIRECT_HUMAN_INPUT
+
+  dependency_rules:
+    srs_required: false
+    sds_required: false
+
+  input_absence_policy:
+    on_no_semantic_input:
+      action: generate_minimal_test_skeleton
+      note: "Lack of semantic input affects correctness, not validity."
+
+# ----------------------------------------------------------
+# 4. Test Scenario Generation Rules
+# ----------------------------------------------------------
+test_generation:
+
+  methodology_compatibility:
+    bdd: true
+    tdd: true
+
+  scenario_structure:
+    format: GIVEN_WHEN_THEN
+    given_label: "GIVEN / PREREQUISITES"
+    when_label: "WHEN / TEST_STEPS"
+    then_label: "THEN / EXPECTED_RESULT"
+
+  inference_allowed: false
+  fabrication_allowed: false
+
+  missing_content_handling:
+    strategy: explicit_empty_or_placeholder
+    placeholder_style: policy_defined
+    allow_open_questions: true
+
+# ----------------------------------------------------------
+# 5. Structural Validity Rules
+# ----------------------------------------------------------
+structural_validity:
+  source: STS_Template
+  must_preserve_section_hierarchy: true
+  must_preserve_required_fields: true
+
+# ----------------------------------------------------------
+# 6. Section Rendering Rules
+# ----------------------------------------------------------
+render_policy:
+  render_all_structural_sections: true
+  omit_section_if_empty: false
+  forbid_template_only_output: false
+
+# ----------------------------------------------------------
+# 7. Failure Conditions (SYSTEM-LEVEL ONLY)
+# ----------------------------------------------------------
+failure_conditions:
+  - template_missing
+  - template_corrupted
+  - output_path_unwritable
+  - execution_engine_failure
+
+# ----------------------------------------------------------
+# 8. Explicit Non-Scope
+# ----------------------------------------------------------
+non_scope:
+  - test_execution
+  - assertion_validation
+  - correctness_verification
+  - requirement_completeness_check
+  - pipeline_execution

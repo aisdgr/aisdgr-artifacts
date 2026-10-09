@@ -1,0 +1,115 @@
+# ==========================================================
+# Execution Policy — Software Test Specification (STS)
+# ==========================================================
+
+document: STS
+class: S
+description: >
+  Execution policy governing AI interaction with
+  Software Test Specification (STS) documents.
+  STS defines verifiable behaviors and acceptance conditions
+  and MUST remain human-owned.
+
+# ----------------------------------------------------------
+# Global Governance Rules
+# ----------------------------------------------------------
+governance:
+  human_owned: true
+  ai_read: true
+  ai_write: conditional
+  immutable_after_approval: true
+
+# ----------------------------------------------------------
+# Section-Level Policies
+# ----------------------------------------------------------
+sections:
+
+  # --------------------------------------------------------
+  # 0. Change History
+  # --------------------------------------------------------
+  "0":
+    name: Change History
+    visibility: human_only
+    executable: false
+    include_in_transformation: false
+
+  # --------------------------------------------------------
+  # 1. Introduction
+  # --------------------------------------------------------
+  "1":
+    name: Introduction
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+  # --------------------------------------------------------
+  # 2. Overall Test Description
+  # --------------------------------------------------------
+  "2":
+    name: Overall Test Description
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+  # --------------------------------------------------------
+  # 3. Test Specifications
+  # --------------------------------------------------------
+  "3":
+    name: Test Specifications
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    item_policy:
+      id_pattern: "^TS-[A-Za-z0-9_-]+-[0-9]+$"
+      required_fields:
+        - DESCRIPTION
+        - GIVEN / PREREQUISITES
+        - WHEN / TEST_STEPS
+        - THEN / EXPECTED_RESULT
+      optional_fields:
+        - TRACE
+
+  # --------------------------------------------------------
+  # Appendix A. Traceability Policy
+  # --------------------------------------------------------
+  "A":
+    name: Traceability Policy
+    visibility: ai_read
+    executable: false
+    include_in_transformation: false
+
+  # --------------------------------------------------------
+  # Appendix B. Authoring and Structural Constraints
+  # --------------------------------------------------------
+  "B":
+    name: Authoring and Structural Constraints
+    visibility: ai_policy
+    executable: false
+    include_in_transformation: false
+
+  # --------------------------------------------------------
+  # Appendix C. Methodology Compatibility Notes
+  # --------------------------------------------------------
+  "C":
+    name: Methodology Compatibility Notes
+    visibility: ai_policy
+    executable: false
+    include_in_transformation: false
+
+  # --------------------------------------------------------
+  # Appendix D. Notes
+  # --------------------------------------------------------
+  "D":
+    name: Notes
+    visibility: human_only
+    executable: false
+    include_in_transformation: false
+
+# ----------------------------------------------------------
+# Enforcement Rules
+# ----------------------------------------------------------
+enforcement:
+  on_policy_violation: terminate_execution
+  on_missing_required_field: reject_section
+  on_invalid_id: reject_item
