@@ -1,0 +1,150 @@
+# ==============================================================================
+# cnl.validation.yaml
+# ID: dev-scr-cnl-validation-schema
+# Version: 1.0.0
+# Status: draft
+# Description: 
+#   Structural schema for validating RNL constraint statements.
+#   Validation focuses on linguistic correctness and clarity
+#   for AI consumption, not normative enforcement.
+# ==============================================================================
+# Defines the structure of a validation result for RNL artifacts.
+#
+# Purpose:
+# - Evaluate the quality and clarity of RNL statements.
+# - Validate keyword usage, patterns, and structural integrity.
+#
+# This schema:
+# - DOES NOT impose normative obligations.
+# - DOES NOT define execution or control flow.
+#
+# Validation answers:
+# "Is this RNL statement well-formed and unambiguous for AI processing?"
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Schema Definition
+# ------------------------------------------------------------------------------
+
+type: object
+description: >
+  Validation result for RNL constraint artifacts.
+  This document reports structural and linguistic issues found
+  during RNL validation.
+
+required:
+  - target
+  - summary
+  - findings
+
+properties:
+
+  # --------------------------------------------------------------------------
+  # Target
+  # --------------------------------------------------------------------------
+  target:
+    type: object
+    description: >
+      Identifies the RNL artifact being validated.
+    required:
+      - cnl_id
+      - cnl_version
+    properties:
+      cnl_id:
+        type: string
+        description: >
+          Identifier of the validated RNL artifact.
+
+      cnl_version:
+        type: string
+        description: >
+          Version of the validated RNL artifact.
+
+  # --------------------------------------------------------------------------
+  # Summary
+  # --------------------------------------------------------------------------
+  summary:
+    type: object
+    description: >
+      Aggregated validation outcome.
+    required:
+      - status
+      - issue_count
+    properties:
+      status:
+        type: string
+        enum:
+          - ok
+          - warning
+          - failed
+        description: >
+          Overall validation status for the RNL artifact.
+
+      issue_count:
+        type: object
+        description: >
+          Count of findings by severity.
+        properties:
+          info:
+            type: integer
+          warning:
+            type: integer
+          high:
+            type: integer
+
+  # --------------------------------------------------------------------------
+  # Findings
+  # --------------------------------------------------------------------------
+  findings:
+    type: list
+    description: >
+      Detailed validation findings for specific RNL statements.
+    item:
+      type: object
+      required:
+        - id
+        - category
+        - severity
+        - message
+      properties:
+        id:
+          type: string
+          description: >
+            Unique identifier of the finding.
+
+        statement_ref:
+          type: string
+          description: >
+            Reference to the specific statement or index within the artifact.
+
+        category:
+          type: string
+          description: >
+            Classification of the issue (e.g. pattern_violation, 
+            keyword_violation, ambiguity).
+
+        location:
+          type: string
+          description: >
+            Location within the RNL artifact where the issue was found.
+
+        severity:
+          type: string
+          enum:
+            - info
+            - warning
+            - high
+          description: >
+            Severity of the validation finding.
+
+        message:
+          type: string
+          description: >
+            Human-readable explanation of the issue.
+
+        suggestion:
+          type: string
+          description: >
+            Suggested correction to align with RNL patterns.
+
+additionalProperties: false
