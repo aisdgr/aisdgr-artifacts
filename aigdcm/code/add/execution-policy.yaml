@@ -1,0 +1,35 @@
+policy:
+  name: add_code_execution_policy
+  version: 0.1
+  scope: internal
+
+match:
+  execution_intent:
+    type: add
+    target: code
+
+rules:
+  - id: EXEC-ADD-CODE-001
+    description: Allow adding production source code.
+    effect: allow
+
+  - id: EXEC-ADD-CODE-002
+    description: Code generation MUST NOT modify test artifacts.
+    constraints:
+      forbidden_artifacts:
+        - test_code
+        - document
+
+  - id: EXEC-ADD-CODE-003
+    description: Scope boundaries are declared by XIM and MUST NOT be inferred.
+    constraints:
+      scope_inference: forbidden
+
+  - id: EXEC-ADD-CODE-004
+    description: Generated code MUST be aligned with existing test expectations.
+    constraints:
+      respect_existing_tests: true
+
+on_violation:
+  action: reject
+  message: Execution violates add-code execution policy.

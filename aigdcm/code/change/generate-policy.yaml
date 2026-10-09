@@ -1,0 +1,18 @@
+policy:
+  name: generate-policy.change.code
+  intent:
+    type: change
+    target: code
+
+generation:
+  scope:
+    - existing_files_only
+
+rules:
+  - Generate code changes only where required by specifications
+  - Do not create new modules or files unless explicitly allowed by XIM
+  - Preserve existing structure, naming, and architecture
+
+constraints:
+  - No speculative enhancements
+  - No inferred requirements

@@ -1,0 +1,45 @@
+policy:
+  name: change_test_execution_policy
+  version: 0.1
+  scope: internal
+
+match:
+  execution_intent:
+    type: change
+    target: test
+
+rules:
+  - id: EXEC-CHANGE-TEST-001
+    description: Allow modifying existing test code.
+    effect: allow
+
+  - id: EXEC-CHANGE-TEST-002
+    description: Test modification MUST NOT affect production source code.
+    constraints:
+      forbidden_artifacts:
+        - production_code
+        - document
+
+  - id: EXEC-CHANGE-TEST-003
+    description: Scope boundaries are declared by XIM and MUST NOT be inferred.
+    constraints:
+      scope_inference: forbidden
+
+  - id: EXEC-CHANGE-TEST-004
+    description: Test changes MUST validate behavior strictly against finalized specifications.
+    constraints:
+      respect_specification: true
+
+  - id: EXEC-CHANGE-TEST-005
+    description: Test changes MUST NOT introduce new validation scope beyond specifications.
+    constraints:
+      expand_validation_scope: forbidden
+
+  - id: EXEC-CHANGE-TEST-006
+    description: Test changes MUST NOT redefine expected behavior.
+    constraints:
+      redefine_expected_behavior: forbidden
+
+on_violation:
+  action: reject
+  message: Execution violates change-test execution policy.

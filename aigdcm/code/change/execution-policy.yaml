@@ -1,0 +1,40 @@
+policy:
+  name: change_code_execution_policy
+  version: 0.1
+  scope: internal
+
+match:
+  execution_intent:
+    type: change
+    target: code
+
+rules:
+  - id: EXEC-CHANGE-CODE-001
+    description: Allow modifying existing production source code.
+    effect: allow
+
+  - id: EXEC-CHANGE-CODE-002
+    description: Code modification MUST NOT affect test artifacts.
+    constraints:
+      forbidden_artifacts:
+        - test_code
+        - document
+
+  - id: EXEC-CHANGE-CODE-003
+    description: Scope boundaries are declared by XIM and MUST NOT be inferred.
+    constraints:
+      scope_inference: forbidden
+
+  - id: EXEC-CHANGE-CODE-004
+    description: Code changes MUST align with finalized specifications.
+    constraints:
+      respect_specification: true
+
+  - id: EXEC-CHANGE-CODE-005
+    description: Existing test failures MUST NOT be resolved by modifying tests.
+    constraints:
+      resolve_test_failure_by_test_change: forbidden
+
+on_violation:
+  action: reject
+  message: Execution violates change-code execution policy.

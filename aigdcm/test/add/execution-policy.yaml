@@ -1,0 +1,30 @@
+policy:
+  name: add_test_execution_policy
+  version: 0.1
+  scope: internal
+
+match:
+  execution_intent:
+    type: add
+    target: test
+
+rules:
+  - id: EXEC-ADD-TEST-001
+    description: Allow adding test artifacts.
+    effect: allow
+
+  - id: EXEC-ADD-TEST-002
+    description: Test generation MUST NOT modify non-test artifacts.
+    constraints:
+      forbidden_artifacts:
+        - source_code
+        - document
+
+  - id: EXEC-ADD-TEST-003
+    description: Scope boundaries are declared by XIM and MUST NOT be inferred.
+    constraints:
+      scope_inference: forbidden
+
+on_violation:
+  action: reject
+  message: Execution violates add-test execution policy.

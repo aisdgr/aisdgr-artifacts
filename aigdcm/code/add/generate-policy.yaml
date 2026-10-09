@@ -1,0 +1,32 @@
+policy:
+  name: add_code_generate_policy
+  version: 0.1
+  scope: public
+
+match:
+  execution_intent:
+    type: add
+    target: code
+
+recognized_sources:
+  required:
+    - STS
+    - CGG_Core
+    - CCS_Core
+    - CCS_Language
+
+  optional:
+    - SRS
+    - SDS
+    - CAS
+    - CIS
+    - API_Spec
+
+generation_constraints:
+  - Generate production source code only.
+  - Generated code MUST satisfy existing test cases derived from STS.
+  - STS is the primary source of behavioral truth.
+  - When SRS or SDS is not provided, do not infer new requirements or architecture.
+  - If API specification is provided, implementation MUST conform to it.
+  - Do not introduce endpoints, fields, or behaviors not explicitly described.
+  - Prefer minimal, MVP-level implementation.
