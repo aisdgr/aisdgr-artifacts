@@ -1,0 +1,89 @@
+policy:
+  name: code_fix_execution_policy
+  version: 1.1
+  domain: code
+  type: fix
+  driver: none
+  scope: xim_defined
+
+match:
+  execution_intent:
+    type: fix
+    target: code
+
+authority:
+  source: xim_scope
+  description: >
+    Fix is a pure code-level correction.
+    Modification boundaries are strictly limited to the scope declared in XIM.
+    No document authority is involved.
+
+rules:
+
+  - id: EXEC-FIX-001
+    description: Allow modifying existing production source code within XIM-declared scope to fix defects.
+    effect: allow
+
+  - id: EXEC-FIX-002
+    description: Code modification MUST be strictly limited to paths, modules, or symbols declared in XIM SCOPE.
+    constraints:
+      scope_enforcement: strict
+      scope_inference: forbidden
+
+  - id: EXEC-FIX-003
+    description: Fix MUST NOT modify any documentation artifacts.
+    constraints:
+      forbidden_artifacts:
+        - document
+        - spec
+        - srs
+        - sts
+        - sds
+        - cis
+        - cas
+        - css
+
+  - id: EXEC-FIX-004
+    description: Fix MUST NOT introduce new functionality.
+    constraints:
+      new_functionality: forbidden
+
+  - id: EXEC-FIX-005
+    description: Fix MUST NOT expand functional or structural scope.
+    constraints:
+      scope_expansion: forbidden
+
+  - id: EXEC-FIX-006
+    description: Business logic MAY be modified ONLY to correct erroneous behavior.
+    constraints:
+      logic_change_reason: defect_only
+
+  - id: EXEC-FIX-007
+    description: Tests MUST NOT be modified to resolve defects.
+    constraints:
+      forbidden_artifacts:
+        - test_code
+        - test_data
+
+  - id: EXEC-FIX-008
+    description: Fix MUST preserve existing Trace annotations if present, but MUST NOT introduce new Trace requirements.
+    constraints:
+      preserve_existing_trace: true
+      require_trace: false
+
+verification:
+  methods:
+    - scope_check
+    - diff_classification
+    - test_execution
+
+on_violation:
+  action: reject
+  message: Execution violates fix execution policy (pure code-level fix only).
+
+report:
+  require:
+    - xim_scope_reference
+    - files_modified
+    - fix_summary
+    - violated_rule_ids

@@ -1,45 +1,45 @@
 #!/usr/bin/env bash
-# ----------------------------------------
+# -------------------------------------------------
 # XIM → Git Commit Message Converter
 #
-# Version: 1.3.1
-# Author : AIDDM / XIM
+# Purpose:
+#   Convert xim.md into a structured git commit message.
 #
-# CHANGELOG
-# ----------
-# v1.3.1
-# - Strip markdown section separators (---) from commit body
+# Commit subject format:
+#   <type>(<target>): [<xim-id>] <purpose>
 #
-# v1.3.0
-# - Commit body follows xim-template structure
-# - Include DETAIL / INTENT / SCOPE / FILE
-# - FILE section shows User File Injection only
-# - System Auto Injection remains hidden
+# Example:
+#   feat(doc): [xim-auth-001] 修改 config.yaml 路徑
 #
-# v1.2.1
-# - Hide System Auto Injection (confidential)
-# - Include User File Injection as commit context
-# ----------------------------------------
+# XIM ID rules:
+# - XIM ID MUST be read from `xim.md`
+# - Defined under section: ## XIM ID
+# - MUST NOT be generated or inferred
+#
+# Commit body structure:
+#   DETAIL
+#   INTENT
+#   SCOPE
+#   FILE (User File Injection only)
+#
+# Notes:
+# - System Auto Injection is intentionally hidden
+# - Markdown separators (---) are stripped
+# -------------------------------------------------
 
 set -e
 
 # ---------- help ----------
 show_help() {
   cat <<'EOF'
-XIM → Git Commit Message Converter (v1.3.1)
+XIM → Git Commit Message Converter
 
 USAGE:
   ./xim_to_comment.sh <xim-file.md>
 
 DESCRIPTION:
-  Convert a XIM (Execution Intent Manifest)
-  into a structured Git commit message.
+  Generate a git commit message from a XIM (Execution Intent Manifest).
 
-Commit body structure:
-  DETAIL
-  INTENT
-  SCOPE
-  FILE (User File Injection only)
 EOF
 }
 
@@ -89,34 +89,51 @@ parse_section() {
   | sed '/^[[:space:]]*---[[:space:]]*$/d'
 }
 
-# ---------- extract subject ----------
+# ---------- extract XIM ID ----------
+XIM_ID=$(awk '/^## XIM ID/ {getline; print; exit}' "$XIM_FILE" | trim)
+
+if [[ -z "$XIM_ID" ]]; then
+  echo "❌ Missing XIM ID (## XIM ID) in $XIM_FILE" >&2
+  exit 1
+fi
+
+# ---------- extract PURPOSE ----------
 PURPOSE=$(awk '/^## PURPOSE/ {getline; print; exit}' "$XIM_FILE" | trim)
 
+if [[ -z "$PURPOSE" ]]; then
+  PURPOSE="(no purpose)"
+fi
+
+# ---------- extract INTENT ----------
 TYPE_RAW=$(parse_enum_block "TYPE")
 TARGET_RAW=$(parse_enum_block "TARGET")
 LANGUAGE_RAW=$(parse_enum_block "LANGUAGE")
 
+# ---------- map to git commit type ----------
 case "$TYPE_RAW" in
   add|change) GIT_TYPE="feat" ;;
   fix)        GIT_TYPE="fix" ;;
   refactor)   GIT_TYPE="refactor" ;;
+  docs)       GIT_TYPE="docs" ;;
   *)          GIT_TYPE="feat" ;;
 esac
 
+# ---------- map to git scope ----------
 case "$TARGET_RAW" in
-  test) GIT_SCOPE="test" ;;
-  doc)  GIT_SCOPE="doc" ;;
-  code) GIT_SCOPE="" ;;
-  *)    GIT_SCOPE="" ;;
+  doc|docs) GIT_SCOPE="doc" ;;
+  test)     GIT_SCOPE="test" ;;
+  code)     GIT_SCOPE="" ;;
+  *)        GIT_SCOPE="" ;;
 esac
 
+# ---------- build subject ----------
 if [[ -n "$GIT_SCOPE" ]]; then
-  SUBJECT="${GIT_TYPE}(${GIT_SCOPE}): ${PURPOSE}"
+  SUBJECT="${GIT_TYPE}(${GIT_SCOPE}): [${XIM_ID}] ${PURPOSE}"
 else
-  SUBJECT="${GIT_TYPE}: ${PURPOSE}"
+  SUBJECT="${GIT_TYPE}: [${XIM_ID}] ${PURPOSE}"
 fi
 
-# ---------- extract body ----------
+# ---------- extract body sections ----------
 DETAIL=$(parse_section "DETAIL")
 SCOPE=$(parse_section "SCOPE")
 
@@ -131,6 +148,7 @@ echo "$SUBJECT"
 echo
 
 # DETAIL
+echo "DETAIL"
 if [[ -n "$DETAIL" ]]; then
   echo "$DETAIL"
 else
@@ -155,7 +173,9 @@ fi
 echo
 
 # FILE (User File Injection only)
-if [[ -n "$USER_FILES" ]]; then
 echo "FILE"
+if [[ -n "$USER_FILES" ]]; then
   echo "$USER_FILES"
+else
+  echo "(none)"
 fi

@@ -1,6 +1,9 @@
 policy:
   name: add_code_generate_policy
-  version: 0.1
+  version: 1.1
+  domain: code
+  type: generate
+  driver: document
   scope: public
 
 match:
@@ -8,25 +11,96 @@ match:
     type: add
     target: code
 
-recognized_sources:
-  required:
-    - STS
+authority:
+  source: document_driven
+  required_documents:
     - CGG_Core
     - CCS_Core
     - CCS_Language
-
-  optional:
+  optional_documents:
     - SRS
     - SDS
+    - STS
     - CAS
     - CIS
+    - CSS
     - API_Spec
 
-generation_constraints:
-  - Generate production source code only.
-  - Generated code MUST satisfy existing test cases derived from STS.
-  - STS is the primary source of behavioral truth.
-  - When SRS or SDS is not provided, do not infer new requirements or architecture.
-  - If API specification is provided, implementation MUST conform to it.
-  - Do not introduce endpoints, fields, or behaviors not explicitly described.
-  - Prefer minimal, MVP-level implementation.
+rules:
+
+  - id: GEN-ADD-001
+    description: Allow generating new production source code for ADD intent.
+    effect: allow
+
+  - id: GEN-ADD-002
+    description: Generated code MUST be production source code only.
+    constraints:
+      allowed_artifacts:
+        - source_code
+      forbidden_artifacts:
+        - test_code
+        - document
+
+  - id: GEN-ADD-003
+    description: STS MUST be treated as the primary source of behavioral truth.
+    constraints:
+      behavior_source_priority:
+        - STS
+
+  - id: GEN-ADD-004
+    description: Generated code MUST satisfy existing test cases derived from STS.
+    constraints:
+      sts_as_behavior_authority: true
+      require_test_pass: true
+
+  - id: GEN-ADD-005
+    description: Generated code MUST conform to structural constraints defined in CSS.
+    constraints:
+      css_compliance: required
+      css_scope_extension: forbidden
+
+  - id: GEN-ADD-006
+    description: When SRS or SDS is not provided, new requirements or architecture MUST NOT be inferred.
+    constraints:
+      requirement_inference: forbidden
+      architecture_inference: forbidden
+
+  - id: GEN-ADD-007
+    description: If API specification is provided, generated implementation MUST conform to it.
+    constraints:
+      api_spec_compliance: required
+
+  - id: GEN-ADD-008
+    description: Generated code MUST NOT introduce endpoints, fields, or behaviors not explicitly described in documents.
+    constraints:
+      undocumented_behavior: forbidden
+
+  - id: GEN-ADD-009
+    description: Generated code SHOULD prefer minimal, MVP-level implementation.
+    constraints:
+      prefer_minimal_implementation: true
+
+  - id: GEN-ADD-010
+    description: All generated code SHOULD include Trace annotations if Trace is part of the project convention.
+    constraints:
+      require_trace_if_convention_exists: true
+
+verification:
+  methods:
+    - document_consistency_check
+    - css_compliance_check
+    - static_analysis
+    - test_execution
+
+on_violation:
+  action: reject
+  message: Execution violates add code generate policy (document- and CSS-driven).
+
+report:
+  require:
+    - generated_files
+    - documents_used
+    - sts_references
+    - css_sections_applied
+    - api_spec_references
+    - violated_rule_ids

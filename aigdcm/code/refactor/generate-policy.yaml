@@ -1,0 +1,70 @@
+policy:
+  name: code_generate_standard_policy
+  version: 1.0
+  domain: code
+  type: generate
+  driver: none
+  scope: general
+
+match:
+  execution_intent:
+    type: add
+    target: code
+
+authority:
+  source: user_intent
+  evidence:
+    - xim
+
+rules:
+
+  - id: GEN-CODE-STD-001
+    description: Allow generating new production source code.
+    effect: allow
+
+  - id: GEN-CODE-STD-002
+    description: Generated code MUST be within the scope explicitly declared in XIM.
+    constraints:
+      scope_inference: forbidden
+      require_scope_reference: true
+
+  - id: GEN-CODE-STD-003
+    description: Generated code MUST NOT modify existing production code unless explicitly allowed.
+    constraints:
+      modify_existing_code: forbidden
+
+  - id: GEN-CODE-STD-004
+    description: Generated code MUST NOT implicitly introduce new requirements or features.
+    constraints:
+      implicit_feature_expansion: forbidden
+
+  - id: GEN-CODE-STD-005
+    description: Generated code SHOULD follow common coding conventions and best practices.
+    constraints:
+      follow_conventions: recommended
+
+  - id: GEN-CODE-STD-006
+    description: Generated code MUST NOT introduce external dependencies unless explicitly declared.
+    constraints:
+      add_dependency: forbidden
+
+  - id: GEN-CODE-STD-007
+    description: Generated code MUST include basic inline documentation or comments.
+    constraints:
+      require_code_comment: true
+
+verification:
+  methods:
+    - scope_check
+    - static_analysis
+
+on_violation:
+  action: reject
+  message: Execution violates standard code generate policy.
+
+report:
+  require:
+    - generated_files
+    - scope_reference
+    - dependency_summary
+    - violated_rule_ids

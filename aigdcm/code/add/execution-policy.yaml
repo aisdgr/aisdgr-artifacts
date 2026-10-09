@@ -1,6 +1,9 @@
 policy:
   name: add_code_execution_policy
-  version: 0.1
+  version: 1.0
+  domain: code
+  type: add
+  driver: none
   scope: internal
 
 match:
@@ -8,28 +11,57 @@ match:
     type: add
     target: code
 
+authority:
+  source: xim_scope
+  description: >
+    Add execution governs whether new production code may be introduced.
+    Modification boundaries are strictly limited to the scope declared in XIM.
+    Document authority is handled by generate policies.
+
 rules:
-  - id: EXEC-ADD-CODE-001
-    description: Allow adding production source code.
+
+  - id: EXEC-ADD-001
+    description: Allow adding new production source code within XIM-declared scope.
     effect: allow
 
-  - id: EXEC-ADD-CODE-002
-    description: Code generation MUST NOT modify test artifacts.
+  - id: EXEC-ADD-002
+    description: Add execution MUST NOT modify any test artifacts.
     constraints:
       forbidden_artifacts:
         - test_code
+        - test_data
         - document
 
-  - id: EXEC-ADD-CODE-003
-    description: Scope boundaries are declared by XIM and MUST NOT be inferred.
+  - id: EXEC-ADD-003
+    description: Scope boundaries MUST be declared by XIM and MUST NOT be inferred.
     constraints:
+      scope_enforcement: strict
       scope_inference: forbidden
 
-  - id: EXEC-ADD-CODE-004
-    description: Generated code MUST be aligned with existing test expectations.
+  - id: EXEC-ADD-004
+    description: Added code MUST NOT break existing test expectations.
     constraints:
       respect_existing_tests: true
 
+  - id: EXEC-ADD-005
+    description: Add execution MUST NOT remove or modify existing production code unless explicitly allowed by XIM.
+    constraints:
+      modify_existing_code: forbidden
+      allow_only_if_xim_declared: true
+
+verification:
+  methods:
+    - scope_check
+    - diff_classification
+    - test_execution
+
 on_violation:
   action: reject
-  message: Execution violates add-code execution policy.
+  message: Execution violates add code execution policy.
+
+report:
+  require:
+    - xim_scope_reference
+    - files_added
+    - files_modified
+    - violated_rule_ids

@@ -1,0 +1,114 @@
+policy:
+  name: code_refactor_css_execution_policy
+  version: 1.0
+  domain: code
+  type: refactor
+  driver: css
+  scope: document_driven
+
+match:
+  execution_intent:
+    type: refactor
+    target: code
+
+authority:
+  source: coding_structure_specification
+  required_documents:
+    - CSS
+    - Trace_Map
+
+rules:
+
+  - id: EXEC-REFACTOR-CSS-001
+    description: Allow refactoring and restructuring of production code when driven by CSS.
+    effect: allow
+
+  - id: EXEC-REFACTOR-CSS-002
+    description: All refactoring activities MUST reference authoritative CSS sections.
+    constraints:
+      require_css_reference: true
+
+  - id: EXEC-REFACTOR-CSS-003
+    description: All existing Trace IDs MUST be preserved or explicitly remapped.
+    constraints:
+      trace_id_preservation: required
+      trace_remap_allowed: true
+
+  - id: EXEC-REFACTOR-CSS-004
+    description: Structural responsibilities MAY be reassigned across classes or methods if defined by CSS.
+    constraints:
+      allow_responsibility_reassignment: true
+      justification_source: css
+
+  - id: EXEC-REFACTOR-CSS-005
+    description: Behavioral changes are allowed ONLY IF justified by CSS and traceable.
+    constraints:
+      behavior_change: conditionally_allowed
+      require_css_justification: true
+      require_trace_link: true
+
+  - id: EXEC-REFACTOR-CSS-006
+    description: Legacy functionality MAY be removed ONLY IF marked as deprecated or superseded in CSS.
+    constraints:
+      remove_behavior: conditionally_allowed
+      require_css_deprecation: true
+      require_trace_resolution: true
+
+  - id: EXEC-REFACTOR-CSS-007
+    description: New functionality MAY be introduced ONLY IF mandated by CSS and traceable to requirements.
+    constraints:
+      new_functionality: conditionally_allowed
+      require_css_mandate: true
+      require_trace_link: true
+
+  - id: EXEC-REFACTOR-CSS-008
+    description: Refactoring MUST NOT introduce untraceable or orphan code.
+    constraints:
+      untraceable_code: forbidden
+      orphan_behavior: forbidden
+
+  - id: EXEC-REFACTOR-CSS-009
+    description: All structural changes MUST be classifiable and reported.
+    constraints:
+      require_change_classification: true
+      classification_types:
+        - moved
+        - merged
+        - split
+        - deprecated
+        - removed
+        - introduced
+
+  - id: EXEC-REFACTOR-CSS-010
+    description: Silent behavioral drift without documentation is strictly forbidden.
+    constraints:
+      undocumented_behavior_change: forbidden
+
+  - id: EXEC-REFACTOR-CSS-011
+    description: Existing Trace IDs not referenced in CSS MUST be preserved and explicitly marked as untrace.
+    constraints:
+      preserve_existing_trace: true
+      css_trace_missing_handling: mark_untrace
+      require_code_comment: true
+      require_report_annotation: true
+
+verification:
+  methods:
+    - css_compliance_check
+    - trace_consistency_check
+    - diff_to_css_mapping
+
+on_violation:
+  action: reject
+  message: Execution violates CSS-driven refactor execution policy.
+
+report:
+  require:
+    - css_sections_applied
+    - files_modified
+    - trace_remap_table
+    - structural_change_summary
+    - behavior_change_summary
+    - deprecated_features
+    - new_css_mandated_features
+    - violated_rule_ids
