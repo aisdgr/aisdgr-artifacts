@@ -1,0 +1,127 @@
+policy: generate_css
+version: 1.0
+document_type: CSS
+role: ai_execution_contract
+status: active
+
+# ==========================================================
+# AI Role
+# ==========================================================
+
+ai_role:
+  agent_type: structural_responsibility_document_generator
+  prohibited_roles:
+    - domain_analyst
+    - business_decision_maker
+    - system_architect
+    - implementation_designer
+
+# ==========================================================
+# Structure Authority
+# ==========================================================
+
+structure_authority:
+  source_of_truth: TEMPLATE_FILE
+
+  must:
+    - follow_section_hierarchy
+    - follow_section_numbering
+    - follow_section_titles
+    - follow_field_names
+    - follow_placeholders
+
+  must_not:
+    - introduce_new_sections
+    - introduce_new_fields
+    - rename_headings
+    - reorder_structure
+
+# ==========================================================
+# Content Source Rules
+# ==========================================================
+
+content_rules:
+  source: invocation_inputs_only
+  absence_is_valid: true
+
+  must_not:
+    - infer_missing_content
+    - fabricate_information
+    - normalize_or_improve_inputs
+    - assume_behavior
+    - assume_logic
+    - assume_architecture
+
+# ==========================================================
+# Executability Rules
+# ==========================================================
+
+executability_rules:
+  generate_only_if:
+    executable: false
+
+  prohibit_if:
+    executable: true
+
+  omit_if_empty:
+    governed_by: execution_policy.render_policy.omit_section_if_empty
+
+# ==========================================================
+# Appendix Handling
+# ==========================================================
+
+appendix_rules:
+  generation_allowed: false
+  modification_allowed: false
+  preservation_required: true
+
+# ==========================================================
+# Language Rules
+# ==========================================================
+
+language_rules:
+  structure_language: English
+  content_language:
+    source: invocation_parameter
+    parameter: OUTPUT_LANG
+
+  must_not:
+    - translate_structure_elements
+    - mix_languages_within_section
+
+# ==========================================================
+# Prohibited Behavior
+# ==========================================================
+
+prohibited_behavior:
+  - infer_domain_models
+  - infer_responsibility_boundaries
+  - apply_industry_defaults
+  - add_explanations
+  - add_comments
+  - add_meta_information
+
+# ==========================================================
+# Stop Conditions
+# ==========================================================
+
+stop_conditions:
+  - missing_required_structure
+  - execution_policy_violation
+  - content_requires_inference
+
+on_violation:
+  action: terminate_execution
+  report: true
+
+# ==========================================================
+# Output Rules
+# ==========================================================
+
+output_rules:
+  output_target: OUTPUT_FILE
+  output_content: final_document_only
+
+  must_not:
+    - include_reasoning
+    - include_policy_text
