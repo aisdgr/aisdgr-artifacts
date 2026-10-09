@@ -1,0 +1,166 @@
+# ==============================================================================
+# source_code.add.yaml
+#
+# Ruleset Role:
+#   This ruleset defines how adding new production source code is governed
+#   by composing scenario-agnostic CODE rules.
+#
+# Execution Semantics:
+#   - New production source code may be introduced within declared boundaries
+#   - No implicit inference, scope expansion, or cross-artifact modification is allowed
+#   - All generated code MUST be traceable and auditable
+#
+# Governance Semantics:
+#   - Add is interpreted as a code-introduction intent
+#   - This ruleset enforces strict boundary, traceability, and artifact isolation
+#   - It is more permissive than CHANGE and FIX on introducing new code,
+#     but equally strict on boundary and inference control
+#
+# Design Notes:
+#   - Individual rules are scenario-agnostic and reusable
+#   - Intent semantics are expressed ONLY at the ruleset level
+#   - Rulesets select and compose rules; they never redefine rule behavior
+#
+# ==============================================================================
+
+ruleset:
+  id: source_code.add
+
+  # ---------------------------------------------------------------------------
+  # Included Rules (Execution Semantics)
+  # ---------------------------------------------------------------------------
+  includes:
+
+    # -------------------------------------------------------------------------
+    # Boundary & Stop (Strict boundary enforcement)
+    # -------------------------------------------------------------------------
+    - rule_id: CODE-BD-01
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-02
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-03
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-04
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-05
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-06
+      version: ">=1.0.0"
+
+    # -------------------------------------------------------------------------
+    # Constraint Neutrality (No inference, no hidden expansion)
+    # -------------------------------------------------------------------------
+    - rule_id: CODE-CN-01
+      version: ">=1.0.0"
+    - rule_id: CODE-CN-02
+      version: ">=1.0.0"
+    - rule_id: CODE-CN-03
+      version: ">=1.0.0"
+
+    # -------------------------------------------------------------------------
+    # Traceability (Mandatory for all introduced code)
+    # -------------------------------------------------------------------------
+    - rule_id: CODE-TR-01
+      version: ">=1.0.0"
+    - rule_id: CODE-TR-02
+      version: ">=1.0.0"
+    - rule_id: CODE-TR-03
+      version: ">=1.0.0"
+    - rule_id: CODE-TR-04
+      version: ">=1.0.0"
+    - rule_id: CODE-TR-05
+      version: ">=1.0.0"
+
+    # -------------------------------------------------------------------------
+    # Artifact Isolation (Code-only, single artifact type)
+    # -------------------------------------------------------------------------
+    - rule_id: CODE-AR-01
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-02
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-03
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-04
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-05
+      version: ">=1.0.0"
+
+    # -------------------------------------------------------------------------
+    # Logging & Report (All additions MUST be auditable)
+    # -------------------------------------------------------------------------
+    - rule_id: CODE-LG-01
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-02
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-03
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-04
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-05
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-06
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-07
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-08
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-09
+      version: ">=1.0.0"
+
+  # ---------------------------------------------------------------------------
+  # Applicability (Governance Lens)
+  # ---------------------------------------------------------------------------
+  applicability:
+    domain:
+      - code
+    artifact:
+      - source_code
+    intent:
+      - add
+    stage:
+      - develop
+
+  # ---------------------------------------------------------------------------
+  # Governance Metadata
+  # ---------------------------------------------------------------------------
+  # Governance metadata is descriptive and MUST NOT influence execution behavior.
+  governance:
+    version: "1.0.0"
+    status: active
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent (Governance meaning of add)
+    # -------------------------------------------------------------------------
+    intent:
+      purpose:
+        - code_introduction
+        - scenario_composition
+      notes:
+        - "This ruleset composes CODE rules for adding new production source code."
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_generator
+      human:
+        - code_regulator
+      system:
+        - validator
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      audit_scope:
+        - source_code_changes
+      reporting:
+        - rule_evaluation_report
+        - change_summary
+      risk_category:
+        - boundary
+        - inference
+        - traceability
+        - artifact_isolation

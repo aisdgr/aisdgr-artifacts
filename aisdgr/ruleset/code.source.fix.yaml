@@ -1,0 +1,163 @@
+# ==============================================================================
+# source_code.fix.yaml
+# Fix existing production source code with minimal, bounded changes.
+# ==============================================================================
+# Definition:
+# - FIX is a STRICT subset of CHANGE.
+# - FIX focuses on correcting incorrect behavior with minimal, localized deltas.
+# - FIX MUST NOT introduce new functionality, refactoring, or scope expansion.
+#
+# Notes:
+# - Rules are scenario-agnostic; FIX semantics are expressed only at the ruleset level.
+# - Governance metadata is descriptive and MUST NOT influence execution behavior.
+# ==============================================================================
+
+ruleset:
+  id: source_code.fix
+
+  # ---------------------------------------------------------------------------
+  # Included Rules
+  # ---------------------------------------------------------------------------
+  # Boundary-first, fail-stop enforcement with no inference.
+  # Structural refactoring and behavior expansion are explicitly forbidden.
+  # ---------------------------------------------------------------------------
+  includes:
+
+    # ---- BD (Boundary & Stop) ----
+    - rule_id: CODE-BD-01
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-02
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-03
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-04
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-05
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-06
+      version: ">=1.0.0"
+
+    # ---- CN (Constraint Neutrality) ----
+    - rule_id: CODE-CN-01
+      version: ">=1.0.0"
+    - rule_id: CODE-CN-02
+      version: ">=1.0.0"
+    - rule_id: CODE-CN-03
+      version: ">=1.0.0"
+
+    # ---- TR (Traceability) ----
+    - rule_id: CODE-TR-01
+      version: ">=1.0.0"
+    - rule_id: CODE-TR-02
+      version: ">=1.0.0"
+    - rule_id: CODE-TR-03
+      version: ">=1.0.0"
+    - rule_id: CODE-TR-04
+      version: ">=1.0.0"
+
+    # ---- AR (Artifact Isolation) ----
+    - rule_id: CODE-AR-01
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-02
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-03
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-04
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-05
+      version: ">=1.0.0"
+
+    # ---- ST (Structural Change — Forbidden in FIX) ----
+    - rule_id: CODE-ST-02
+      version: ">=1.0.0"
+    - rule_id: CODE-ST-03
+      version: ">=1.0.0"
+    - rule_id: CODE-ST-04
+      version: ">=1.0.0"
+    - rule_id: CODE-ST-05
+      version: ">=1.0.0"
+
+    # ---- LG (Logging & Report) ----
+    - rule_id: CODE-LG-01
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-02
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-03
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-04
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-05
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-06
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-07
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-08
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-09
+      version: ">=1.0.0"
+
+  # ---------------------------------------------------------------------------
+  # Applicability (Decision Lens)
+  # ---------------------------------------------------------------------------
+  # Defines where this ruleset is relevant from a governance perspective.
+  # This lens does NOT alter execution conditions.
+  # ---------------------------------------------------------------------------
+  applicability:
+    domain:
+      - code
+    artifact:
+      - source_code
+    intent:
+      - fix
+    stage:
+      - develop
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: "1.0.0"
+    status: active
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent (Why this ruleset exists)
+    # -------------------------------------------------------------------------
+    intent:
+      purpose:
+        - defect_correction
+        - regression_prevention
+      non_goals:
+        - feature_addition
+        - refactoring
+        - behavior_expansion
+      notes:
+        - "Fix is defined as minimal, localized modification to correct incorrect behavior without expanding functional scope."
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_generator
+      human:
+        - code_regulator
+      system:
+        - validator
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      enforcement_level: strict
+      failure_mode: fail_stop
+      audit_scope:
+        - modified_source_code
+      reporting:
+        - rule_evaluation_report
+        - change_summary
+      risk_category:
+        - scope_expansion
+        - silent_behavior_change
+        - traceability

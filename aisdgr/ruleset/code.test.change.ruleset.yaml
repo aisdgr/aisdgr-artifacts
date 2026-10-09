@@ -1,0 +1,154 @@
+# ==============================================================================
+# test_code.change.yaml
+# Modify existing test code artifacts without affecting production source code.
+# ==============================================================================
+# Definition:
+# - CHANGE TEST focuses on updating existing test artifacts.
+# - CHANGE TEST MUST NOT modify production source code.
+# - CHANGE TEST MUST NOT expand validation scope or redefine expected behavior.
+#
+# Notes:
+# - Rules are scenario-agnostic; CHANGE semantics are expressed only at the ruleset level.
+# - Governance metadata is descriptive and MUST NOT influence execution behavior.
+# ==============================================================================
+
+ruleset:
+  id: test_code.change
+
+  # ---------------------------------------------------------------------------
+  # Included Rules
+  # ---------------------------------------------------------------------------
+  # Test code change enforces strict isolation and no inference:
+  # - Production code remains untouched
+  # - Validation scope remains bounded
+  # - All changes are traceable and auditable
+  # ---------------------------------------------------------------------------
+  includes:
+
+    # ---- BD (Boundary & Stop) ----
+    - rule_id: CODE-BD-01
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-02
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-03
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-04
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-05
+      version: ">=1.0.0"
+    - rule_id: CODE-BD-06
+      version: ">=1.0.0"
+
+    # ---- CN (Constraint Neutrality) ----
+    - rule_id: CODE-CN-01
+      version: ">=1.0.0"
+    - rule_id: CODE-CN-02
+      version: ">=1.0.0"
+    - rule_id: CODE-CN-03
+      version: ">=1.0.0"
+
+    # ---- AR (Artifact Isolation) ----
+    - rule_id: CODE-AR-01
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-02
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-03
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-04
+      version: ">=1.0.0"
+    - rule_id: CODE-AR-05
+      version: ">=1.0.0"
+
+    # ---- TI (Test Integrity) ----
+    - rule_id: CODE-TI-01
+      version: ">=1.0.0"
+    - rule_id: CODE-TI-02
+      version: ">=1.0.0"
+    - rule_id: CODE-TI-03
+      version: ">=1.0.0"
+    - rule_id: CODE-TI-04
+      version: ">=1.0.0"
+    - rule_id: CODE-TI-05
+      version: ">=1.0.0"
+
+    # ---- LG (Logging & Report) ----
+    - rule_id: CODE-LG-01
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-02
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-03
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-04
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-05
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-06
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-07
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-08
+      version: ">=1.0.0"
+    - rule_id: CODE-LG-09
+      version: ">=1.0.0"
+
+  # ---------------------------------------------------------------------------
+  # Applicability (Decision Lens)
+  # ---------------------------------------------------------------------------
+  applicability:
+    domain:
+      - code
+    artifact:
+      - test_code
+    intent:
+      - change
+    stage:
+      - develop
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: "1.0.0"
+    status: active
+    owner: asdgr
+
+    # -------------------------------------------------------------------------
+    # Intent (Why this ruleset exists)
+    # -------------------------------------------------------------------------
+    intent:
+      purpose:
+        - test_maintenance
+        - alignment_with_specification
+      non_goals:
+        - production_code_change
+        - validation_scope_expansion
+        - expected_behavior_redefinition
+      notes:
+        - "Test code changes are limited to existing test artifacts and MUST preserve original validation intent."
+
+    # -------------------------------------------------------------------------
+    # Responsibilities
+    # -------------------------------------------------------------------------
+    responsibilities:
+      ai:
+        - code_generator
+      human:
+        - code_regulator
+      system:
+        - validator
+
+    # -------------------------------------------------------------------------
+    # Governance Impact
+    # -------------------------------------------------------------------------
+    governance_impact:
+      enforcement_level: strict
+      failure_mode: fail_stop
+      audit_scope:
+        - modified_test_code
+      reporting:
+        - rule_evaluation_report
+        - change_summary
+      risk_category:
+        - test_scope_expansion
+        - production_contamination
+        - traceability

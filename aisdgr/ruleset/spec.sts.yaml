@@ -1,0 +1,156 @@
+# ==============================================================================
+# spec.sts.yaml
+# Ruleset for Software Test Specification
+# ==============================================================================
+
+ruleset:
+  id: spec.sts
+
+  # ---------------------------------------------------------------------------
+  # Included Rules
+  # ---------------------------------------------------------------------------
+  includes:
+
+    # ---- TR: Traceability ----
+    - rule_id: SPEC-TR-P01
+      version: ">=1.0.0"
+    - rule_id: SPEC-TR-P02
+      version: ">=1.0.0"
+    - rule_id: SPEC-TR-P03
+      version: ">=1.0.0"
+    - rule_id: SPEC-TR-C01
+      version: ">=1.0.0"
+    - rule_id: SPEC-TR-C02
+      version: ">=1.0.0"
+    - rule_id: SPEC-TR-C03
+      version: ">=1.0.0"
+
+    # ---- BD: Boundary & Stop ----
+    - rule_id: SPEC-BD-P01
+      version: ">=1.0.0"
+    - rule_id: SPEC-BD-P02
+      version: ">=1.0.0"
+    - rule_id: SPEC-BD-P03
+      version: ">=1.0.0"
+    - rule_id: SPEC-BD-C01
+      version: ">=1.0.0"
+    - rule_id: SPEC-BD-C02
+      version: ">=1.0.0"
+    - rule_id: SPEC-BD-C03
+      version: ">=1.0.0"
+    - rule_id: SPEC-BD-C04
+      version: ">=1.0.0"
+
+    # ---- AR: Artifact Isolation ----
+    - rule_id: SPEC-AR-P01
+      version: ">=1.0.0"
+    - rule_id: SPEC-AR-P02
+      version: ">=1.0.0"
+    - rule_id: SPEC-AR-C01
+      version: ">=1.0.0"
+    - rule_id: SPEC-AR-C02
+      version: ">=1.0.0"
+    - rule_id: SPEC-AR-C03
+      version: ">=1.0.0"
+
+    # ---- ST: Structural Change ----
+    - rule_id: SPEC-ST-P01
+      version: ">=1.0.0"
+    - rule_id: SPEC-ST-C01
+      version: ">=1.0.0"
+    - rule_id: SPEC-ST-C02
+      version: ">=1.0.0"
+    - rule_id: SPEC-ST-C03
+      version: ">=1.0.0"
+    - rule_id: SPEC-ST-C04
+      version: ">=1.0.0"
+    - rule_id: SPEC-ST-C05
+      version: ">=1.0.0"
+    - rule_id: SPEC-ST-C06
+      version: ">=1.0.0"
+
+    # ---- CN: Constraint Neutrality ----
+    - rule_id: SPEC-CN-C01
+      version: ">=1.0.0"
+    - rule_id: SPEC-CN-C02
+      version: ">=1.0.0"
+    - rule_id: SPEC-CN-C03
+      version: ">=1.0.0"
+
+    # ---- LG: Logging & Report ----
+    - rule_id: SPEC-LG-P01
+      version: ">=1.0.0"
+    - rule_id: SPEC-LG-P02
+      version: ">=1.0.0"
+    - rule_id: SPEC-LG-P03
+      version: ">=1.0.0"
+    - rule_id: SPEC-LG-P04
+      version: ">=1.0.0"
+    - rule_id: SPEC-LG-P05
+      version: ">=1.0.0"
+    - rule_id: SPEC-LG-P06
+      version: ">=1.0.0"
+    - rule_id: SPEC-LG-P07
+      version: ">=1.0.0"
+    - rule_id: SPEC-LG-C01
+      version: ">=1.0.0"
+    - rule_id: SPEC-LG-C02
+      version: ">=1.0.0"
+
+    # ---- CC: Content Constraints ----
+    - rule_id: SPEC-CC-C01
+      version: ">=1.0.0"
+    - rule_id: SPEC-CC-C02
+      version: ">=1.0.0"
+    - rule_id: SPEC-CC-C03
+      version: ">=1.0.0"
+    - rule_id: SPEC-CC-C04
+      version: ">=1.0.0"
+    - rule_id: SPEC-CC-C05
+      version: ">=1.0.0"
+    - rule_id: SPEC-CC-C06
+      version: ">=1.0.0"
+    - rule_id: SPEC-CC-C07
+      version: ">=1.0.0"
+
+  # ---------------------------------------------------------------------------
+  # Applicability
+  # ---------------------------------------------------------------------------
+  applicability:
+    domain: [spec]
+    document_type: [sts]
+    stage: [specify]
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: "1.0.0"
+    status: draft
+    owner: aisdgr
+
+    intent:
+      purpose:
+        - test_definition
+      notes:
+        - "This ruleset governs Software Test Specification specification activities."
+
+    responsibilities:
+      ai:
+        - spec_generator
+      human:
+        - document_author
+      system:
+        - content_validator
+
+    governance_impact:
+      audit_scope:
+        - sts_specification
+      reporting:
+        - rule_evaluation_report
+        - change_summary
+      risk_category:
+        - content_boundary
+        - generation_safety
+        - traceability
+        - structural_integrity

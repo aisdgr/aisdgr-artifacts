@@ -1,0 +1,82 @@
+# ==============================================================================
+# lang.go.yaml
+# Ruleset for Go Coding Standards
+# ==============================================================================
+
+ruleset:
+  id: lang.go
+
+  # ---------------------------------------------------------------------------
+  # Included Rules
+  # ---------------------------------------------------------------------------
+  includes:
+
+    # ---- Pattern Rules (Cross-language) ----
+    - rule_id: LANG-CC-ALL-P01
+      version: ">=1.0.0"
+    - rule_id: LANG-CC-ALL-P02
+      version: ">=1.0.0"
+    - rule_id: LANG-CC-ALL-P03
+      version: ">=1.0.0"
+    - rule_id: LANG-CC-ALL-P04
+      version: ">=1.0.0"
+    - rule_id: LANG-CC-ALL-P05
+      version: ">=1.0.0"
+    - rule_id: LANG-CC-ALL-P06
+      version: ">=1.0.0"
+    - rule_id: LANG-CC-ALL-P07
+      version: ">=1.0.0"
+    - rule_id: LANG-CC-ALL-P08
+      version: ">=1.0.0"
+    - rule_id: LANG-CC-ALL-P09
+      version: ">=1.0.0"
+    - rule_id: LANG-CC-ALL-P10
+      version: ">=1.0.0"
+    - rule_id: LANG-CC-ALL-P11
+      version: ">=1.0.0"
+
+    # ---- Concrete Rules (Go) ----
+    - rule_id: LANG-CC-GO-C01
+      version: ">=1.0.0"
+    - rule_id: LANG-CC-GO-C02
+      version: ">=1.0.0"
+
+  # ---------------------------------------------------------------------------
+  # Applicability
+  # ---------------------------------------------------------------------------
+  applicability:
+    domain: [lang]
+    language: [go]
+    stage: [develop]
+
+  # ---------------------------------------------------------------------------
+  # Governance
+  # ---------------------------------------------------------------------------
+  governance:
+    version: "1.0.0"
+    status: draft
+    owner: aisdgr
+
+    intent:
+      purpose:
+        - language_quality_standard
+      notes:
+        - "This ruleset enforces Go coding standards for AI-generated code."
+
+    responsibilities:
+      ai:
+        - code_generator
+      human:
+        - code_reviewer
+      system:
+        - compliance_checker
+
+    governance_impact:
+      audit_scope:
+        - go_generated_code
+      reporting:
+        - compliance_report
+        - violation_report
+      risk_category:
+        - language_safety
+        - quality_standard
