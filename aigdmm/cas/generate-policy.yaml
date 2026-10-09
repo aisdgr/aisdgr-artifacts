@@ -1,0 +1,138 @@
+document: CAS
+version: 1.0.0
+stage: Draft
+owner: AIGD Foundation
+purpose: >
+  Define generation validity rules for Coding Architecture Specification (CAS).
+  This policy ensures AI always produces a structurally valid CAS document,
+  independent of content correctness or completeness.
+
+# ----------------------------------------------------------
+# Core Generation Principle
+# ----------------------------------------------------------
+generation_principle:
+  validity_over_correctness: true
+  description: >
+    AI is responsible for generating a structurally valid CAS document.
+    Humans are responsible for reviewing and correcting architectural decisions.
+
+# ----------------------------------------------------------
+# Mandatory Generation Rules
+# ----------------------------------------------------------
+mandatory_rules:
+
+  - id: GEN-CAS-001
+    description: >
+      CAS generation MUST always produce an output document.
+      Absence of SRS, SDS, IM, or human-provided content MUST NOT block generation.
+
+  - id: GEN-CAS-002
+    description: >
+      CAS document structure MUST strictly follow CAS_Template.md.
+      Section hierarchy, headings, and identifiers MUST NOT be altered.
+
+  - id: GEN-CAS-003
+    description: >
+      Generation MUST focus on architectural constraints and boundaries.
+      Implementation details, algorithms, and code-level decisions MUST NOT be introduced.
+
+# ----------------------------------------------------------
+# Input Dependency Rules
+# ----------------------------------------------------------
+input_rules:
+
+  require_upstream_documents: false
+
+  optional_inputs:
+    - SRS
+    - SDS
+    - IM
+
+  input_absence_policy:
+    description: >
+      When no authoritative or human-authored inputs are provided,
+      AI MUST still generate a minimal, conservative CAS
+      that satisfies structural and policy constraints.
+
+# ----------------------------------------------------------
+# Content Generation Rules
+# ----------------------------------------------------------
+content_rules:
+
+  inference_policy:
+    allow_minimal_assumptions: true
+    assumption_constraints:
+      - assumptions MUST be explicitly stated
+      - assumptions MUST be conservative
+      - assumptions MUST NOT introduce domain-specific commitments
+
+  prohibition_rules:
+    - MUST NOT fabricate business requirements
+    - MUST NOT invent non-existent external systems
+    - MUST NOT introduce technology choices unless structurally required
+
+# ----------------------------------------------------------
+# Section Handling Rules
+# ----------------------------------------------------------
+section_rules:
+
+  respect_execution_policy: true
+
+  empty_section_policy:
+    executable_true:
+      action: generate_minimal_valid_content
+      description: >
+        Executable sections MUST be generated even if no human input exists.
+        Content SHOULD remain abstract and non-committal.
+
+    executable_false:
+      action: omit_section
+      description: >
+        Non-executable sections MUST NOT be generated.
+
+# ----------------------------------------------------------
+# Language Rules
+# ----------------------------------------------------------
+language_rules:
+
+  template_language_fixed: true
+  content_language:
+    source: invocation_parameter
+    allow_mixed_language: false
+
+# ----------------------------------------------------------
+# Prohibited Stop Conditions
+# ----------------------------------------------------------
+forbidden_stop_conditions:
+
+  - missing_SRS
+  - missing_SDS
+  - missing_IM
+  - insufficient_domain_knowledge
+  - ambiguous_architecture_intent
+
+# ----------------------------------------------------------
+# Allowed Stop Conditions
+# ----------------------------------------------------------
+allowed_stop_conditions:
+
+  - template_structure_invalid
+  - execution_policy_conflict
+  - violation_of_coding_governance (CGG / CCS)
+
+# ----------------------------------------------------------
+# Output Rules
+# ----------------------------------------------------------
+output_rules:
+
+  output_required: true
+  output_only_document: true
+  prohibit_explanations: true
+  prohibit_policy_echo: true
+
+# ----------------------------------------------------------
+# Canonical Statement
+# ----------------------------------------------------------
+canonical_statement: >
+  CAS generation guarantees structural validity.
+  Architectural correctness is a human responsibility.

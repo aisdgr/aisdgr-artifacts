@@ -1,0 +1,185 @@
+version: "1.0"
+document_type: CIS
+model: AIGDMM
+mode: aicdm_reverse   # Code -> CIS (AI reverse extraction)
+
+# ==========================================================
+# Global Defaults
+# ==========================================================
+defaults:
+  visibility: ai_read
+  executable: true
+  include_in_transformation: true
+
+# ==========================================================
+# Section-Level Policy
+# ==========================================================
+sections:
+
+  "0":
+    name: Change History
+    visibility: human_only
+    executable: false
+    include_in_transformation: false
+    description: >
+      Informative history only.
+      MUST NOT be generated or modified by AI.
+
+  "1":
+    name: Introduction
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    sub_sections:
+      "1.1":
+        name: Purpose
+        field_policy:
+          content:
+            editable_by: ai
+            source: code_context
+            semantics: descriptive_only
+
+      "1.2":
+        name: Scope
+        field_policy:
+          content:
+            editable_by: ai
+            source: code_context
+            semantics: descriptive_only
+
+      "1.3":
+        name: Definitions, Acronyms, Abbreviations
+        visibility: human_only
+        executable: false
+        include_in_transformation: false
+
+      "1.4":
+        name: References
+        visibility: ai_read
+        executable: false
+        include_in_transformation: false
+
+  "2":
+    name: Conceptual Model Overview
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    sub_sections:
+      "2.1":
+        name: Concept Perspective
+        field_policy:
+          content:
+            editable_by: ai
+            source: code_structure
+            semantics: inferred_structure_only
+
+      "2.2":
+        name: Concept Boundaries
+        field_policy:
+          content:
+            editable_by: ai
+            source: code_boundaries
+            semantics: non_inferential
+
+  "3":
+    name: Meta Definitions
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    item_policy:
+      id_pattern: "^META-[A-Za-z0-9_-]+$"
+      required_fields:
+        - key
+        - value
+        - description
+
+    field_policy:
+      key:
+        editable_by: ai
+        semantics: neutral_identifier
+
+      value:
+        editable_by: ai
+        semantics: neutral_value
+
+      description:
+        editable_by: ai
+        semantics: neutral_only
+        prohibition:
+          - behavior
+          - logic
+          - execution_flow
+
+  "4":
+    name: Rule Specifications
+    visibility: ai_read
+    executable: true
+    include_in_transformation: true
+
+    item_policy:
+      id_pattern: "^RULE-[A-Za-z0-9_-]+$"
+      required_fields:
+        - referenced_meta
+        - rule
+
+    field_policy:
+      referenced_meta:
+        editable_by: ai
+        semantics: reference_only
+
+      rule:
+        editable_by: ai
+        semantics: condition_outcome_pair
+        constraints:
+          - no_execution_flow
+          - no_control_sequence
+          - no_side_effects
+
+      description:
+        editable_by: ai
+        semantics: explanatory_only
+
+  "A":
+    name: Appendix A — Authoring Rules
+    visibility: ai_read
+    executable: false
+    include_in_transformation: false
+    description: >
+      Informative governance appendix.
+      Not part of executable or generative scope.
+
+# ==========================================================
+# Field-Level Global Rules
+# ==========================================================
+fields:
+
+  id:
+    required: true
+    editable_by: ai
+    executable: false
+
+  content:
+    editable_by: ai
+    executable: false
+
+# ==========================================================
+# Execution Rules
+# ==========================================================
+execution_rules:
+
+  must_generate_structure: true
+  forbid_empty_document: true
+  forbid_execution_flow_definition: true
+  forbid_semantic_invention: true
+
+# ==========================================================
+# Violation Policy
+# ==========================================================
+violation_policy:
+
+  on_execution_flow_detected: terminate
+  on_semantic_inference: terminate
+  on_structure_mismatch: terminate

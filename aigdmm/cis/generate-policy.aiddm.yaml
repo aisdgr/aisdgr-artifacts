@@ -1,0 +1,120 @@
+version: "1.0"
+document_type: CIS
+model: AIGDMM
+methodology: AIDDM
+operation: generate
+generation_mode: ai_materialization
+
+# ==========================================================
+# Core Principle
+# ==========================================================
+principle:
+  validity_over_correctness: true
+  description: >
+    AI is responsible for producing a structurally valid CIS document.
+    Humans are responsible for semantic correctness.
+
+# ==========================================================
+# Generation Responsibility Model
+# ==========================================================
+responsibility_model:
+
+  ai:
+    - generate_full_document_structure
+    - populate_all_executable_sections
+    - materialize_rule_skeletons
+    - preserve_template_hierarchy
+    - mark_uncertain_semantics_explicitly
+
+  human:
+    - review_and_correct_semantics
+    - refine_rules_and_constraints
+    - adjust_execution_policy_if_needed
+
+# ==========================================================
+# Artifact Generation Rules (NON-NEGOTIABLE)
+# ==========================================================
+artifact_generation:
+
+  must_produce_artifact: true
+  forbid_no_output: true
+  forbid_false_success: true
+
+  # Even with minimal or empty human input,
+  # AI MUST still produce a CIS document
+  allow_generation_without_semantic_input: true
+
+# ==========================================================
+# Structure Rules
+# ==========================================================
+structure_rules:
+
+  source_of_truth: CIS_Template.md
+
+  must_follow_template_exactly: true
+  must_generate_all_sections: true
+  forbid_section_removal: true
+  forbid_section_reordering: true
+
+# ==========================================================
+# Content Population Rules
+# ==========================================================
+content_rules:
+
+  semantic_source:
+    primary: human_authored_content
+    secondary: none
+
+  missing_content_policy:
+    allowed: true
+    handling:
+      - generate_structural_placeholder
+      - mark_as_human_required
+
+  prohibition:
+    - infer_requirements
+    - invent_domain_knowledge
+    - reinterpret_human_rules
+
+# ==========================================================
+# Rule Skeleton Policy
+# ==========================================================
+rule_generation:
+
+  generate_rule_skeletons: true
+  allow_empty_rule_body: true
+  forbid_new_rule_types: true
+
+# ==========================================================
+# Language Rules
+# ==========================================================
+language:
+
+  structure_language: fixed_from_template
+  content_language: configurable_by_invocation
+  forbid_language_mixing_within_section: true
+
+# ==========================================================
+# Stop & Violation Conditions
+# ==========================================================
+violation_policy:
+
+  terminate_if:
+    - template_structure_missing
+    - template_structure_modified
+    - output_file_not_generated
+
+  do_not_terminate_if:
+    - semantic_missing
+    - rule_incomplete
+    - content_uncertain
+
+# ==========================================================
+# Output Rules
+# ==========================================================
+output:
+
+  output_only_final_document: true
+  forbid_explanations: true
+  forbid_annotations: true
+  forbid_reasoning_logs: true
