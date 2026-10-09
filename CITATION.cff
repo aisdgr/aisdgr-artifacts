@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use these reference artifacts, please cite this repository and the associated BRA or VSS paper."
+title: "AISDGR Artifacts: BRA and VSS Reference Materials"
+authors:
+  - family-names: Tsai
+    given-names: Spark
+    orcid: https://orcid.org/0009-0006-8847-4703
+license: CC-BY-4.0
+repository-code: https://github.com/aisdgr/aisdgr-artifacts
