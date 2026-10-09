@@ -1,0 +1,63 @@
+# ==============================================================================
+# SPEC-TR-P03.yaml
+# A single code change MUST NOT contain multiple Trace IDs.
+# ==============================================================================
+
+execution:
+  id: SPEC-TR-P03
+  apply_as: traceability_engineer
+  normative: >
+    Each output spec document artifact produced by a single execution
+    MUST reference exactly one Trace ID.
+
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - ensure_trace_to_change_uniqueness
+      - prevent_mixed_trace_contexts
+      - maintain_auditable_change_history
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_generator
+    human:
+      - spec_regulator
+    system:
+      - validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - spec_generation
+      - spec_modification
+    risk: traceability
+    severity: high
+    reason:
+      - multiple_trace_ids_in_single_change
+      - ambiguous_change_origin
+      - broken_trace_to_execution_mapping
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: foundational
+    affected_capabilities:
+      - traceability
+      - auditability
+      - accountability

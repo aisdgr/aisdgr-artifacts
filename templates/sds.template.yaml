@@ -1,0 +1,35 @@
+# sds.template.yaml
+# Template Definition for Software Design Specification
+
+template:
+  type: sds
+  document: Software Design Specification
+  version: "1.0.0"
+
+sections:
+  documentation-sensitivity-notice:
+    role: informative
+  change-history:
+    role: informative
+  purpose-and-scope:
+    role: boundary
+  design-overview:
+    role: authoritative
+  design-components:
+    role: authoritative
+  interaction-and-data-flow:
+    role: authoritative
+  interfaces-and-adapters:
+    role: authoritative
+  cross-cutting-concerns:
+    role: authoritative
+  error-handling-strategy:
+    role: authoritative
+  deployment-and-operational-design:
+    role: authoritative
+  appendix-a-traceability-policy:
+    role: informative
+  appendix-b-authoring-constraints:
+    role: informative
+  appendix-c-notes:
+    role: informative

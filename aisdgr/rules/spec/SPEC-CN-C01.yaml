@@ -1,0 +1,63 @@
+# ==============================================================================
+# SPEC-CN-C01.yaml
+# Undeclared boundaries MUST NOT be inferred.
+# ==============================================================================
+
+execution:
+  id: SPEC-CN-C01
+  apply_as: constraint_engineer
+  normative: >
+    Undeclared boundaries MUST NOT be inferred
+    during spec generation execution.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - eliminate_implicit_scope_inference
+      - preserve_decidability
+      - enforce_explicit_boundary_declaration
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    system:
+      - boundary_validator
+      - constraint_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - boundary_resolution
+      - spec_execution
+    risk:
+      - scope
+      - governance
+    severity:
+      - high
+    reason:
+      - inferred_boundary_detected
+      - implicit_scope_resolution
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - boundary_decidability
+      - execution_safety
+      - auditability

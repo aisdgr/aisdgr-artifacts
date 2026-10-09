@@ -1,0 +1,65 @@
+# ==============================================================================
+# SPEC-ST-C05.yaml
+# Each generated item MUST include all required declarative fields.
+# ==============================================================================
+
+execution:
+  id: SPEC-ST-C05
+  apply_as: structure_engineer
+  normative: >
+    Each generated item or element in a spec document artifact
+    MUST include all required declarative fields as specified by the template.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - enforce_item_completeness
+      - prevent_partial_declaration
+      - ensure_all_required_fields_present
+      - enforce_declaration_completeness
+      - prevent_field_omission
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    system:
+      - structure_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - specify
+    scope:
+      - spec_generation
+      - spec_modification
+    risk:
+      - correctness
+    severity:
+      - high
+    reason:
+      - missing_required_field
+      - incomplete_item_declaration
+      - missing_mandatory_field
+      - incomplete_element_declaration
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - structural_completeness
+      - template_integrity
+      - auditability

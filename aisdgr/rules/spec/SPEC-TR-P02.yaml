@@ -1,0 +1,62 @@
+# ==============================================================================
+# SPEC-TR-P02.yaml
+# Trace IDs MUST be embedded in the actual code content.
+# ==============================================================================
+
+execution:
+  id: SPEC-TR-P02
+  apply_as: traceability_engineer
+  normative: >
+    Trace IDs present in the output artifact MUST be embedded within
+    the spec document artifact itself and MUST NOT exist solely outside
+    the spec document artifact.
+
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - ensure_trace_is_code_resident
+      - prevent_external_or_implicit_trace_only
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_generator
+    human:
+      - spec_regulator
+    system:
+      - validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - spec_generation
+      - spec_modification
+    risk: traceability
+    severity: high
+    reason:
+      - trace_id_present_only_in_metadata
+      - trace_reference_not_embedded_in_code
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: foundational
+    affected_capabilities:
+      - traceability
+      - auditability
+      - accountability

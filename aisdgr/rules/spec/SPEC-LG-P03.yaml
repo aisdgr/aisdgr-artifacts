@@ -1,0 +1,62 @@
+# ==============================================================================
+# SPEC-LG-P03.yaml
+# Each execution MUST include a rationale.
+# ==============================================================================
+
+execution:
+  id: SPEC-LG-P03
+  apply_as: logging_engineer
+  normative: >
+    Each spec generation execution MUST include a non-empty rationale
+    explaining why the execution was performed.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - preserve_decision_context
+      - prevent_silent_execution
+      - enable_post_hoc_analysis
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    system:
+      - execution_logger
+      - rationale_collector
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - spec_execution
+    risk:
+      - accountability
+      - governance
+    severity:
+      - medium
+    reason:
+      - missing_execution_rationale
+      - opaque_execution_decision
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: enforce
+    affected_capabilities:
+      - accountability
+      - auditability
+      - decision_traceability

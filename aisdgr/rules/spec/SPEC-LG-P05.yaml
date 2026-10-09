@@ -1,0 +1,56 @@
+# ==============================================================================
+# SPEC-LG-P05.yaml
+# Change summaries MUST match actual document changes.
+# ==============================================================================
+
+execution:
+  id: SPEC-LG-P05
+  apply_as: logging_engineer
+  normative: >
+    Change summaries MUST accurately reflect
+    the actual document changes performed.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_misleading_summaries
+      - ensure_change_integrity
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    system:
+      - diff_analyzer
+      - summary_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - document_change
+    risk:
+      - auditability
+    severity:
+      - high
+    reason:
+      - summary_mismatch
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: enforce
+    affected_capabilities:
+      - forensic_analysis
+      - accountability

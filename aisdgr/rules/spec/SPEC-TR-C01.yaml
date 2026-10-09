@@ -1,0 +1,47 @@
+# ==============================================================================
+# SPEC-TR-C01.yaml
+# Existing Trace IDs MUST NOT be removed.
+# ==============================================================================
+
+execution:
+  id: SPEC-TR-C01
+  apply_as: traceability_engineer
+  normative: >
+    Trace IDs present in the input artifact MUST NOT be absent 
+    from the corresponding output artifact.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+  intent:
+    rationale:
+      - preserve_trace_continuity
+      - prevent_trace_erasure
+      - maintain_audit_chain_integrity
+  responsibilities:
+    ai:
+      - spec_generator
+    human:
+      - spec_regulator
+    system:
+      - validator
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - spec_modification
+      - document_restructuring
+      - content_correction
+    risk: traceability
+    severity: high
+    reason:
+      - trace_id_removal
+      - loss_of_code_origin
+      - audit_chain_break
+  governance_impact:
+    level: foundational
+    affected_capabilities:
+      - traceability
+      - auditability
+      - accountability

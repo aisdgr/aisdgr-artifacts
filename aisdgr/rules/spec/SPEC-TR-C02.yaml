@@ -1,0 +1,48 @@
+# ==============================================================================
+# SPEC-TR-C02.yaml
+# Orphan code without Trace IDs MUST NOT be generated.
+# ==============================================================================
+
+execution:
+  id: SPEC-TR-C02
+  apply_as: traceability_engineer
+  normative: >
+    No output spec document artifact without a Trace ID
+    MUST be generated.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+  intent:
+    rationale:
+      - prevent_orphan_code
+      - enforce_trace_completeness
+      - ensure_governance_visibility
+  responsibilities:
+    ai:
+      - spec_generator
+    human:
+      - spec_regulator
+    system:
+      - validator
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - spec_generation
+      - intermediate_artifact
+    risk:
+      - traceability
+      - architecture_flexibility
+    severity: medium
+    reason:
+      - orphan_code_generated
+      - delayed_trace_assignment
+      - reduced_architectural_flexibility
+  governance_impact:
+    level: conditional
+    affected_capabilities:
+      - traceability
+      - auditability
+      - architectural_flexibility

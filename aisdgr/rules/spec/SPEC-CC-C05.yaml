@@ -1,0 +1,71 @@
+# ==============================================================================
+# SPEC-CC-C05.yaml
+# Inference and Fabrication Prohibition
+# Pattern: GGC — Generation Governance
+# ==============================================================================
+
+execution:
+  id: SPEC-CC-C05
+  apply_as: content_regulator
+  normative: >
+    AI MUST NOT infer, expand, merge, split, reinterpret, or fabricate
+    any document content, trace references, or constraints. All generated
+    content MUST be strictly derived from explicitly provided or
+    referenced sources. AI MUST NOT invent new quality attributes,
+    constraint categories, or domain abstractions beyond what is
+    explicitly declared.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - inference_and_fabrication_prohibited
+      - restrict_ai_content_generation
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_generator
+    human:
+      - generation_supervisor
+    system:
+      - generation_governor
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - specify
+    scope:
+      - content_generation
+    document_type:
+      - cas
+      - cis
+      - css
+      - sds
+      - srs
+      - sts
+    risk:
+      - unauthorized_generation
+    severity:
+      - high
+    reason:
+      - generation_boundary_violation
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - generation_safety
+      - content_governance

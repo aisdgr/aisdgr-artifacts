@@ -1,0 +1,67 @@
+# ==============================================================================
+# SPEC-ST-C01.yaml
+# Template-defined section structure is immutable and MUST NOT be modified.
+# ==============================================================================
+
+execution:
+  id: SPEC-ST-C01
+  apply_as: structure_engineer
+  normative: >
+    Spec generation execution MUST NOT perform any modification
+    to the template-defined section structure under any circumstance.
+    The section structure is immutable and defined exclusively by the template.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - enforce_template_structure_immutability
+      - prevent_unauthorized_section_change
+      - eliminate_implicit_section_restructuring
+      - preserve_template_authority
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    system:
+      - structure_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - specify
+    scope:
+      - section_structure_change
+      - spec_generation
+      - spec_modification
+    risk:
+      - architecture
+    severity:
+      - high
+    reason:
+      - template_structure_violated
+      - unauthorized_section_addition_or_removal
+      - unauthorized_structural_refactor
+      - implicit_structure_change
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - architectural_stability
+      - template_integrity
+      - auditability
+      - auditability

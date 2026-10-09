@@ -1,0 +1,17 @@
+# css.template.yaml
+# Template Definition for Coding Structure Specification
+
+template:
+  type: css
+  document: Coding Structure Specification
+  version: "1.0.0"
+
+sections:
+  change-history:
+    role: informative
+  introduction:
+    role: informative
+  structure-overview:
+    role: authoritative
+  structural-elements:
+    role: authoritative

@@ -1,0 +1,25 @@
+# sts.template.yaml
+# Template Definition for Software Test Specification
+
+template:
+  type: sts
+  document: Software Test Specification
+  version: "1.0.0"
+
+sections:
+  change-history:
+    role: informative
+  introduction:
+    role: informative
+  overall-test-description:
+    role: boundary
+  test-specifications:
+    role: authoritative
+  appendix-a-traceability-policy:
+    role: informative
+  appendix-b-authoring-constraints:
+    role: informative
+  appendix-c-methodology-notes:
+    role: informative
+  appendix-d-notes:
+    role: informative

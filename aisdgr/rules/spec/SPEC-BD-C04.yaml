@@ -1,0 +1,53 @@
+# ==============================================================================
+# SPEC-BD-C04.yaml
+# Generation targets MUST be limited to explicitly declared regions.
+# ==============================================================================
+
+execution:
+  id: SPEC-BD-C04
+  apply_as: boundary_engineer
+  normative: >
+    Generation targets MUST be limited to explicitly declared regions
+    including designated placeholders and section boundaries within the template.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - enforce_generation_target_precision
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    system:
+      - boundary_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - spec_execution
+    reason:
+      - generation_outside_designated_region
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - boundary_enforcement
+      - execution_safety
+      - auditability

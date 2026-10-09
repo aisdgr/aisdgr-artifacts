@@ -1,0 +1,57 @@
+# ==============================================================================
+# SPEC-AR-P02.yaml
+# All generated artifacts MUST be addressable and locatable.
+# ==============================================================================
+
+execution:
+  id: SPEC-AR-P02
+  apply_as: artifact_engineer
+  normative: >
+    All generated artifacts MUST be addressable and locatable
+    within the execution context.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_unreachable_artifacts
+      - ensure_artifact_traceability
+      - enable_post_execution_audit
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    system:
+      - artifact_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - artifact_creation
+    reason:
+      - non_addressable_artifact
+      - non_locatable_artifact
+      - audit_failure_risk
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - artifact_traceability
+      - auditability
+      - execution_transparency

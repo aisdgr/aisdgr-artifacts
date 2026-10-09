@@ -1,0 +1,56 @@
+# ==============================================================================
+# SPEC-LG-C02.yaml
+# Rule violations MUST NOT be silently ignored.
+# ==============================================================================
+
+execution:
+  id: SPEC-LG-C02
+  apply_as: governance_observer
+  normative: >
+    Rule violations MUST NOT be silently ignored
+    and MUST be explicitly recorded and reported.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_governance_evasion
+      - enforce_visibility_of_violations
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    system:
+      - rule_enforcer
+      - report_generator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - governance_enforcement
+    risk:
+      - governance
+    severity:
+      - critical
+    reason:
+      - silent_rule_violation
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - governance_integrity
+      - accountability

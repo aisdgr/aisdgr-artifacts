@@ -1,0 +1,71 @@
+# ==============================================================================
+# SPEC-CC-C06.yaml
+# Prescriptive Content Prohibition
+# Pattern: GGC — Generation Governance
+# ==============================================================================
+
+execution:
+  id: SPEC-CC-C06
+  apply_as: content_regulator
+  normative: >
+    AI MUST NOT generate prescriptive content, including implementation
+    details, behavior logic, algorithms, execution mechanisms, or
+    system-wide architecture. Generated content MUST remain declarative
+    and at the abstraction level appropriate for the document type.
+    Domain-specific semantic constructs MUST NOT be altered in meaning
+    or purpose.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prescriptive_content_prohibited
+      - restrict_ai_content_generation
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_generator
+    human:
+      - generation_supervisor
+    system:
+      - generation_governor
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - specify
+    scope:
+      - content_generation
+    document_type:
+      - cas
+      - cis
+      - css
+      - sds
+      - srs
+      - sts
+    risk:
+      - unauthorized_generation
+    severity:
+      - high
+    reason:
+      - generation_boundary_violation
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - generation_safety
+      - content_governance

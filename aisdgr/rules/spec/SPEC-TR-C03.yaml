@@ -1,0 +1,59 @@
+# ==============================================================================
+# SPEC-TR-C03.yaml
+# Trace IDs MUST NOT reference items that do not exist in the upstream document.
+# ==============================================================================
+
+execution:
+  id: SPEC-TR-C03
+  apply_as: traceability_engineer
+  normative: >
+    A Trace ID in a spec document MUST NOT reference
+    an item that does not exist in the upstream document.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_dangling_trace_reference
+      - enforce_upstream_document_integrity
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    human:
+      - spec_regulator
+    system:
+      - trace_reference_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - specify
+    scope:
+      - spec_generation
+      - spec_modification
+    risk: traceability
+    severity: high
+    reason:
+      - dangling_trace_id_reference
+      - upstream_item_not_found
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - traceability
+      - auditability

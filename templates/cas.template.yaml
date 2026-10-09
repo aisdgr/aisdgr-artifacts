@@ -1,0 +1,21 @@
+# cas.template.yaml
+# Template Definition for Coding Architecture Specification
+
+template:
+  type: cas
+  document: Coding Architecture Specification
+  version: "1.0.0"
+
+sections:
+  change-history:
+    role: informative
+  introduction:
+    role: informative
+  architectural-context:
+    role: boundary
+  module-structure:
+    role: boundary
+  architectural-constraints:
+    role: authoritative
+  interface-architecture:
+    role: authoritative

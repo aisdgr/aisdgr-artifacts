@@ -1,0 +1,71 @@
+# ==============================================================================
+# SPEC-CC-C02.yaml
+# Boundary Section Constraint
+# Pattern: GEC — Section Authority
+# section_type: boundary
+# ==============================================================================
+
+execution:
+  id: SPEC-CC-C02
+  apply_as: content_engineer
+  normative: >
+    Sections classified as boundary MUST define scope, perspective,
+    or conceptual boundaries only and MUST NOT describe implementation
+    details, solutions, or prescriptive mechanisms.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - boundary_section_defines_scope_only
+      - enforce_content_boundary
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_generator
+    human:
+      - document_author
+    system:
+      - content_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - specify
+    scope:
+      - content_authoring
+    section_type:
+      - boundary
+    document_type:
+      - cas
+      - cis
+      - css
+      - sds
+      - srs
+      - sts
+    risk:
+      - content_violation
+    severity:
+      - medium
+    reason:
+      - section_content_boundary
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - content_integrity
+      - document_conformance

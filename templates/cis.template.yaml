@@ -1,0 +1,17 @@
+# cis.template.yaml
+# Template Definition for Conceptual Implementation Specification
+
+template:
+  type: cis
+  document: Conceptual Implementation Specification
+  version: "1.0.0"
+
+sections:
+  change-history:
+    role: informative
+  introduction:
+    role: informative
+  conceptual-model-overview:
+    role: boundary
+  decision-structure:
+    role: authoritative

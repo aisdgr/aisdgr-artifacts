@@ -1,0 +1,62 @@
+# ==============================================================================
+# SPEC-LG-P02.yaml
+# Execution records MUST be linked to the corresponding Trace ID.
+# ==============================================================================
+
+execution:
+  id: SPEC-LG-P02
+  apply_as: logging_engineer
+  normative: >
+    Each execution record MUST be explicitly linked
+    to the corresponding Trace ID used in the affected spec documents.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - bind_execution_to_code_identity
+      - prevent_unattributed_execution
+      - enable_end_to_end_traceability
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    system:
+      - execution_logger
+      - trace_linker
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - spec_execution
+    risk:
+      - traceability
+      - auditability
+    severity:
+      - high
+    reason:
+      - execution_without_trace_link
+      - orphan_execution_record
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: enforce
+    affected_capabilities:
+      - end_to_end_traceability
+      - auditability
+      - forensic_analysis

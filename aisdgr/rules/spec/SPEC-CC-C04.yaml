@@ -1,0 +1,68 @@
+# ==============================================================================
+# SPEC-CC-C04.yaml
+# Generation Scope Constraint
+# Pattern: GGC — Generation Governance
+# ==============================================================================
+
+execution:
+  id: SPEC-CC-C04
+  apply_as: content_regulator
+  normative: >
+    AI MUST NOT generate document content by default. Content MAY be
+    generated only when explicitly instructed by a human and MUST be
+    limited to the explicitly declared scope or placeholder.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - generation_scope_must_be_explicit
+      - restrict_ai_content_generation
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_generator
+    human:
+      - generation_supervisor
+    system:
+      - generation_governor
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - specify
+    scope:
+      - content_generation
+    document_type:
+      - cas
+      - cis
+      - css
+      - sds
+      - srs
+      - sts
+    risk:
+      - unauthorized_generation
+    severity:
+      - high
+    reason:
+      - generation_boundary_violation
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - generation_safety
+      - content_governance

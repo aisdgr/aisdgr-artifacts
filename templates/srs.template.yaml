@@ -1,0 +1,23 @@
+# srs.template.yaml
+# Template Definition for Software Requirements Specification
+
+template:
+  type: srs
+  document: Software Requirements Specification
+  version: "1.0.0"
+
+sections:
+  change-history:
+    role: informative
+  introduction:
+    role: informative
+  overall-description:
+    role: boundary
+  functional-requirements:
+    role: authoritative
+  non-functional-requirements:
+    role: authoritative
+  business-rules:
+    role: authoritative
+  interface-requirements:
+    role: authoritative

@@ -1,0 +1,55 @@
+# ==============================================================================
+# SPEC-AR-C01.yaml
+# Creation of undeclared artifact types is forbidden.
+# ==============================================================================
+
+execution:
+  id: SPEC-AR-C01
+  apply_as: artifact_engineer
+  normative: >
+    Code execution MUST NOT create any artifact
+    whose artifact type is not explicitly declared.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_implicit_artifact_type_creation
+      - enforce_artifact_type_control
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    system:
+      - artifact_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - artifact_creation
+    reason:
+      - undeclared_artifact_type
+      - artifact_type_violation
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - artifact_isolation
+      - execution_safety
+      - auditability

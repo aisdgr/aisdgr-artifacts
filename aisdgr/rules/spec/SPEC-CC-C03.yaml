@@ -1,0 +1,74 @@
+# ==============================================================================
+# SPEC-CC-C03.yaml
+# Authoritative Section Constraint
+# Pattern: GEC — Section Authority
+# section_type: authoritative
+# ==============================================================================
+
+execution:
+  id: SPEC-CC-C03
+  apply_as: content_engineer
+  normative: >
+    Sections classified as authoritative MUST be explicit, declarative,
+    and enforceable. Where applicable, such sections MUST declare
+    traceability to upstream specifications and MUST NOT prescribe
+    implementation mechanisms, behavior logic, or execution flow.
+    Sections with fixed mandatory fields MUST use exactly those fields
+    and MUST NOT introduce additional ones.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - authoritative_section_is_explicit_and_declarative
+      - enforce_content_boundary
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_generator
+    human:
+      - document_author
+    system:
+      - content_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - specify
+    scope:
+      - content_authoring
+    section_type:
+      - authoritative
+    document_type:
+      - cas
+      - cis
+      - css
+      - sds
+      - srs
+      - sts
+    risk:
+      - content_violation
+    severity:
+      - medium
+    reason:
+      - section_content_boundary
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - content_integrity
+      - document_conformance

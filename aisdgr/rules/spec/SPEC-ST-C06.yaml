@@ -1,0 +1,60 @@
+# ==============================================================================
+# SPEC-ST-C06.yaml
+# Structural elements MUST NOT be repurposed to embed behavior or logic.
+# ==============================================================================
+
+execution:
+  id: SPEC-ST-C06
+  apply_as: structure_engineer
+  normative: >
+    Structural elements and fields defined by the template
+    MUST NOT be repurposed to embed behavior, logic, decision rules,
+    or execution flow that is outside their designated semantic role.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - enforce_semantic_role_integrity
+      - prevent_semantic_role_violation
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    system:
+      - structure_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - specify
+    scope:
+      - semantic_role_change
+    risk:
+      - architecture
+    severity:
+      - high
+    reason:
+      - semantic_role_violation
+      - embedded_behavior_in_structure
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - template_integrity
+      - architectural_stability
+      - auditability

@@ -1,0 +1,63 @@
+# ==============================================================================
+# SPEC-BD-P01.yaml
+# Code execution MUST stop if no boundary is declared.
+# ==============================================================================
+
+execution:
+  id: SPEC-BD-P01
+  apply_as: boundary_engineer
+  normative: >
+    Code execution MUST stop if no explicit boundary declaration is present.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_unbounded_modification
+      - enforce_explicit_scope
+      - eliminate_inferred_boundaries
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_generator
+    human:
+      - spec_regulator
+    system:
+      - validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - spec_generation
+      - spec_modification
+      - document_restructuring
+      - content_correction
+    risk: boundary
+    severity: high
+    reason:
+      - boundary_missing
+      - scope_inference_risk
+      - uncontrolled_change_risk
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: foundational
+    affected_capabilities:
+      - boundary_enforcement
+      - auditability
+      - accountability

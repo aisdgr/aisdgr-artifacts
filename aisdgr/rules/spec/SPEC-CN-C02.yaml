@@ -1,0 +1,67 @@
+# ==============================================================================
+# SPEC-CN-C02.yaml
+# Undeclared requirements MUST not be inferred.
+# ==============================================================================
+
+execution:
+  id: SPEC-CN-C02
+  apply_as: constraint_engineer
+  normative: >
+    Undeclared requirements, behavior, mechanism, implementation detail,
+    or execution flow MUST NOT be inferred during spec generation execution.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_requirement_inference
+      - preserve_requirement_authority
+      - eliminate_implicit_feature_assumption
+      - prevent_behavior_inference
+      - prevent_implementation_inference
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    system:
+      - requirement_validator
+      - constraint_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - requirement_resolution
+      - spec_execution
+    risk:
+      - scope
+      - governance
+    severity:
+      - high
+    reason:
+      - inferred_requirement_detected
+      - implicit_feature_assumption
+      - inferred_behavior_detected
+      - inferred_implementation_detected
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - requirement_decidability
+      - execution_safety
+      - auditability

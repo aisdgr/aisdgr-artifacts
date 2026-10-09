@@ -1,0 +1,56 @@
+# ==============================================================================
+# SPEC-LG-C01.yaml
+# Rationales MUST NOT be empty or purely repetitive.
+# ==============================================================================
+
+execution:
+  id: SPEC-LG-C01
+  apply_as: logging_engineer
+  normative: >
+    Execution rationales MUST NOT be empty,
+    generic, or purely repetitive across executions.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_placeholder_justification
+      - ensure_meaningful_rationale
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    system:
+      - rationale_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - execution_logging
+    risk:
+      - accountability
+    severity:
+      - medium
+    reason:
+      - empty_rationale
+      - repetitive_rationale
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: enforce
+    affected_capabilities:
+      - accountability
+      - auditability

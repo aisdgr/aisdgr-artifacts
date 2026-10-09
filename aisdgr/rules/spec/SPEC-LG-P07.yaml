@@ -1,0 +1,55 @@
+# ==============================================================================
+# SPEC-LG-P07.yaml
+# Rule reports MUST include per-rule evaluation results.
+# ==============================================================================
+
+execution:
+  id: SPEC-LG-P07
+  apply_as: governance_observer
+  normative: >
+    Rule-evaluation reports MUST include
+    explicit pass or fail results for each applied rule.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - ensure_rule_transparency
+      - enable_post_execution_review
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    system:
+      - rule_evaluator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - rule_reporting
+    risk:
+      - governance
+    severity:
+      - high
+    reason:
+      - incomplete_rule_report
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: enforce
+    affected_capabilities:
+      - traceable_governance
+      - auditability

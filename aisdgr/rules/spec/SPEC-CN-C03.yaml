@@ -1,0 +1,63 @@
+# ==============================================================================
+# SPEC-CN-C03.yaml
+# Undeclared acceptance criteria, verification items, or test case items MUST not be inferred.
+# ==============================================================================
+
+execution:
+  id: SPEC-CN-C03
+  apply_as: constraint_engineer
+  normative: >
+    Undeclared acceptance criteria, verification items, or test case items MUST NOT be inferred
+    during spec generation execution.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_validation_target_inference
+      - preserve_validation_authority
+      - eliminate_implicit_validation_scope
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - spec_executor
+    system:
+      - validation_target_validator
+      - constraint_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - design
+    scope:
+      - validation_resolution
+      - spec_execution
+    risk:
+      - scope
+      - governance
+    severity:
+      - high
+    reason:
+      - inferred_validation_target
+      - implicit_validation_scope
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - validation_decidability
+      - execution_safety
+      - auditability
