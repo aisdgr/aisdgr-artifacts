@@ -1,0 +1,337 @@
+fields:
+
+  # ---------------------------------------------------------------------------
+  # Meta
+  # ---------------------------------------------------------------------------
+  - name: meta.id
+    type: string
+    pattern: '^[a-zA-Z0-9_\-\.]+$'
+    constraint: unique
+    required: true
+    render_when_empty: true
+    generate_document: true
+    role_in_code: ignore
+
+  - name: meta.title
+    type: string
+    required: true
+    render_when_empty: true
+    generate_document: true
+    role_in_code: ignore
+
+  # ---------------------------------------------------------------------------
+  # Version
+  # ---------------------------------------------------------------------------
+  - name: version.version
+    type: string
+    pattern: '^\d+\.\d+$'
+    required: true
+    render_when_empty: true
+    generate_document: true
+    role_in_code: ignore
+
+  - name: version.status
+    type: enum
+    values:
+      - Draft
+      - Review
+      - Approved
+      - Released
+      - Deprecated
+    default: Draft    
+    required: true
+    render_when_empty: true
+    generate_document: true
+    role_in_code: ignore
+
+  - name: version.author
+    type: string
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: ignore
+
+  - name: version.date
+    type: string
+    format: date
+    required: true
+    render_when_empty: true
+    generate_document: true
+    role_in_code: ignore
+
+  # ---------------------------------------------------------------------------
+  # Description
+  # ---------------------------------------------------------------------------
+  - name: description
+    type: string
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: ignore
+
+  # ---------------------------------------------------------------------------
+  # Section
+  # ---------------------------------------------------------------------------
+  - name: purpose
+    type: text
+    required: false
+    render_when_empty: true
+    generate_document: true
+    role_in_code: ignore
+
+  - name: scope
+    type: text
+    required: false
+    render_when_empty: true
+    generate_document: true
+    role_in_code: ignore
+
+  - name: term
+    type: string
+    required: true
+    render_when_empty: false
+    generate_document: true
+    role_in_code: ignore
+
+  - name: references
+    type: list
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: ignore
+
+  - name: document_overview
+    type: text
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: ignore
+
+  - name: product_perspective
+    type: text
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: ignore
+
+  - name: product_functions
+    type: text
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: ignore
+
+  - name: user_classes
+    type: list
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: ignore
+
+  - name: operating_environment
+    type: text
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: ignore
+
+  - name: design_constraints
+    type: text
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: ignore
+
+  - name: assumptions_dependencies
+    type: text
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: ignore
+
+  # ---------------------------------------------------------------------------
+  # Module
+  # ---------------------------------------------------------------------------
+  - name: module.title
+    type: string
+    pattern: '^[a-zA-Z0-9_\-\.]+$'
+    constraint: unique
+    required: true
+    render_when_empty: true
+    generate_document: true
+    role_in_code: specification
+
+  # ---------------------------------------------------------------------------
+  # Requirement ID
+  # ---------------------------------------------------------------------------
+  - name: requirement.id
+    type: string
+    pattern: '^FR-[A-Za-z0-9_]+-\d{3}$'
+    constraint: unique
+    required: true
+    render_when_empty: true
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.performance.id
+    type: string
+    pattern: '^NFR-PERF-\d{3}$'
+    constraint: unique
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.security.id
+    type: string
+    pattern: '^NFR-SEC-\d{3}$'
+    constraint: unique
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.reliability.id
+    type: string
+    pattern: '^NFR-REL-\d{3}$'
+    constraint: unique
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.usability.id
+    type: string
+    pattern: '^NFR-USA-\d{3}$'
+    constraint: unique
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.maintainability.id
+    type: string
+    pattern: '^NFR-MAI-\d{3}$'
+    constraint: unique
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.portability.id
+    type: string
+    pattern: '^NFR-POR-\d{3}$'
+    constraint: unique
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.business_rule.id
+    type: string
+    pattern: '^BR-\d{3}$'
+    constraint: unique
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.interface.id
+    type: string
+    pattern: '^UIR-\d{3}$'
+    constraint: unique
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.interface.api.id
+    type: string
+    pattern: '^API-\d{3}$'
+    constraint: unique
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.interface.data.id
+    type: string
+    pattern: '^DATA-\d{3}$'
+    constraint: unique
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  # ---------------------------------------------------------------------------
+  # Requirement Fields
+  # ---------------------------------------------------------------------------
+  - name: requirement.title
+    type: string
+    required: true
+    render_when_empty: true
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.rationale
+    type: text
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: requirement.acceptance_criteria
+    type: list
+    required: true
+    render_when_empty: true
+    generate_document: true
+    role_in_code: specification
+
+  # ---------------------------------------------------------------------------
+  # Interface Fields
+  # ---------------------------------------------------------------------------
+  - name: interface.endpoint
+    type: string
+    pattern: '^(https?://)?([a-zA-Z0-9_\-\.]+)(:[0-9]{1,5})?(/[\w/_\-\.]*)*$'
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: interface.data_format
+    type: enum
+    values:
+      - JSON
+      - XML
+      - YAML
+      - CSV
+      - Other
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: interface.error_handling
+    type: text
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: interface.data_schema
+    type: text
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification
+
+  - name: interface.direction
+    type: enum
+    values:
+      - input
+      - output
+      - bidirectional
+    required: false
+    render_when_empty: false
+    generate_document: true
+    role_in_code: specification

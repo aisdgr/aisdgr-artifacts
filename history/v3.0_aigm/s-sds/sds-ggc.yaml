@@ -1,0 +1,293 @@
+# ============================================================
+# SDS Generation Governance Constraints (GGC)
+# ============================================================
+# Generation governance rules for Software Design Specification (SDS).
+#
+# These rules constrain HOW AI may generate SDS content.
+# They do NOT define structure or validity (handled by GEC).
+#
+# Rules follow:
+# - aigdmm-rule-unified.yaml
+# - AIGD-CNL
+# - Semantic section grouping based on sds-template.md
+# ============================================================
+
+meta:                             # core
+  spec: AIGDMM-RULE               # core
+  version: 1.0                    # core
+  rule_set: ggc                   # option
+  owner: aigdmm                   # option
+  status: active                  # option
+
+
+rules:
+
+  # ==========================================================
+  # Global Generation Boundary
+  # ==========================================================
+  - rule:
+      id: GGC-SDS-GLOBAL-001
+      title: SDS Generation Must Be Explicitly Scoped
+      description: >
+        AI MUST generate SDS content only within explicitly requested sections.
+        AI MUST NOT generate content for sections that are not explicitly requested.
+      severity: error
+
+    applies_to:
+      document_type: [SDS]
+      sections:
+        - Documentation Sensitivity Notice
+        - Purpose & Scope
+        - Design Overview
+        - Design Components
+        - Interaction & Data Flow
+        - Interfaces & Adapters
+        - Cross-Cutting Concerns
+        - Error Handling Strategy
+        - Deployment & Operational Design
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Project-Specific Design Only
+  # ==========================================================
+  - rule:
+      id: GGC-SDS-PROJECT-ONLY-001
+      title: Generated Design Must Be Project-Specific
+      description: >
+        AI MUST generate project-specific design content only.
+        AI MUST NOT generate reusable domain models or generic architectures.
+      severity: error
+
+    applies_to:
+      document_type: [SDS]
+      sections:
+        - Documentation Sensitivity Notice
+        - Design Overview
+        - Design Components
+
+    intent:
+      category: generation
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Placeholder-Only Generation
+  # ==========================================================
+  - rule:
+      id: GGC-SDS-PLACEHOLDER-001
+      title: Generation Is Restricted to Declared Placeholders
+      description: >
+        AI MUST generate content only within declared placeholders.
+        AI MUST NOT introduce content outside declared placeholders.
+      severity: error
+
+    applies_to:
+      document_type: [SDS]
+      sections:
+        - Design Overview
+        - Design Components
+        - Interaction & Data Flow
+        - Interfaces & Adapters
+        - Cross-Cutting Concerns
+        - Error Handling Strategy
+        - Deployment & Operational Design
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # No Requirement Re-Interpretation
+  # ==========================================================
+  - rule:
+      id: GGC-SDS-NO-REQ-REWRITE-001
+      title: Requirements MUST NOT Be Reinterpreted
+      description: >
+        AI MUST NOT reinterpret, modify, or extend requirements.
+        All generated design content MUST strictly derive from referenced SRS or SAS.
+      severity: error
+
+    applies_to:
+      document_type: [SDS]
+      sections:
+        - Design Overview
+        - Design Components
+        - Interaction & Data Flow
+        - Interfaces & Adapters
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Component-Level Design Only
+  # ==========================================================
+  - rule:
+      id: GGC-SDS-COMPONENT-LEVEL-001
+      title: Design Generation Is Limited to Component Level
+      description: >
+        AI MUST generate design at component level only.
+        AI MUST NOT generate system-wide architecture or cross-project abstractions.
+      severity: error
+
+    applies_to:
+      document_type: [SDS]
+      sections:
+        - Design Components
+        - Interaction & Data Flow
+
+    intent:
+      category: generation
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Interface Design Constraint
+  # ==========================================================
+  - rule:
+      id: GGC-SDS-INTERFACE-001
+      title: Interface Generation Must Remain Declarative
+      description: >
+        AI MUST describe interfaces declaratively.
+        AI MUST NOT infer protocols, schemas, or implementation mechanisms.
+      severity: error
+
+    applies_to:
+      document_type: [SDS]
+      sections:
+        - Interfaces & Adapters
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Cross-Cutting Concern Generation
+  # ==========================================================
+  - rule:
+      id: GGC-SDS-XCUT-001
+      title: Cross-Cutting Concerns Must Reference NFR
+      description: >
+        AI MUST generate cross-cutting concerns only when traceable to NFR.
+        AI MUST NOT introduce new quality attributes.
+      severity: error
+
+    applies_to:
+      document_type: [SDS]
+      sections:
+        - Cross-Cutting Concerns
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Error Handling Strategy Generation
+  # ==========================================================
+  - rule:
+      id: GGC-SDS-ERR-001
+      title: Error Handling Strategy Must Be Design-Level Only
+      description: >
+        AI MUST generate error handling strategies at design level only.
+        AI MUST NOT define implementation logic or recovery algorithms.
+      severity: error
+
+    applies_to:
+      document_type: [SDS]
+      sections:
+        - Error Handling Strategy
+
+    intent:
+      category: generation
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Operational Design Generation
+  # ==========================================================
+  - rule:
+      id: GGC-SDS-OPS-001
+      title: Operational Design Must Be NFR-Driven
+      description: >
+        AI MUST generate operational design only when traceable to NFR.
+        AI MUST NOT introduce deployment patterns or infrastructure decisions.
+      severity: error
+
+    applies_to:
+      document_type: [SDS]
+      sections:
+        - Deployment & Operational Design
+
+    intent:
+      category: generation
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Appendices Generation Restriction
+  # ==========================================================
+  - rule:
+      id: GGC-SDS-APP-001
+      title: Appendices Are Not Generative Targets
+      description: >
+        AI MUST NOT generate appendix content by default.
+        Appendix generation MUST require explicit user instruction.
+      severity: error
+
+    applies_to:
+      document_type: [SDS]
+      sections:
+        - Traceability Policy
+        - Authoring and Structural Constraints
+        - Notes
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+# ============================================================
+# Appendix: AIGD-CNL
+# ============================================================
+#
+# All rule.description fields MUST follow AIGD-CNL.
+#
+# ============================================================

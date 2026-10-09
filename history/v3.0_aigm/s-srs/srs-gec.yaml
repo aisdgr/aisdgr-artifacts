@@ -1,0 +1,276 @@
+# ==============================================================================
+# SRS – Global Engineering Constraints (GEC)
+# ==============================================================================
+
+document:
+
+  # ---------------------------------------------------------------------------
+  # Meta Information
+  # ---------------------------------------------------------------------------
+  meta:
+    id: srs-gec
+    title: SRS Global Engineering Constraints
+    version: 1.3
+    status: active
+    action: generate
+    artifact: document
+    owner: aigdmm
+
+  # ---------------------------------------------------------------------------
+  # Applicability Context (Structural Vocabulary Only)
+  # ---------------------------------------------------------------------------
+  applicability_context:
+
+    # 1. Intent vocabulary (Why)
+    intent:
+      category:
+        - structure
+        - requirements
+        - generation
+
+    # 2. Role vocabulary (Who)
+    roles:
+      enforced_on:
+      - ai
+      - human
+      exempt:
+      - human
+      responsible:
+      - ai
+      - human
+      - system
+      involvement:
+      - primary
+      - secondary
+      - oversight
+
+    # 3. Applies-to vocabulary (Where / What)
+    applies_to:
+
+      document_type:
+        - SRS
+
+      section:
+        - Introduction
+        - Purpose
+        - Scope
+        - Definitions, Acronyms, Abbreviations
+        - References
+        - Document Overview
+        - Overall Description
+        - Product Perspective
+        - Product Functions
+        - User Classes and Characteristics
+        - Operating Environment
+        - Design and Implementation Constraints
+        - Assumptions and Dependencies
+        - Performance
+        - Security
+        - Reliability
+        - Usability
+        - Maintainability
+        - Portability
+        - External Interface Requirements
+        - API Interfaces
+        - Data Interfaces
+
+      authority:
+        - informative
+        - authoritative
+
+      generation:
+        - human_only
+        - ai_allowed
+        - ai_required
+
+      transformation:
+        - allowed
+        - forbidden
+
+  # ---------------------------------------------------------------------------
+  # Rules
+  # ---------------------------------------------------------------------------
+  rules:
+
+    # ==========================================================
+    # Introduction & Document Overview
+    # ==========================================================
+    - id: GEC-SRS-INTRO-001
+      version: 1.0
+      status: active
+      title: Introduction Sections Are Informative Only
+
+      description: >
+        Introduction-related sections MUST be informative only.
+        These sections MUST NOT define requirements,
+        constraints, or normative system behavior.
+
+      intent:
+        category: structure
+
+      roles:
+        enforced_on:
+          - ai
+        exempt:
+          - human
+        responsible:
+          - ai
+        involvement:
+          - primary
+
+      applies_to:
+        document_type:
+          - SRS
+        section:
+          - Introduction
+          - Purpose
+          - Scope
+          - Definitions, Acronyms, Abbreviations
+          - References
+          - Document Overview
+        authority:
+          - informative
+        generation:
+          - human_only
+        transformation:
+          - forbidden
+
+      risk: transparency
+      severity: medium
+
+    # ==========================================================
+    # Overall Description
+    # ==========================================================
+    - id: GEC-SRS-STRUCT-001
+      version: 1.0
+      status: active
+      title: Overall Description Must Be Descriptive
+
+      description: >
+        Overall Description sections MUST describe the system context
+        and high-level behavior.
+        These sections MUST NOT introduce test cases,
+        implementation details, or low-level design decisions.
+
+      intent:
+        category: structure
+
+      roles:
+        enforced_on:
+          - ai
+        exempt:
+          - human
+        responsible:
+          - ai
+        involvement:
+          - primary
+
+      applies_to:
+        document_type:
+          - SRS
+        section:
+          - Overall Description
+          - Product Perspective
+          - Product Functions
+          - User Classes and Characteristics
+          - Operating Environment
+          - Design and Implementation Constraints
+          - Assumptions and Dependencies
+        authority:
+          - informative
+        generation:
+          - ai_allowed
+        transformation:
+          - forbidden
+
+      risk: transparency
+      severity: medium
+
+    # ==========================================================
+    # Non-Functional Requirements
+    # ==========================================================
+    - id: GEC-SRS-NFR-001
+      version: 1.0
+      status: active
+      title: Non-Functional Requirements Must Be Explicit
+
+      description: >
+        Non-functional requirement sections MUST define measurable
+        and explicit constraints.
+        Vague, implicit, or subjective statements MUST NOT be introduced.
+
+      intent:
+        category: requirements
+
+      roles:
+        enforced_on:
+          - ai
+        exempt:
+          - human
+        responsible:
+          - ai
+        involvement:
+          - primary
+
+      applies_to:
+        document_type:
+          - SRS
+        section:
+          - Performance
+          - Security
+          - Reliability
+          - Usability
+          - Maintainability
+          - Portability
+        authority:
+          - authoritative
+        generation:
+          - ai_allowed
+        transformation:
+          - allowed
+
+      risk: safety
+      severity: high
+
+    # ==========================================================
+    # External Interfaces
+    # ==========================================================
+    - id: GEC-SRS-EXT-001
+      version: 1.0
+      status: active
+      title: External Interfaces Must Be Explicitly Declared
+
+      description: >
+        External interface sections MUST explicitly declare
+        interface boundaries, data contracts, and interaction constraints.
+        Implicit or inferred interfaces MUST NOT be generated.
+
+      intent:
+        category: requirements
+
+      roles:
+        enforced_on:
+          - ai
+        exempt:
+          - human
+        responsible:
+          - ai
+        involvement:
+          - primary
+
+      applies_to:
+        document_type:
+          - SRS
+        section:
+          - External Interface Requirements
+          - API Interfaces
+          - Data Interfaces
+        authority:
+          - authoritative
+        generation:
+          - ai_allowed
+        transformation:
+          - forbidden
+
+      risk: security
+      severity: high

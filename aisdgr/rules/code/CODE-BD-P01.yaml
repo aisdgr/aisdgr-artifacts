@@ -6,13 +6,13 @@
 execution:
   id: CODE-BD-P01
   apply_as: boundary_engineer
-  constraint: >
+  normative: >
     Code execution MUST stop if no explicit boundary declaration is present.
 
 governance:
   version: "1.0.0"
   status: draft
-  owner: asdgr
+  owner: aisdgr
 
   # -------------------------------------------------------------------------
   # Intent

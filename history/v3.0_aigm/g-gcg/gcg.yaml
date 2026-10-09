@@ -1,0 +1,117 @@
+meta:
+  document: CGG
+  layer: governance
+  id: CGG-CORE
+  version: 1.0.0
+  status: Stable
+  owner: AIGD Foundation (Proposed)
+
+governance:
+  mutability: immutable              # MUST NOT be modified by AI or automation
+  ai_role: prohibited                # AI MUST NOT generate or modify this document
+  human_role: author_and_maintain
+  scope:
+    - all_languages
+    - all_ai_generated_code
+    - all_coding_governance_processes
+
+description: |
+  CGG_Core defines the governance model for coding standards
+  in AI-assisted development.
+
+  It does NOT define coding rules.
+  It defines how rules are enforced, audited, and attributed
+  across human and AI participants.
+
+principles:
+
+  - id: CGG-PR-001
+    title: AI as constrained executor
+    statement: |
+      AI is a constrained executor, not an autonomous designer.
+      AI MUST comply with all applicable coding standards
+      and MUST NOT reinterpret or weaken them.
+
+  - id: CGG-PR-002
+    title: Separation of validity and correctness
+    statement: |
+      Validity and correctness are distinct responsibilities.
+      AI is responsible for structural and rule validity.
+      Humans are responsible for semantic and business correctness.
+
+  - id: CGG-PR-003
+    title: Explicit governance over implicit trust
+    statement: |
+      All AI behavior MUST be explicitly governed.
+      No AI action is permitted based on assumed intent
+      or inferred authority.
+
+  - id: CGG-PR-004
+    title: Visibility over silent correction
+    statement: |
+      Violations MUST be surfaced explicitly.
+      Silent mutation or auto-correction is prohibited.
+
+enforcement:
+
+  mandatory_inputs:
+    - CCS_Core.yaml
+    - language_specific_CCS
+
+  enforcement_rules:
+    - id: CGG-ENF-001
+      rule: |
+        All AI-generated code MUST comply with CCS_Core
+        and applicable language-specific CCS documents.
+
+    - id: CGG-ENF-002
+      rule: |
+        Detected violations MUST result in a Code Validation Report (CVR).
+        Violations MUST NOT be auto-fixed.
+
+    - id: CGG-ENF-003
+      rule: |
+        AI execution MAY continue in the presence of violations,
+        but violations MUST remain visible and traceable.
+
+audit:
+
+  artifacts:
+    - CVR   # Code Validation Report
+
+  properties:
+    immutable: true
+    append_only: true
+    system_generated: true
+
+  rules:
+    - Audit artifacts MUST NOT be manually modified.
+    - Audit artifacts serve as evidence, not discussion.
+
+accountability:
+
+  human_responsibility:
+    - final_review
+    - approval
+    - exception_acceptance
+
+  ai_responsibility:
+    - compliance
+    - validation
+    - reporting
+
+scope_definition:
+
+  in_scope:
+    - ai_generated_source_code
+    - human_authored_source_code
+    - code_review_and_validation_processes
+
+  out_of_scope:
+    - business_requirement_definition
+    - architectural_design_decisions
+    - human_judgment_and_approval
+
+canonical_statement: |
+  CGG does not tell AI how to write code.
+  It defines how AI is permitted to participate in writing code.

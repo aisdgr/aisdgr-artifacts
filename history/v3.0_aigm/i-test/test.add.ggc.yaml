@@ -1,0 +1,27 @@
+policy:
+  name: add_test_generate_policy
+  version: 0.1
+  scope: internal
+
+match:
+  execution_intent:
+    type: add
+    target: test
+
+recognized_sources:
+  required:
+    - STS
+    - CGG_Core
+    - CCS_Core
+    - CCS_Language
+
+  optional:
+    - SDS
+    - CAS
+    - CIS
+
+generation_constraints:
+  - Generate test code only.
+  - Do not generate or modify production source code.
+  - Do not infer requirements beyond provided XIM and input files.
+  - Align test cases with STS when applicable.

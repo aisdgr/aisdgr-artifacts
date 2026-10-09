@@ -6,14 +6,14 @@
 execution:
   id: CODE-BD-P02
   apply_as: boundary_engineer
-  constraint: >
+  normative: >
     Code execution MUST stop if multiple declared boundaries
     cannot be resolved into a single, deterministic execution scope.
 
 governance:
   version: "1.0.0"
   status: draft
-  owner: asdgr
+  owner: aisdgr
 
   # -------------------------------------------------------------------------
   # Intent

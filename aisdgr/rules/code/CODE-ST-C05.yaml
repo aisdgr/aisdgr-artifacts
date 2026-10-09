@@ -1,0 +1,60 @@
+# ==============================================================================
+# CODE-ST-C05.yaml
+# Structural elements MUST NOT be repurposed to embed behavior or logic.
+# ==============================================================================
+
+execution:
+  id: CODE-ST-C05
+  apply_as: structure_engineer
+  normative: >
+    Structural elements and constructs in the codebase
+    MUST NOT be repurposed to embed behavior, logic, or decision rules
+    that is outside their designated semantic role.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - enforce_semantic_role_integrity
+      - prevent_semantic_role_violation
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - structure_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - semantic_role_change
+    risk:
+      - architecture
+    severity:
+      - high
+    reason:
+      - semantic_role_violation
+      - embedded_behavior_in_structure
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - architectural_stability
+      - execution_safety
+      - auditability

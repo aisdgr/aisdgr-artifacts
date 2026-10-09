@@ -1,0 +1,85 @@
+policy:
+  name: change_code_generate_policy
+  version: 1.0
+  domain: code
+  type: generate
+  driver: document
+  scope: restricted
+
+match:
+  execution_intent:
+    type: change
+    target: code
+
+authority:
+  source: document_driven
+  description: >
+    Change generate is driven by finalized documents.
+    Code generation is limited to modifying existing code to align with specifications.
+  required_documents:
+    - CGG_Core
+    - CCS_Core
+    - CCS_Language
+  optional_documents:
+    - SRS
+    - SDS
+    - STS
+    - CAS
+    - CIS
+    - CSS
+    - API_Spec
+
+rules:
+
+  - id: GEN-CHG-001
+    description: Allow generating code changes for CHANGE intent.
+    effect: allow
+
+  - id: GEN-CHG-002
+    description: Generated changes MUST be applied only to existing source files.
+    constraints:
+      existing_files_only: true
+      new_file_creation: forbidden
+
+  - id: GEN-CHG-003
+    description: New modules or files MUST NOT be created unless explicitly allowed by XIM.
+    constraints:
+      new_module_creation: forbidden
+      allow_only_if_xim_declared: true
+
+  - id: GEN-CHG-004
+    description: Generated code changes MUST be strictly required by provided specifications.
+    constraints:
+      require_document_justification: true
+      speculative_change: forbidden
+
+  - id: GEN-CHG-005
+    description: Existing structure, naming, and architecture MUST be preserved unless explicitly specified.
+    constraints:
+      preserve_structure: true
+      preserve_naming: true
+      preserve_architecture: true
+
+  - id: GEN-CHG-006
+    description: Generated code MUST NOT introduce inferred or undocumented requirements.
+    constraints:
+      inferred_requirement: forbidden
+      undocumented_behavior: forbidden
+
+verification:
+  methods:
+    - document_consistency_check
+    - diff_classification
+    - static_analysis
+    - test_execution
+
+on_violation:
+  action: reject
+  message: Execution violates change code generate policy.
+
+report:
+  require:
+    - modified_files
+    - documents_used
+    - specification_references
+    - violated_rule_ids

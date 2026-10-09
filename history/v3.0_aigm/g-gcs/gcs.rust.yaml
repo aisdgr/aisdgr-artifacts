@@ -1,0 +1,215 @@
+meta:
+  document: CCS
+  layer: language
+  id: CCS-RUST
+  version: 1.1.0
+  status: Stable
+  owner: AIGD Foundation (Proposed)
+
+scope:
+  language: rust
+  level: language
+
+applies_with:
+  - CCS_Core.yaml
+
+governance:
+  mutability: immutable              # MUST NOT be modified by AI
+  ai_role: enforce_and_comply        # AI must comply and may be validated
+  human_role: author_and_maintain
+
+description: |
+  CCS_Rust defines Rust-specific coding standards under the
+  AIGDMM Coding Constitution framework.
+
+  This document constrains how both AI and human developers
+  are allowed to write Rust code, emphasizing memory safety,
+  explicit ownership, and predictable concurrency.
+
+references:
+  - The Rust Programming Language
+  - Rust Reference
+  - Rust API Guidelines
+
+standards:
+
+  # ------------------------------------------------------------
+  # CCS-RS-001
+  # ------------------------------------------------------------
+  - id: CCS-RS-001
+    title: Ownership and borrowing correctness
+    severity: MUST
+
+    description: |
+      Code MUST respect Rust ownership and borrowing rules.
+      Lifetimes, mutability, and aliasing MUST be explicit
+      and enforced by the compiler.
+
+    applies_to:
+      language: rust
+      ownership: explicit
+      borrowing: checked
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Guarantee memory safety and prevent data races.
+
+  # ------------------------------------------------------------
+  # CCS-RS-002
+  # ------------------------------------------------------------
+  - id: CCS-RS-002
+    title: No unsafe code by default
+    severity: MUST
+
+    description: |
+      Use of `unsafe` code MUST be avoided.
+      If `unsafe` is required, its scope MUST be minimal
+      and explicitly justified and documented.
+
+    applies_to:
+      language: rust
+      unsafe_usage: restricted
+      unsafe_scope: minimal
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Preserve Rust’s safety guarantees and auditability.
+
+  # ------------------------------------------------------------
+  # CCS-RS-003
+  # ------------------------------------------------------------
+  - id: CCS-RS-003
+    title: Explicit error handling with Result and Option
+    severity: MUST
+
+    description: |
+      Errors MUST be represented using `Result` or `Option`.
+      Panics MUST NOT be used for normal control flow.
+
+    applies_to:
+      language: rust
+      error_model:
+        - result
+        - option
+      panic_usage: forbidden_for_flow
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Ensure recoverable and predictable error propagation.
+
+  # ------------------------------------------------------------
+  # CCS-RS-004
+  # ------------------------------------------------------------
+  - id: CCS-RS-004
+    title: Deterministic and explicit concurrency
+    severity: MUST
+
+    description: |
+      Concurrency MUST be explicit and deterministic.
+      Shared state across threads MUST be synchronized
+      using safe abstractions (e.g., Mutex, Arc).
+
+    applies_to:
+      language: rust
+      concurrency: explicit
+      synchronization: safe_only
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent data races and undefined behavior in parallel code.
+
+  # ------------------------------------------------------------
+  # CCS-RS-005
+  # ------------------------------------------------------------
+  - id: CCS-RS-005
+    title: Prefer immutability by default
+    severity: SHOULD
+
+    description: |
+      Variables SHOULD be immutable by default.
+      Mutability MUST be introduced only when required
+      and scoped as narrowly as possible.
+
+    applies_to:
+      language: rust
+      mutability: immutable_preferred
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve reasoning and reduce accidental state changes.
+
+  # ------------------------------------------------------------
+  # CCS-RS-006
+  # ------------------------------------------------------------
+  - id: CCS-RS-006
+    title: Explicit lifetime and API contracts
+    severity: SHOULD
+
+    description: |
+      Public APIs SHOULD make ownership and lifetime expectations
+      explicit through type signatures and documentation.
+
+    applies_to:
+      language: rust
+      element:
+        - public_api
+        - exported_type
+      lifetime_contract: explicit
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Clarify API usage and prevent misuse by callers.
+
+  # ------------------------------------------------------------
+  # CCS-RS-007
+  # ------------------------------------------------------------
+  - id: CCS-RS-007
+    title: Intent-revealing naming and documentation
+    severity: SHOULD
+
+    description: |
+      Public functions, types, and non-trivial logic
+      SHOULD be named and documented to clearly express intent,
+      responsibilities, and constraints.
+
+      Documentation MUST explain "what" and "why",
+      and MUST NOT be used to justify correctness or approval.
+
+    applies_to:
+      language: rust
+      element:
+        - public_api
+        - core_logic
+      documentation:
+        - rustdoc
+        - inline_comment
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve readability, review efficiency, and long-term maintenance.
+
+notes: |
+  CCS_Rust is a language-layer specification.
+  Runtime behavior, async executors, and framework usage
+  MUST be governed by CAS or CIS documents, not here.

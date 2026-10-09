@@ -1,0 +1,81 @@
+# ------------------------------------------------------------------------------
+# Target
+# ------------------------------------------------------------------------------
+
+target:
+  # Identifier of the validated rule
+  rule_id: GEN-NEW-CODE-ADD-JWT
+
+  # Version of the validated rule
+  rule_version: "1.0.0"
+
+# ------------------------------------------------------------------------------
+# Summary
+# ------------------------------------------------------------------------------
+
+summary:
+  # Overall validation status:
+  # - ok       : no issues found
+  # - warning  : rule is usable but has potential issues
+  # - failed   : rule is structurally or semantically invalid
+  status: warning
+
+  # Count of findings by severity
+  issue_count:
+    info: 1
+    warning: 2
+    high: 0
+
+# ------------------------------------------------------------------------------
+# Findings
+# ------------------------------------------------------------------------------
+
+findings:
+
+  # --------------------------------------------------------------------------
+  # Finding 1
+  # --------------------------------------------------------------------------
+  - id: FND-001
+    category: cnl_violation
+    location: description
+    severity: warning
+
+    message: >
+      The rule description uses the phrase "as needed",
+      which is not permitted in CNL normative statements.
+
+    suggestion: >
+      Replace "as needed" with a mandatory CNL keyword such as
+      "MUST" or "MUST NOT" to ensure enforceable constraints.
+
+  # --------------------------------------------------------------------------
+  # Finding 2
+  # --------------------------------------------------------------------------
+  - id: FND-002
+    category: ambiguity
+    location: applies_to.section
+    severity: warning
+
+    message: >
+      The applicability scope references "target files"
+      without an explicit file scope definition.
+
+    suggestion: >
+      Add a concrete file scope definition (e.g. specific paths
+      or file patterns) to prevent inferred or expanded scope.
+
+  # --------------------------------------------------------------------------
+  # Finding 3
+  # --------------------------------------------------------------------------
+  - id: FND-003
+    category: completeness
+    location: roles
+    severity: info
+
+    message: >
+      No roles are specified for this rule.
+      This is allowed, but may reduce clarity when composing rulesets.
+
+    suggestion: >
+      Consider adding roles to clarify which actors
+      (e.g. ai, human, system) are associated with this rule.

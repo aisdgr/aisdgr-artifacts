@@ -1,0 +1,300 @@
+# ============================================================
+# CAS Governance Enforcement Constraints (GEC)
+# ============================================================
+# Governance rules for Coding Architecture Specification (CAS).
+#
+# CAS defines human-defined architectural boundaries that
+# constrain how implementation artifacts may be produced
+# or transformed by automation.
+#
+# Rules follow:
+# - aigdmm-rule-unified.yaml
+# - AIGD-CNL
+# - Semantic section grouping based on cas-template.md
+# ============================================================
+
+meta:                             # core
+  spec: AIGDMM-RULE               # core
+  version: 1.0                    # core
+  rule_set: gec                   # option
+  owner: aigdmm                   # option
+  status: active                  # option
+
+
+rules:
+
+  # ==========================================================
+  # Change History
+  # ==========================================================
+  - rule:
+      id: GEC-CAS-CH-001
+      title: Change History Is Informative Only
+      description: >
+        The Change History section MUST be informative only.
+        The Change History section MUST NOT define architectural constraints.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Change History
+
+    intent:
+      category: structure
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Introduction
+  # ==========================================================
+  - rule:
+      id: GEC-CAS-INTRO-001
+      title: Introduction Is Descriptive Only
+      description: >
+        Introduction sections MUST be descriptive only.
+        Introduction sections MUST NOT define architectural constraints.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Introduction
+        - Purpose
+        - Scope
+        - Definitions, Acronyms, Abbreviations
+        - References
+        - Document Overview
+
+    intent:
+      category: structure
+      risk: ambiguity
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Architectural Context
+  # ==========================================================
+  - rule:
+      id: GEC-CAS-CTX-001
+      title: Architectural Context Defines Boundaries Only
+      description: >
+        Architectural context sections MUST define architectural scope and boundaries only.
+        Architectural context sections MUST NOT describe implementation logic or solutions.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Architectural Context
+        - Context Overview
+        - In-Scope Concerns
+        - Out-of-Scope Concerns
+
+    intent:
+      category: structure
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Module Boundary Architecture
+  # ==========================================================
+  - rule:
+      id: GEC-CAS-MB-001
+      title: Module Boundary Architecture Must Remain Conceptual
+      description: >
+        Module boundary architecture MUST define conceptual responsibility boundaries only.
+        Module boundary architecture MUST NOT imply implementation structure or packaging.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Module Boundary Architecture
+        - Module Boundary Overview
+        - Module Definitions
+        - Inter-Module Boundary Rules
+        - Module Evolution Constraints
+
+    intent:
+      category: safety
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Architectural Constraints
+  # ==========================================================
+  - rule:
+      id: GEC-CAS-AC-001
+      title: Architectural Constraints Must Be Declarative and Enforceable
+      description: >
+        Each architectural constraint MUST be uniquely identifiable.
+        Each architectural constraint MUST be declarative and enforceable.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Architectural Constraints
+
+    intent:
+      category: safety
+      risk: ambiguity
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Runtime and Execution Constraints
+  # ==========================================================
+  - rule:
+      id: GEC-CAS-RT-001
+      title: Runtime and Execution Constraints Must Be Declarative
+      description: >
+        Runtime and execution constraints MUST be explicitly declared.
+        Runtime and execution constraints MUST NOT prescribe implementation mechanisms.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Runtime and Execution Constraints
+        - Runtime Constraints
+        - Execution Model Constraints
+
+    intent:
+      category: safety
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Dependency and Interaction Constraints
+  # ==========================================================
+  - rule:
+      id: GEC-CAS-DI-001
+      title: Dependency and Interaction Constraints Must Respect Boundaries
+      description: >
+        Dependency and interaction constraints MUST define boundary-level rules only.
+        Dependency and interaction constraints MUST NOT imply call mechanisms or data formats.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Dependency and Interaction Constraints
+        - Dependency Constraints
+        - Interaction Constraints
+
+    intent:
+      category: safety
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Security and Isolation Constraints
+  # ==========================================================
+  - rule:
+      id: GEC-CAS-SEC-001
+      title: Security and Isolation Constraints Must Define Trust Boundaries
+      description: >
+        Security and isolation constraints MUST define architectural trust boundaries.
+        Security and isolation constraints MUST NOT prescribe implementation techniques.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Security and Isolation Constraints
+
+    intent:
+      category: safety
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Operational Constraints
+  # ==========================================================
+  - rule:
+      id: GEC-CAS-OPS-001
+      title: Operational Constraints Must Define Failure Boundaries
+      description: >
+        Operational constraints MUST define operational visibility and failure boundaries.
+        Operational constraints MUST NOT prescribe tooling or implementation details.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Operational Constraints
+
+    intent:
+      category: safety
+      risk: ambiguity
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Appendices
+  # ==========================================================
+  - rule:
+      id: GEC-CAS-APP-001
+      title: Appendices Are Informative Only
+      description: >
+        All appendices MUST be informative only.
+        Appendices MUST NOT define architectural constraints.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Traceability Policy
+        - Authoring and Structural Constraints
+        - Notes
+
+    intent:
+      category: structure
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+# ============================================================
+# Appendix: AIGD-CNL
+# ============================================================
+#
+# All rule.description fields MUST follow AIGD-CNL.
+#
+# ============================================================

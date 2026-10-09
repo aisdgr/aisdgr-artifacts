@@ -1,0 +1,420 @@
+# ==========================================================
+# STS Governance Expression Contract
+# ==========================================================
+
+meta:
+  id: sts-gec
+  title: STS Governance Expression Contract
+  version: 1.0
+  status: active
+  action: govern
+  artifact: document
+  owner: aigdmm
+
+# ==========================================================
+# Applicability Context (STS)
+# ==========================================================
+applicability_context:
+
+  intent:
+    category:
+      - structure
+      - behavior
+      - verification
+      - quality
+      - accountability
+      - oversight
+      - auditability
+      - violation_handling
+
+  roles:
+    enforced_on:
+      - ai
+      - system
+    exempt:
+      - human
+    responsible:
+      - human
+    involvement:
+      - primary
+      - oversight
+
+  applies_to:
+    document_type:
+      - STS
+
+    section:
+      - Change History
+      - Introduction
+      - Purpose
+      - Scope
+      - Definitions, Acronyms, Abbreviations
+      - References
+      - Document Overview
+      - Overall Test Description
+      - Test Perspective
+      - Test Scope and Coverage
+      - Test Roles and Responsibilities
+      - Test Environment Assumptions
+      - Test Constraints
+      - Assumptions and Dependencies
+      - Test Specifications
+      - Appendix A. Traceability Policy
+      - Appendix B. Authoring and Structural Constraints
+      - Appendix C. Methodology Compatibility Notes
+
+# ==========================================================
+# Governance Rules
+# ==========================================================
+rules:
+
+  # --------------------------------------------------------
+  # Introduction sections are informative only
+  # --------------------------------------------------------
+  - id: GEC-STS-INTRO-001
+    version: 1.0
+    status: active
+    title: Introduction Sections Are Informative Only
+
+    description: >
+      Introduction-related sections MUST be informative only.
+      These sections MUST NOT define verification criteria,
+      acceptance conditions, or test behavior.
+
+    intent:
+      category: structure
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - STS
+      section:
+        - Introduction
+        - Purpose
+        - Scope
+        - Definitions, Acronyms, Abbreviations
+        - References
+        - Document Overview
+      authority:
+        - informative
+      generation:
+        - human_only
+      transformation:
+        - forbidden
+
+    risk: drift
+    severity: medium
+
+
+  # --------------------------------------------------------
+  # Overall Test Description defines context only
+  # --------------------------------------------------------
+  - id: GEC-STS-OTD-001
+    version: 1.0
+    status: active
+    title: Overall Test Description Defines Context Only
+
+    description: >
+      Overall test description sections MUST define test context.
+      Overall test description sections MUST NOT define individual test cases.
+
+    intent:
+      category: structure
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - STS
+      section:
+        - Overall Test Description
+        - Test Perspective
+        - Test Scope and Coverage
+        - Test Roles and Responsibilities
+        - Test Environment Assumptions
+        - Test Constraints
+        - Assumptions and Dependencies
+      authority:
+        - informative
+      generation:
+        - human_only
+      transformation:
+        - forbidden
+
+    risk: drift
+    severity: medium
+
+
+  # --------------------------------------------------------
+  # Given / When / Then structure is mandatory
+  # --------------------------------------------------------
+  - id: GEC-STS-GWT-001
+    version: 1.0
+    status: active
+    title: Given When Then Structure Is Mandatory
+
+    description: >
+      Each test specification MUST declare GIVEN, WHEN, and THEN fields.
+      GIVEN, WHEN, and THEN fields MUST be implementation-agnostic.
+
+    intent:
+      category: behavior
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - STS
+      section:
+        - Test Specifications
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - allowed
+
+    risk: ambiguity
+    severity: high
+
+
+  # --------------------------------------------------------
+  # Test specifications must be explicit and verifiable
+  # --------------------------------------------------------
+  - id: GEC-STS-TS-001
+    version: 1.0
+    status: active
+    title: Test Specifications Must Be Explicit and Verifiable
+
+    description: >
+      Each test specification MUST be uniquely identifiable.
+      Each test specification MUST be objectively verifiable.
+
+    intent:
+      category: behavior
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - STS
+      section:
+        - Test Specifications
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - allowed
+
+    risk: ambiguity
+    severity: high
+
+
+  # --------------------------------------------------------
+  # Traceability is mandatory
+  # --------------------------------------------------------
+  - id: GEC-STS-TRACE-001
+    version: 1.0
+    status: active
+    title: Test Items Must Be Traceable to SRS and SDS
+
+    description: >
+      All test specifications MUST be traceable
+      to upstream requirements or design specifications.
+      Missing traceability MUST be treated as a violation.
+
+    intent:
+      category: auditability
+
+    roles:
+      enforced_on:
+        - system
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - STS
+      section:
+        - Test Specifications
+        - Appendix A. Traceability Policy
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - allowed
+
+    risk: transparency
+    severity: high
+
+
+  # --------------------------------------------------------
+  # ISO/IEC 42001 – Human accountability
+  # --------------------------------------------------------
+  - id: GEC-STS-42001-001
+    version: 1.0
+    status: active
+    title: Human Accountability for Verification Results
+
+    description: >
+      Verification results and acceptance decisions
+      documented in STS MUST have a clearly identifiable
+      human responsible role.
+      AI systems MUST NOT be the accountable authority.
+
+    intent:
+      category: accountability
+
+    roles:
+      enforced_on:
+        - ai
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - STS
+
+    risk: transparency
+    severity: high
+
+
+  # --------------------------------------------------------
+  # ISO/IEC 42001 – Human oversight
+  # --------------------------------------------------------
+  - id: GEC-STS-42001-002
+    version: 1.0
+    status: active
+    title: Human Oversight Required for Test Outcome Changes
+
+    description: >
+      Any modification to test outcomes or acceptance results
+      MUST be reviewed and approved by a human responsible role.
+      Automated alteration of verification outcomes
+      MUST NOT be performed without oversight.
+
+    intent:
+      category: oversight
+
+    roles:
+      enforced_on:
+        - system
+      responsible:
+        - human
+      involvement:
+        - oversight
+
+    applies_to:
+      document_type:
+        - STS
+      transformation:
+        - allowed
+
+    risk: safety
+    severity: critical
+
+
+  # --------------------------------------------------------
+  # ISO/IEC 42001 – Audit evidence
+  # --------------------------------------------------------
+  - id: GEC-STS-42001-003
+    version: 1.0
+    status: active
+    title: Verification Evidence Must Be Retained
+
+    description: >
+      Verification evidence and test reports
+      MUST be retained for audit and accountability purposes.
+      Evidence MUST be sufficient to support verification claims.
+
+    intent:
+      category: auditability
+
+    roles:
+      enforced_on:
+        - system
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - STS
+      section:
+        - Appendix A. Traceability Policy
+
+    risk: legal
+    severity: medium
+
+
+  # --------------------------------------------------------
+  # ISO/IEC 42001 – Violation handling
+  # --------------------------------------------------------
+  - id: GEC-STS-42001-004
+    version: 1.0
+    status: active
+    title: Handling Verification Governance Violations
+
+    description: >
+      Any detected violation of STS governance rules
+      MUST be recorded and escalated.
+      Automated remediation MUST NOT be applied
+      without human approval.
+
+    intent:
+      category: violation_handling
+
+    roles:
+      enforced_on:
+        - system
+      responsible:
+        - human
+      involvement:
+        - oversight
+
+    applies_to:
+      document_type:
+        - STS
+
+    risk: safety
+    severity: high

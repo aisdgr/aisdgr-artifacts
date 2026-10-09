@@ -12,7 +12,7 @@ execution:
 governance:
   version: "1.0.0"
   status: draft
-  owner: asdgr
+  owner: aisdgr
 
   # -------------------------------------------------------------------------
   # Intent

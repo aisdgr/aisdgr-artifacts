@@ -1,0 +1,269 @@
+# ============================================================
+# STS Generation Governance Constraints (GGC)
+# ============================================================
+# Generation governance rules for Software Test Specification (STS).
+#
+# These rules constrain HOW AI may generate STS content.
+# They do NOT define document structure or validity (handled by GEC).
+#
+# STS focuses on externally observable behaviors and acceptance
+# conditions, not implementation or execution logic.
+#
+# Rules follow:
+# - aigdmm-rule-unified.yaml
+# - AIGD-CNL
+# - Semantic section grouping based on sts-template.md
+# ============================================================
+
+meta:                             # core
+  spec: AIGDMM-RULE               # core
+  version: 1.0                    # core
+  rule_set: ggc                   # option
+  owner: aigdmm                   # option
+  status: active                  # option
+
+
+rules:
+
+  # ==========================================================
+  # Global Generation Boundary
+  # ==========================================================
+  - rule:
+      id: GGC-STS-GLOBAL-001
+      title: STS Generation Must Be Explicitly Scoped
+      description: >
+        AI MUST generate STS content only within explicitly requested sections.
+        AI MUST NOT generate content for sections that are not explicitly requested.
+      severity: error
+
+    applies_to:
+      document_type: [STS]
+      sections:
+        - Introduction
+        - Overall Test Description
+        - Test Specifications
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Placeholder-Only Generation
+  # ==========================================================
+  - rule:
+      id: GGC-STS-PLACEHOLDER-001
+      title: Generation Is Restricted to Declared Placeholders
+      description: >
+        AI MUST generate content only within declared placeholders.
+        AI MUST NOT introduce content outside declared placeholders.
+      severity: error
+
+    applies_to:
+      document_type: [STS]
+      sections:
+        - Purpose
+        - Scope
+        - Definitions, Acronyms, Abbreviations
+        - References
+        - Document Overview
+        - Test Perspective
+        - Test Scope and Coverage
+        - Test Roles and Responsibilities
+        - Test Environment Assumptions
+        - Test Constraints
+        - Assumptions and Dependencies
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # No Requirement or Design Inference
+  # ==========================================================
+  - rule:
+      id: GGC-STS-NO-INFER-001
+      title: No Requirement or Design Inference Is Allowed
+      description: >
+        AI MUST NOT infer, reinterpret, or extend requirements or design.
+        All test content MUST be strictly derived from referenced SRS or SDS.
+      severity: error
+
+    applies_to:
+      document_type: [STS]
+      sections:
+        - Test Specifications
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Test Specification Generation Boundary
+  # ==========================================================
+  - rule:
+      id: GGC-STS-TS-BOUNDARY-001
+      title: Test Specifications Must Describe Observable Behavior Only
+      description: >
+        Test specifications MUST describe externally observable behavior only.
+        Test specifications MUST NOT describe internal logic or execution flow.
+      severity: error
+
+    applies_to:
+      document_type: [STS]
+      sections:
+        - Test Specifications
+
+    intent:
+      category: generation
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # GIVEN / WHEN / THEN Semantics
+  # ==========================================================
+  - rule:
+      id: GGC-STS-GWT-001
+      title: GIVEN WHEN THEN Semantics Must Be Preserved
+      description: >
+        GIVEN MUST describe initial state or context only.
+        WHEN MUST describe stimulus only.
+        THEN MUST describe observable outcomes only.
+      severity: error
+
+    applies_to:
+      document_type: [STS]
+      sections:
+        - GIVEN / PREREQUISITES
+        - WHEN / TEST_STEPS
+        - THEN / EXPECTED_RESULT
+
+    intent:
+      category: generation
+      risk: ambiguity
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # No Execution or Tool Assumptions
+  # ==========================================================
+  - rule:
+      id: GGC-STS-NO-EXEC-001
+      title: Execution and Tool Assumptions Are Prohibited
+      description: >
+        AI MUST NOT assume or generate execution mechanisms, tools, or frameworks.
+        Test specifications MUST remain implementation-agnostic.
+      severity: error
+
+    applies_to:
+      document_type: [STS]
+      sections:
+        - Test Specifications
+        - WHEN / TEST_STEPS
+
+    intent:
+      category: generation
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Test Item Identity and Trace
+  # ==========================================================
+  - rule:
+      id: GGC-STS-TRACE-001
+      title: Each Test Item Must Declare Explicit Traceability
+      description: >
+        Each test item MUST declare explicit trace references.
+        Trace references MUST NOT be fabricated or inferred.
+      severity: error
+
+    applies_to:
+      document_type: [STS]
+      sections:
+        - TRACE
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # No Cross-Test or Cross-Area Generation
+  # ==========================================================
+  - rule:
+      id: GGC-STS-CROSS-TS-001
+      title: Cross-Test Generation Is Prohibited
+      description: >
+        AI MUST generate one test item at a time.
+        AI MUST NOT merge, split, or infer additional test items.
+      severity: error
+
+    applies_to:
+      document_type: [STS]
+      sections:
+        - Test Specifications
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Appendices Generation Restriction
+  # ==========================================================
+  - rule:
+      id: GGC-STS-APP-001
+      title: Appendices Are Not Generative Targets
+      description: >
+        AI MUST NOT generate appendix content by default.
+        Appendix generation MUST require explicit user instruction.
+      severity: error
+
+    applies_to:
+      document_type: [STS]
+      sections:
+        - Traceability Policy
+        - Authoring and Structural Constraints
+        - Methodology Compatibility Notes
+        - Notes
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+# ============================================================
+# Appendix: AIGD-CNL
+# ============================================================
+#
+# All rule.description fields MUST follow AIGD-CNL.
+#
+# ============================================================

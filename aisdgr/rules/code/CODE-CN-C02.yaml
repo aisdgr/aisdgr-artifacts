@@ -7,13 +7,13 @@ execution:
   id: CODE-CN-C02
   apply_as: constraint_engineer
   normative: >
-    Undeclared requirements MUST NOT be inferred
-    during code execution.
+    Undeclared requirements, behavior, mechanism, implementation detail,
+    or execution flow MUST NOT be inferred during code execution.
 
 governance:
   version: "1.0.0"
   status: draft
-  owner: asdgr
+  owner: aisdgr
 
   # -------------------------------------------------------------------------
   # Intent
@@ -23,6 +23,8 @@ governance:
       - prevent_requirement_inference
       - preserve_requirement_authority
       - eliminate_implicit_feature_assumption
+      - prevent_behavior_inference
+      - prevent_implementation_inference
 
   # -------------------------------------------------------------------------
   # Responsibilities
@@ -51,6 +53,8 @@ governance:
     reason:
       - inferred_requirement_detected
       - implicit_feature_assumption
+      - inferred_behavior_detected
+      - inferred_implementation_detected
 
   # -------------------------------------------------------------------------
   # Governance Impact

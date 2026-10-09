@@ -1,0 +1,95 @@
+policy:
+  name: code_refactor_standard_execution_policy
+  version: 1.0
+  domain: code
+  type: refactor
+  driver: none
+  scope: general
+
+match:
+  execution_intent:
+    type: refactor
+    target: code
+
+authority:
+  source: behavior_equivalence
+  evidence:
+    - tests
+    - static_analysis
+
+rules:
+
+  - id: EXEC-REFACTOR-STD-001
+    description: Allow structural refactoring of existing production source code.
+    effect: allow
+
+  - id: EXEC-REFACTOR-STD-002
+    description: Refactoring MUST preserve observable runtime behavior.
+    constraints:
+      preserve_behavior: true
+
+  - id: EXEC-REFACTOR-STD-003
+    description: Public APIs MUST remain backward compatible.
+    constraints:
+      public_api_change: forbidden
+
+  - id: EXEC-REFACTOR-STD-004
+    description: All existing tests MUST pass after refactoring.
+    constraints:
+      require_test_pass: true
+
+  - id: EXEC-REFACTOR-STD-005
+    description: Refactoring operations MUST be classifiable as known refactor patterns.
+    constraints:
+      require_refactor_classification: true
+      allowed_patterns:
+        - rename_symbol
+        - extract_method
+        - inline_method
+        - move_class
+        - reformat_code
+        - simplify_control_flow
+
+  - id: EXEC-REFACTOR-STD-006
+    description: Refactoring MUST NOT introduce new functionality.
+    constraints:
+      new_functionality: forbidden
+
+  - id: EXEC-REFACTOR-STD-007
+    description: Refactoring MUST NOT remove existing behavior.
+    constraints:
+      remove_behavior: forbidden
+
+  - id: EXEC-REFACTOR-STD-008
+    description: Refactoring MUST NOT change business logic.
+    constraints:
+      change_business_logic: forbidden
+
+  - id: EXEC-REFACTOR-STD-009
+    description: Refactoring MUST NOT add new external dependencies.
+    constraints:
+      add_dependency: forbidden
+
+  - id: EXEC-REFACTOR-STD-010
+    description: Test artifacts MUST NOT be modified to satisfy refactoring outcomes.
+    constraints:
+      forbidden_artifacts:
+        - test_code
+        - test_data
+
+verification:
+  methods:
+    - test_execution
+    - diff_classification
+    - api_surface_check
+
+on_violation:
+  action: reject
+  message: Execution violates standard code refactor execution policy.
+
+report:
+  require:
+    - refactor_summary
+    - files_modified
+    - refactor_operation_list
+    - violated_rule_ids

@@ -1,0 +1,75 @@
+policy:
+  name: code_generate_css_policy
+  version: 1.0
+  domain: code
+  type: generate
+  driver: css
+  scope: document_driven
+
+match:
+  execution_intent:
+    type: add
+    target: code
+
+authority:
+  source: coding_structure_specification
+  required_documents:
+    - CSS
+    - Trace_Map
+
+rules:
+
+  - id: GEN-CODE-CSS-001
+    description: Allow generating production code strictly based on CSS definitions.
+    effect: allow
+
+  - id: GEN-CODE-CSS-002
+    description: Generated code MUST map to explicit CSS sections.
+    constraints:
+      require_css_reference: true
+
+  - id: GEN-CODE-CSS-003
+    description: All generated code MUST include Trace IDs linked to CSS or requirements.
+    constraints:
+      require_trace_id: true
+
+  - id: GEN-CODE-CSS-004
+    description: Generated code MUST NOT introduce structures not defined in CSS.
+    constraints:
+      css_scope_extension: forbidden
+
+  - id: GEN-CODE-CSS-005
+    description: Generated code MAY introduce new functionality ONLY IF mandated by CSS.
+    constraints:
+      new_functionality: conditionally_allowed
+      require_css_mandate: true
+
+  - id: GEN-CODE-CSS-006
+    description: Generated code MUST NOT conflict with existing traced code structures.
+    constraints:
+      conflict_with_existing_trace: forbidden
+
+  - id: GEN-CODE-CSS-007
+    description: If CSS references are incomplete, generated code MUST be marked as untrace.
+    constraints:
+      missing_css_trace_handling: mark_untrace
+      require_code_comment: true
+      require_report_annotation: true
+
+verification:
+  methods:
+    - css_compliance_check
+    - trace_consistency_check
+    - static_analysis
+
+on_violation:
+  action: reject
+  message: Execution violates CSS-driven code generate policy.
+
+report:
+  require:
+    - generated_files
+    - css_sections_applied
+    - trace_list
+    - untrace_items
+    - violated_rule_ids

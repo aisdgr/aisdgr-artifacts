@@ -1,0 +1,237 @@
+# ============================================================
+# CIS Generation Governance Constraints (GGC)
+# ============================================================
+# Generation governance rules for Conceptual Implementation
+# Specification (CIS).
+#
+# CIS defines conceptual decision structures only.
+# CIS MUST NOT define execution flow, algorithms, or logic.
+#
+# These rules constrain HOW AI may generate CIS content.
+#
+# Rules follow:
+# - aigdmm-rule-unified.yaml
+# - AIGD-CNL
+# - Semantic section grouping based on cis-template.md
+# ============================================================
+
+meta:                             # core
+  spec: AIGDMM-RULE               # core
+  version: 1.0                    # core
+  rule_set: ggc                   # option
+  owner: aigdmm                   # option
+  status: active                  # option
+
+
+rules:
+
+  # ==========================================================
+  # Global Generation Boundary
+  # ==========================================================
+  - rule:
+      id: GGC-CIS-GLOBAL-001
+      title: CIS Generation Is Restricted by Default
+      description: >
+        AI MUST NOT generate CIS content by default.
+        CIS content MAY be generated only when explicitly instructed.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Introduction
+        - Conceptual Model Overview
+        - Meta Definitions
+        - Rule Specifications
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Placeholder-Only Generation
+  # ==========================================================
+  - rule:
+      id: GGC-CIS-PLACEHOLDER-001
+      title: CIS Generation Is Restricted to Declared Placeholders
+      description: >
+        AI MAY generate CIS content only within explicitly declared placeholders.
+        AI MUST NOT introduce content outside declared placeholders.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Purpose
+        - Scope
+        - References
+        - Concept Perspective
+        - Concept Boundaries
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Meta Definition Generation Constraint
+  # ==========================================================
+  - rule:
+      id: GGC-CIS-META-001
+      title: Meta Definitions Must Remain Neutral
+      description: >
+        AI MUST generate meta definitions as neutral conceptual keys only.
+        AI MUST NOT encode behavior, logic, conditions, or outcomes in meta.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Meta Definitions
+        - Meta List
+
+    intent:
+      category: generation
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Rule Generation Boundary
+  # ==========================================================
+  - rule:
+      id: GGC-CIS-RULE-BOUNDARY-001
+      title: Rules Define Condition to Outcome Only
+      description: >
+        AI MUST generate rules as condition-to-outcome mappings only.
+        AI MUST NOT generate execution flow, control logic, or sequencing.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Rule Specifications
+        - Rule Group
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # No Rule Inference or Expansion
+  # ==========================================================
+  - rule:
+      id: GGC-CIS-NO-INFER-001
+      title: Rule Inference or Expansion Is Prohibited
+      description: >
+        AI MUST NOT infer, expand, merge, or split rules.
+        Each rule MUST be explicitly provided or instructed.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Rule Specifications
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Condition and Outcome Semantics
+  # ==========================================================
+  - rule:
+      id: GGC-CIS-SEM-001
+      title: Condition and Outcome Semantics Must Be Preserved
+      description: >
+        Conditions MUST describe decision predicates only.
+        Outcomes MUST describe conceptual results only.
+        Neither MUST imply execution steps or algorithms.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Condition
+        - Outcome
+
+    intent:
+      category: generation
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Traceability Integrity
+  # ==========================================================
+  - rule:
+      id: GGC-CIS-TRACE-001
+      title: Trace References Must Be Explicit and Non-Fabricated
+      description: >
+        AI MUST NOT fabricate or infer trace references.
+        All trace references MUST be explicitly provided.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Trace
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Appendix Generation Restriction
+  # ==========================================================
+  - rule:
+      id: GGC-CIS-APP-001
+      title: Appendices Are Not Generative Targets
+      description: >
+        AI MUST NOT generate appendix content by default.
+        Appendix generation MUST require explicit human instruction.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Authoring Rules
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+# ============================================================
+# Appendix: AIGD-CNL
+# ============================================================
+#
+# All rule.description fields MUST follow AIGD-CNL.
+#
+# ============================================================

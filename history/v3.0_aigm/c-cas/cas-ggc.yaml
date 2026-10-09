@@ -1,0 +1,201 @@
+# ============================================================
+# CAS Generation Governance Constraints (GGC)
+# ============================================================
+# Generation governance rules for Coding Architecture
+# Specification (CAS).
+#
+# CAS defines human-authored architectural boundaries.
+# AI generation is highly restricted and mostly prohibited.
+#
+# Rules follow:
+# - aigdmm-rule-unified.yaml
+# - AIGD-CNL
+# - Semantic section grouping based on cas-template.md
+# ============================================================
+
+meta:                             # core
+  spec: AIGDMM-RULE               # core
+  version: 1.0                    # core
+  rule_set: ggc                   # option
+  owner: aigdmm                   # option
+  status: active                  # option
+
+
+rules:
+
+  # ==========================================================
+  # Global Generation Prohibition
+  # ==========================================================
+  - rule:
+      id: GGC-CAS-GLOBAL-001
+      title: CAS Content Generation Is Prohibited by Default
+      description: >
+        AI MUST NOT generate CAS content by default.
+        CAS content MUST be authored or explicitly directed by humans.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Introduction
+        - Architectural Context
+        - Module Boundary Architecture
+        - Architectural Constraints
+        - Runtime and Execution Constraints
+        - Dependency and Interaction Constraints
+        - Security and Isolation Constraints
+        - Operational Constraints
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Placeholder-Only Generation (Explicit Instruction Required)
+  # ==========================================================
+  - rule:
+      id: GGC-CAS-PLACEHOLDER-001
+      title: CAS Generation Is Restricted to Explicit Placeholders
+      description: >
+        AI MAY generate CAS content only within explicitly designated placeholders.
+        AI MUST NOT generate content outside declared placeholders.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Purpose
+        - Scope
+        - Document Overview
+        - Context Overview
+        - In-Scope Concerns
+        - Out-of-Scope Concerns
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # No Architecture Inference
+  # ==========================================================
+  - rule:
+      id: GGC-CAS-NO-INFER-001
+      title: Architectural Decisions MUST NOT Be Inferred
+      description: >
+        AI MUST NOT infer architectural decisions, boundaries, or constraints.
+        All architectural content MUST be explicitly provided by humans.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Module Definitions
+        - Inter-Module Boundary Rules
+        - Module Evolution Constraints
+        - Architectural Constraints
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # No Design or Implementation Leakage
+  # ==========================================================
+  - rule:
+      id: GGC-CAS-NO-IMPL-001
+      title: Design and Implementation Details Are Prohibited
+      description: >
+        AI MUST NOT generate design, implementation, or solution details in CAS.
+        CAS generation MUST remain at architectural boundary level only.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Module Boundary Architecture
+        - Runtime and Execution Constraints
+        - Dependency and Interaction Constraints
+
+    intent:
+      category: generation
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Constraint Declaration Integrity
+  # ==========================================================
+  - rule:
+      id: GGC-CAS-CONSTRAINT-001
+      title: Constraints MUST Be Explicitly Declared
+      description: >
+        AI MUST NOT invent or expand architectural constraints.
+        Each constraint MUST be explicitly authored or instructed by humans.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Architectural Constraints
+        - Runtime Constraints
+        - Execution Model Constraints
+        - Dependency Constraints
+        - Interaction Constraints
+        - Security and Isolation Constraints
+        - Operational Constraints
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Appendices Generation Restriction
+  # ==========================================================
+  - rule:
+      id: GGC-CAS-APP-001
+      title: CAS Appendices Are Not Generative Targets
+      description: >
+        AI MUST NOT generate appendix content by default.
+        Appendix generation MUST require explicit human instruction.
+      severity: error
+
+    applies_to:
+      document_type: [CAS]
+      sections:
+        - Traceability Policy
+        - Authoring and Structural Constraints
+        - Notes
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+# ============================================================
+# Appendix: AIGD-CNL
+# ============================================================
+#
+# All rule.description fields MUST follow AIGD-CNL.
+#
+# ============================================================

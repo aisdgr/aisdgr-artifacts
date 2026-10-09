@@ -1,0 +1,392 @@
+document:
+  meta:
+    id: srs-contract
+    title: SRS Contract
+    version: 1.0
+    status: active
+    action: contract
+    artifact: document
+    owner: aigm
+
+  applicability_context:
+    intent:
+      category:
+        - structure
+        - requirements
+        - generation
+        - rendering
+        - validation
+      source:
+        - srs.template.md
+        - srs.schema.yaml
+
+    roles:
+      enforced_on:
+        - ai
+        - human
+        - system
+      responsible:
+      - ai
+      - human
+      - system
+      involvement:
+      - primary
+      - secondary
+      - oversight
+
+    applies_to:
+      section:
+        - front_matter
+
+        - change_history
+
+        - introduction.purpose
+        - introduction.scope
+        - introduction.definitions
+        - introduction.references
+        - introduction.document_overview
+
+        - overall_description.product_perspective
+        - overall_description.product_functions
+        - overall_description.user_classes
+        - overall_description.operating_environment
+        - overall_description.design_constraints
+        - overall_description.assumptions_dependencies
+
+        - functional_requirements
+
+        - non_functional_requirements.performance
+        - non_functional_requirements.security
+        - non_functional_requirements.reliability
+        - non_functional_requirements.usability
+        - non_functional_requirements.maintainability
+        - non_functional_requirements.portability
+
+        - business_rules
+
+        - interface_requirements.user_interface
+        - interface_requirements.api_interfaces
+        - interface_requirements.data_interfaces
+
+      constraint:
+        - required
+        - generate_document
+        - render_when_empty
+        - pattern
+        - unique
+      template:
+        - srs.template.md
+      schema:
+        - srs.schema.yaml
+
+  rules:
+    # --------------------------------------------------------------------------
+    # Contract rules you requested (independent)
+    # --------------------------------------------------------------------------
+    - id: CONTRACT-SRS-STRUCT-001
+      title: Structure Follows SRS Template
+      status: active
+      description: SRS generator MUST follow the structure defined in srs.template.md.
+      intent:
+        - category: structure
+        - source: srstemplate.md
+      roles:
+        - enforced_on: ai
+      applies_to:
+      risk: transparency
+      severity: high
+
+    - id: CONTRACT-SRS-VALUE-001
+      title: Values Conform to SRS Schema
+      status: active
+      description: SRS generator MUST ensure all field values conform to srs.schema.yaml.
+      intent:
+        - category: requirements
+        - source: srs.schema.yaml
+      roles:
+        - enforced_on: ai
+      applies_to:
+      risk: transparency
+      severity: high
+
+    - id: CONTRACT-SRS-LIST-RENDER-001
+      title: List Fields Render as Bullet Lists
+      status: active
+      description: SRS generator MUST render list-type fields as Markdown bullet lists.
+      intent:
+        - category: rendering
+      roles:
+        - enforced_on: ai
+      applies_to:
+        section:
+        - introduction.references
+        - overall_description.user_classes
+        - functional_requirements.requirements.acceptance_criteria
+        - non_functional_requirements.performance.requirements.acceptance_criteria
+        - non_functional_requirements.security.requirements.acceptance_criteria
+        - non_functional_requirements.reliability.requirements.acceptance_criteria
+        - non_functional_requirements.usability.requirements.acceptance_criteria
+        - non_functional_requirements.maintainability.requirements.acceptance_criteria
+        - non_functional_requirements.portability.requirements.acceptance_criteria
+        - business_rules.rules.acceptance_criteria
+        - interface_requirements.user_interface.requirements.acceptance_criteria
+      risk: transparency
+      severity: medium
+
+    - id: CONTRACT-SRS-REQUIRED-RENDER-001
+      title: Required Fields Are Rendered
+      status: active
+      description: SRS generator MUST render all required fields in the output document.
+      intent:
+        - category: rendering
+      roles:
+        - enforced_on: ai
+      applies_to:
+        section:
+          - front_matter
+          - change_history
+          - introduction.purpose
+          - introduction.scope
+          - overall_description.product_perspective
+          - functional_requirements
+          - non_functional_requirements.performance
+          - non_functional_requirements.security
+          - non_functional_requirements.reliability
+          - non_functional_requirements.usability
+          - non_functional_requirements.maintainability
+          - non_functional_requirements.portability
+      risk: transparency
+      severity: high
+
+    - id: CONTRACT-SRS-GENERATE-DOC-RENDER-001
+      title: Generate Document Fields Are Rendered
+      status: active
+      description: SRS generator MUST render fields marked generate_document as true.
+      intent:
+        - category: rendering
+      roles:
+        - enforced_on: ai
+      applies_to:
+        section:
+          - introduction.purpose
+          - introduction.scope
+          - introduction.document_overview
+          - overall_description.product_perspective
+          - overall_description.product_functions
+          - overall_description.user_classes
+          - functional_requirements
+          - non_functional_requirements.performance
+          - non_functional_requirements.security
+          - non_functional_requirements.reliability
+          - non_functional_requirements.usability
+          - non_functional_requirements.maintainability
+          - non_functional_requirements.portability
+      risk: transparency
+      severity: medium
+
+    - id: CONTRACT-SRS-RENDER-WHEN-EMPTY-001
+      title: Render When Empty Is Respected
+      status: active
+      description: SRS generator MUST render fields with render_when_empty set to true even when the value is empty.
+      intent:
+        - category: rendering
+      roles:
+        - enforced_on: ai
+      applies_to:
+        section:
+          - introduction.definitions
+          - introduction.references
+          - interface_requirements.user_interface
+          - interface_requirements.api_interfaces
+          - interface_requirements.data_interfaces
+      risk: transparency
+      severity: medium
+
+    - id: CONTRACT-SRS-PATTERN-001
+      title: Pattern Constraints Are Satisfied
+      status: active
+      description: SRS generator MUST ensure values match any declared pattern constraints.
+      intent:
+        - category: validation
+      roles:
+        - enforced_on: ai
+      applies_to:
+        section:
+          - front_matter
+          - change_history
+          - functional_requirements
+          - non_functional_requirements.performance
+          - non_functional_requirements.security
+          - non_functional_requirements.reliability
+          - non_functional_requirements.usability
+          - non_functional_requirements.maintainability
+          - non_functional_requirements.portability
+          - business_rules
+      risk: security
+      severity: high
+
+    - id: CONTRACT-SRS-UNIQUE-001
+      title: Unique Constraints Are Satisfied
+      status: active
+      description: SRS generator MUST ensure values are unique where unique constraints are declared.
+      intent:
+        - category: validation
+      roles:
+        - enforced_on: ai
+      applies_to:
+        - constraint: unique
+      risk: transparency
+      severity: high
+
+    - id: GEC-SRS-INTRO-001
+      title: Introduction Sections Are Informative Only
+      status: active
+      description: SRS generator MUST treat Introduction content as informative only.
+      intent:
+        - category: structure
+      roles:
+        - enforced_on: ai
+      applies_to:
+        - section: Introduction
+      risk: transparency
+      severity: medium
+
+    - id: GEC-SRS-STRUCT-001
+      title: Overall Description Must Be Descriptive
+      status: active
+      description: SRS generator MUST describe the system context without introducing unstated requirements.
+      intent:
+        - category: structure
+      roles:
+        - enforced_on: ai
+      applies_to:
+        - section: Overall Description
+      risk: transparency
+      severity: medium
+
+    - id: GEC-SRS-NFR-001
+      title: Non-Functional Requirements Must Be Explicit
+      status: active
+      description: SRS generator MUST state each non-functional requirement explicitly and testably.
+      intent:
+        - category: requirements
+      roles:
+        - enforced_on: ai
+      applies_to:
+        - section: Non-Functional Requirements
+      risk: safety
+      severity: high
+
+    - id: GEC-SRS-EXT-001
+      title: External Interfaces Must Be Explicitly Declared
+      status: active
+      description: SRS generator MUST NOT generate external interface requirements unless they are explicitly declared by the user.
+      intent:
+        - category: requirements
+      roles:
+        - enforced_on: ai
+      applies_to:
+        - section: External Interface Requirements
+      risk: security
+      severity: high
+
+    - id: GGC-SRS-GLOBAL-001
+      title: Generation Must Be Explicitly Scoped
+      status: active
+      description: SRS generator MUST generate content only for explicitly requested sections.
+      intent:
+        - category: generation
+      roles:
+        - enforced_on: ai
+      applies_to:
+      risk: transparency
+      severity: high
+
+    - id: GGC-SRS-GEN-PLACEHOLDER-001
+      title: Generation Is Restricted to Declared Placeholders
+      status: active
+      description: SRS generator MUST write content only into placeholders declared in srs.template.md.
+      intent:
+        - category: generation
+      roles:
+        - enforced_on: ai
+      applies_to:
+        - template: srs.template.md
+      risk: transparency
+      severity: high
+
+    - id: GGC-SRS-NO-IMPLICIT-REQ-001
+      title: No Implicit Requirements May Be Generated
+      status: active
+      description: SRS generator MUST NOT invent requirements that are not provided by the user.
+      intent:
+        - category: requirements
+      roles:
+        - enforced_on: ai
+      applies_to:
+      risk: transparency
+      severity: critical
+
+    - id: GGC-SRS-FR-001
+      title: Functional Requirement Generation Is User-Driven Only
+      status: active
+      description: SRS generator MUST NOT generate functional requirements without explicit user input.
+      intent:
+        - category: requirements
+      roles:
+        - enforced_on: ai
+      applies_to:
+        - section: Functional Requirements
+      risk: transparency
+      severity: high
+
+    - id: GGC-SRS-NFR-001
+      title: Non-Functional Requirement Generation Is Constraint-Bound
+      status: active
+      description: SRS generator MUST generate non-functional requirements only from explicit constraints provided by the user.
+      intent:
+        - category: requirements
+      roles:
+        - enforced_on: ai
+      applies_to:
+        - section: Non-Functional Requirements
+      risk: safety
+      severity: high
+
+    - id: GGC-SRS-IF-001
+      title: Interface Requirement Generation Must Be Declarative
+      status: active
+      description: SRS generator MUST treat interface requirements as declarations of external behavior only.
+      intent:
+        - category: requirements
+      roles:
+        - enforced_on: ai
+      applies_to:
+        - section: External Interface Requirements
+      risk: security
+      severity: high
+
+    - id: GGC-SRS-CROSS-SECTION-001
+      title: Cross-Section Generation Is Prohibited
+      status: active
+      description: SRS generator MUST NOT move or copy content across sections unless explicitly requested by the user.
+      intent:
+        - category: generation
+      roles:
+        - enforced_on: ai
+      applies_to:
+      risk: transparency
+      severity: high
+
+    - id: GGC-SRS-APP-001
+      title: Appendices Are Not Generative Targets
+      status: active
+      description: SRS generator MUST NOT generate appendix content unless explicitly requested by the user.
+      intent:
+        - category: generation
+      roles:
+        - enforced_on: ai
+      applies_to:
+        - section: Appendices
+      risk: transparency
+      severity: medium

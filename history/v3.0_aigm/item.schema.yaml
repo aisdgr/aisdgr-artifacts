@@ -1,0 +1,12 @@
+item:
+  type: list | string | date | text | object | integer | number | boolean | enum
+  pattern: string
+  format: string
+  values:
+    - string
+  default: string
+  constraint: string
+  required: boolean
+  render_when_empty: boolean
+  generate_document: boolean
+  role_in_code: ignore | specification | reference | constraint

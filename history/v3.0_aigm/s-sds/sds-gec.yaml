@@ -1,0 +1,601 @@
+# ==========================================================
+# SDS Governance Expression Contract
+# ==========================================================
+
+meta:
+  id: sds-gec
+  title: SDS Governance Expression Contract
+  version: 1.3
+  status: active
+  action: govern
+  artifact: document
+  owner: aigdmm
+
+# ==========================================================
+# Applicability Context (SDS)
+# ==========================================================
+applicability_context:
+
+  # 1. Intent vocabulary (Why)
+  intent:
+    category:
+      - structure
+      - behavior
+      - safety
+      - quality
+      - accountability
+      - oversight
+      - auditability
+      - violation_handling
+
+  # 2. Role vocabulary (Who)
+  roles:
+    enforced_on:
+      - ai
+      - system
+    exempt:
+      - human
+    responsible:
+      - human
+    involvement:
+      - primary
+      - secondary
+      - oversight
+
+  # 3. Applies-to vocabulary (Where / What)
+  applies_to:
+    document_type:
+      - SDS
+
+    section:
+      - Documentation Sensitivity Notice
+      - Change History
+      - Purpose & Scope
+      - Design Overview
+      - Design Components
+      - Interaction & Data Flow
+      - Interfaces & Adapters
+      - Cross-Cutting Concerns
+      - Error Handling Strategy
+      - Deployment & Operational Design
+      - Appendix A. Traceability Policy
+      - Appendix B. Authoring and Structural Constraints
+
+    authority:
+      - informative
+      - authoritative
+
+    generation:
+      - human_only
+      - ai_allowed
+
+    transformation:
+      - allowed
+      - forbidden
+
+# ==========================================================
+# Governance Rules
+# ==========================================================
+rules:
+
+  # --------------------------------------------------------
+  # Documentation Sensitivity Notice
+  # --------------------------------------------------------
+  - id: GEC-SDS-NOTICE-001
+    version: 1.0
+    status: active
+    title: SDS Design Scope Must Be Project-Specific
+
+    description: >
+      The SDS MUST describe project-specific design decisions only.
+      The SDS MUST NOT define reusable domain models
+      or generic architectural patterns.
+
+    intent:
+      category: safety
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+      section:
+        - Documentation Sensitivity Notice
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - forbidden
+
+    risk: leakage
+    severity: high
+
+
+  # --------------------------------------------------------
+  # Change History
+  # --------------------------------------------------------
+  - id: GEC-SDS-CH-001
+    version: 1.0
+    status: active
+    title: Change History Is Informative Only
+
+    description: >
+      The Change History section MUST be informative only.
+      It MUST NOT define design content.
+
+    intent:
+      category: structure
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+      section:
+        - Change History
+      authority:
+        - informative
+      generation:
+        - human_only
+      transformation:
+        - forbidden
+
+    risk: drift
+    severity: medium
+
+
+  # --------------------------------------------------------
+  # Purpose & Scope
+  # --------------------------------------------------------
+  - id: GEC-SDS-PS-001
+    version: 1.0
+    status: active
+    title: Purpose and Scope Must Be Explicit
+
+    description: >
+      The Purpose and Scope section MUST explicitly define
+      the project-local design scope.
+      It MUST NOT exceed the project boundary.
+
+    intent:
+      category: structure
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+      section:
+        - Purpose & Scope
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - forbidden
+
+    risk: ambiguity
+    severity: high
+
+
+  # --------------------------------------------------------
+  # Design Overview
+  # --------------------------------------------------------
+  - id: GEC-SDS-OV-001
+    version: 1.0
+    status: active
+    title: Design Overview Must Be Traceable
+
+    description: >
+      Each design overview MUST describe project-local
+      design decisions and MUST declare traceability
+      to upstream SRS or SAS.
+
+    intent:
+      category: behavior
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+      section:
+        - Design Overview
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - allowed
+
+    risk: ambiguity
+    severity: high
+
+
+  # --------------------------------------------------------
+  # Design Components
+  # --------------------------------------------------------
+  - id: GEC-SDS-COMP-001
+    version: 1.0
+    status: active
+    title: Design Components Must Declare Responsibilities and Interactions
+
+    description: >
+      Each design component MUST declare responsibilities,
+      interactions, and traceability to upstream specifications.
+
+    intent:
+      category: behavior
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+      section:
+        - Design Components
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - allowed
+
+    risk: ambiguity
+    severity: high
+
+
+  # --------------------------------------------------------
+  # Interaction & Data Flow
+  # --------------------------------------------------------
+  - id: GEC-SDS-FLOW-001
+    version: 1.0
+    status: active
+    title: Interaction and Data Flow Must Be Explicit
+
+    description: >
+      Each interaction and data flow MUST be explicitly described
+      and MUST declare traceability to SRS.
+
+    intent:
+      category: behavior
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+      section:
+        - Interaction & Data Flow
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - allowed
+
+    risk: ambiguity
+    severity: high
+
+
+  # --------------------------------------------------------
+  # Interfaces & Adapters
+  # --------------------------------------------------------
+  - id: GEC-SDS-INT-001
+    version: 1.0
+    status: active
+    title: Interfaces and Adapters Must Be Explicit
+
+    description: >
+      All interfaces and adapters MUST be explicitly defined.
+      Interfaces MUST NOT imply behavior beyond project scope.
+
+    intent:
+      category: structure
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+      section:
+        - Interfaces & Adapters
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - forbidden
+
+    risk: leakage
+    severity: high
+
+
+  # --------------------------------------------------------
+  # Cross-Cutting Concerns
+  # --------------------------------------------------------
+  - id: GEC-SDS-XCUT-001
+    version: 1.0
+    status: active
+    title: Cross-Cutting Concerns Must Be Traceable
+
+    description: >
+      Each cross-cutting concern MUST be explicitly described
+      and MUST declare traceability to non-functional requirements.
+
+    intent:
+      category: quality
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+      section:
+        - Cross-Cutting Concerns
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - allowed
+
+    risk: ambiguity
+    severity: high
+
+
+  # --------------------------------------------------------
+  # Error Handling Strategy
+  # --------------------------------------------------------
+  - id: GEC-SDS-ERR-001
+    version: 1.0
+    status: active
+    title: Error Handling Strategy Must Be Explicit
+
+    description: >
+      The error handling strategy MUST be explicitly defined
+      and MUST declare traceability to SRS.
+
+    intent:
+      category: safety
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+      section:
+        - Error Handling Strategy
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - allowed
+
+    risk: ambiguity
+    severity: high
+
+
+  # --------------------------------------------------------
+  # Deployment & Operational Design
+  # --------------------------------------------------------
+  - id: GEC-SDS-OPS-001
+    version: 1.0
+    status: active
+    title: Deployment and Operational Design Must Be Explicit
+
+    description: >
+      Deployment and operational design MUST be explicitly described
+      and MUST declare traceability to non-functional requirements.
+
+    intent:
+      category: safety
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+      section:
+        - Deployment & Operational Design
+      authority:
+        - authoritative
+      generation:
+        - ai_allowed
+      transformation:
+        - allowed
+
+    risk: ambiguity
+    severity: high
+
+
+  # --------------------------------------------------------
+  # Appendices
+  # --------------------------------------------------------
+  - id: GEC-SDS-APP-001
+    version: 1.0
+    status: active
+    title: Appendices Are Informative Only
+
+    description: >
+      All appendices MUST be informative only.
+      Appendices MUST NOT define design content.
+
+    intent:
+      category: structure
+
+    roles:
+      enforced_on:
+        - ai
+      exempt:
+        - human
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+      section:
+        - Appendix A. Traceability Policy
+        - Appendix B. Authoring and Structural Constraints
+      authority:
+        - informative
+      generation:
+        - human_only
+      transformation:
+        - forbidden
+
+    risk: drift
+    severity: low
+
+
+  # --------------------------------------------------------
+  # ISO/IEC 42001 – Human Accountability
+  # --------------------------------------------------------
+  - id: GEC-SDS-42001-001
+    version: 1.0
+    status: active
+    title: Human Accountability for Design Decisions
+
+    description: >
+      All design decisions documented in the SDS
+      MUST have a clearly identifiable human responsible role.
+      AI systems MAY assist in drafting design content
+      but MUST NOT be the accountable authority.
+
+    intent:
+      category: accountability
+
+    roles:
+      enforced_on:
+        - ai
+      responsible:
+        - human
+      involvement:
+        - primary
+
+    applies_to:
+      document_type:
+        - SDS
+
+    risk: transparency
+    severity: high
+
+
+  # --------------------------------------------------------
+  # ISO/IEC 42001 – Human Oversight
+  # --------------------------------------------------------
+  - id: GEC-SDS-42001-002
+    version: 1.0
+    status: active
+    title: Human Oversight Required for SDS Modifications
+
+    description: >
+      Any modification to SDS content
+      MUST be reviewed and approved by a human responsible role.
+      Automated remediation MUST NOT be performed
+      without explicit human oversight.
+
+    intent:
+      category: oversight
+
+    roles:
+      enforced_on:
+        - system
+      responsible:
+        - human
+      involvement:
+        - oversight
+
+    applies_to:
+      document_type:
+        - SDS
+      transformation:
+        - allowed
+
+    risk: safety
+    severity: critical

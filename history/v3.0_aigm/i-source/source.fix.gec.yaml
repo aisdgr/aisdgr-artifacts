@@ -1,0 +1,114 @@
+schema:
+  name: AISL-Document-Schema
+  version: 1.2
+  description: >
+    Structural schema for AISL documents.
+    An AISL document consists of metadata and a flat list of rules.
+    Document content sections are NOT structural elements.
+    All content scoping, including sections, MUST be expressed
+    via rule applies_to predicates.
+
+# ==============================================================================
+# Document Root
+# ==============================================================================
+
+document:
+  struct: object
+  required:
+    - meta
+    - rules
+
+  fields:
+
+    # --------------------------------------------------------------------------
+    # Metadata (Document Identity Only)
+    # --------------------------------------------------------------------------
+    meta:
+      struct: object
+      required:
+        - spec
+        - version
+        - rule_set
+        - status
+
+      fields:
+        spec:
+          type: string
+          description: >
+            Specification identifier this document conforms to
+            (e.g. SRS-GEC, GCS-JAVA, CONTRACT).
+
+        version:
+          type: string
+          description: Document version (x.y format).
+
+        rule_set:
+          enum:                      # structural enum
+            - gec
+            - ggc
+            - gcg
+            - gcs
+            - contract
+          description: >
+            Rule set category of this document.
+
+        status:
+          enum:                      # structural enum
+            - draft
+            - active
+            - deprecated
+          description: Document lifecycle status.
+
+        owner:
+          type: string
+          optional: true
+          description: Document owner or maintaining group.
+
+    # --------------------------------------------------------------------------
+    # Applies-To Dimensions (Structural Vocabulary)
+    # --------------------------------------------------------------------------
+    applies_to_dimensions:
+      type: object
+      description: >
+        Declares allowed applicability dimensions for rules
+        within this document.
+        This includes content sections, languages, environments,
+        or any other structural scoping categories.
+        These dimensions define structural vocabulary only.
+      additional_keys: allowed
+      value:
+        type: list
+        item:
+          type: string
+
+    # --------------------------------------------------------------------------
+    # Rules (Single Content Carrier)
+    # --------------------------------------------------------------------------
+    rules:
+      type: list
+      description: >
+        Flat list of rules.
+        All normative, structural, and content-related information
+        MUST be represented as rules.
+      item:
+        ref: rule.schema.yaml
+
+# ==============================================================================
+# Structural Principles
+# ==============================================================================
+
+principles:
+  description: >
+    AISL documents are rule-centric and structure-minimal.
+
+  section_as_scope:
+    rule: >
+      Content sections MUST NOT be represented as document structure.
+      Sections are treated as applicability scopes and MUST appear
+      only as applies_to predicates within rules.
+
+  no_implicit_content:
+    rule: >
+      Document meaning MUST NOT be inferred from ordering,
+      formatting, or file layout.
+      Only explicit rules are authoritative.

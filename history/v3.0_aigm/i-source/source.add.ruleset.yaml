@@ -1,0 +1,104 @@
+document:
+  meta:
+    id: source.add.contract
+    title: Add Code Contract
+    version: 1.0
+    status: active
+    action: contract
+    artifact: code
+    owner: aigm
+
+  description: >
+    Add execution governs whether new production code may be introduced.
+    Modification boundaries are strictly limited to the scope declared in tes.
+    Document authority is handled by generate policies.
+
+  related_artifacts:
+    - kind: contract
+      name: tes.yaml
+      relation: execution_scope_declaration
+
+  applicability_context:
+    intent:
+      category:
+        - add
+    roles:
+      actors:
+        - ai
+        - system
+        - human
+      responsibilities:
+        - executor
+        - approver
+
+    applies_to_dimensions:
+      intent:
+        - add
+      target:
+        - code
+      domain:
+        - code
+
+  rules:
+
+    - id: SOURCE-ADD-001
+      version: 1.0
+      status: active
+      description: >
+        The AI MUST only add new production source code within the scope explicitly declared by tes.yaml.
+      intent: 
+        - add
+      roles:
+        executor:
+          - ai
+          - human
+        approver:
+          - human
+      applies_to:
+        test.scope
+      risk: security
+      severity: critical
+
+
+    - id: SOURCE-ADD-002
+      version: 1.0
+      description: >
+        The AI MUST NOT remove or modify existing production code unless such modification is explicitly allowed by tes.yaml.
+      applies_to:
+        intent: add
+        target: code
+      severity: critical
+
+    # ==========================================================
+    # Generate-related constraints (from GGC)
+    # ==========================================================
+
+    - id: GEN-ADD-001
+      version: 1.1
+      description: >
+        The AI MUST generate new code only when required authoritative
+        documents are available and applicable.
+      applies_to:
+        intent: add
+        target: code
+      severity: high
+
+    - id: GEN-ADD-002
+      version: 1.1
+      description: >
+        The AI MUST generate code that is consistent with the applicable
+        CSS conventions when such conventions exist.
+      applies_to:
+        intent: add
+        target: code
+      severity: high
+
+    - id: GEN-ADD-005
+      version: 1.1
+      description: >
+        The AI MUST provide trace references when generating code that
+        follows an established convention.
+      applies_to:
+        intent: add
+        target: code
+      severity: medium

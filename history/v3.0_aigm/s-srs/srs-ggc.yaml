@@ -1,0 +1,256 @@
+# ============================================================
+# SRS Generation Governance Constraints (GGC)
+# ============================================================
+# Generation governance rules for Software Requirements
+# Specification (SRS).
+#
+# These rules constrain HOW AI may generate SRS content.
+# They do NOT define document structure (handled by GEC).
+#
+# Rules follow:
+# - aigdmm-rule-unified.yaml
+# - AIGD-CNL
+# - Semantic section grouping based on srs-template.md
+# ============================================================
+
+meta:                             # core
+  spec: AIGDMM-RULE               # core
+  version: 1.0                    # core
+  rule_set: ggc                   # option
+  owner: aigdmm                   # option
+  status: active                  # option
+
+
+rules:
+
+  # ==========================================================
+  # Global Generation Boundary
+  # ==========================================================
+  - rule:
+      id: GGC-SRS-GLOBAL-001
+      title: Generation Must Be Explicitly Scoped
+      description: >
+        AI MUST generate content only within explicitly requested SRS sections.
+        AI MUST NOT generate content for sections that are not explicitly requested.
+      severity: error
+
+    applies_to:
+      document_type: [SRS]
+      sections:
+        - Introduction
+        - Overall Description
+        - Functional Requirements
+        - Non-Functional Requirements
+        - Business Rules
+        - User Interface Requirements
+        - External Interface Requirements
+        - System Constraints
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Placeholder-Only Generation
+  # ==========================================================
+  - rule:
+      id: GGC-SRS-GEN-PLACEHOLDER-001
+      title: Generation Is Restricted to Declared Placeholders
+      description: >
+        AI MUST generate content only within declared placeholders.
+        AI MUST NOT introduce content outside declared placeholders.
+      severity: error
+
+    applies_to:
+      document_type: [SRS]
+      sections:
+        - Purpose
+        - Scope
+        - Product Perspective
+        - Product Functions
+        - User Classes and Characteristics
+        - Operating Environment
+        - Design and Implementation Constraints
+        - Assumptions and Dependencies
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # No Implicit Requirements
+  # ==========================================================
+  - rule:
+      id: GGC-SRS-NO-IMPLICIT-REQ-001
+      title: No Implicit Requirements May Be Generated
+      description: >
+        AI MUST NOT infer or generate implicit requirements.
+        All generated requirements MUST be explicitly stated by the user.
+      severity: error
+
+    applies_to:
+      document_type: [SRS]
+      sections:
+        - Functional Requirements
+        - Non-Functional Requirements
+        - Business Rules
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Functional Requirement Generation
+  # ==========================================================
+  - rule:
+      id: GGC-SRS-FR-001
+      title: Functional Requirement Generation Is User-Driven Only
+      description: >
+        AI MUST generate functional requirements only when explicitly instructed.
+        AI MUST NOT propose new functional requirements autonomously.
+      severity: error
+
+    applies_to:
+      document_type: [SRS]
+      sections:
+        - Functional Requirements
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Non-Functional Requirement Generation
+  # ==========================================================
+  - rule:
+      id: GGC-SRS-NFR-001
+      title: Non-Functional Requirement Generation Is Constraint-Bound
+      description: >
+        AI MUST generate non-functional requirements only within declared categories.
+        AI MUST NOT introduce new non-functional requirement categories.
+      severity: error
+
+    applies_to:
+      document_type: [SRS]
+      sections:
+        - Performance
+        - Security
+        - Reliability
+        - Usability
+        - Maintainability
+        - Portability
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Interface Requirement Generation
+  # ==========================================================
+  - rule:
+      id: GGC-SRS-IF-001
+      title: Interface Requirement Generation Must Be Declarative
+      description: >
+        AI MUST generate interface requirements declaratively.
+        AI MUST NOT infer endpoints, schemas, or protocols.
+      severity: error
+
+    applies_to:
+      document_type: [SRS]
+      sections:
+        - External Interface Requirements
+        - API Interfaces
+        - Data Interfaces
+
+    intent:
+      category: generation
+      risk: hallucination
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Cross-Section Generation Prohibition
+  # ==========================================================
+  - rule:
+      id: GGC-SRS-CROSS-SECTION-001
+      title: Cross-Section Generation Is Prohibited
+      description: >
+        AI MUST NOT generate content that spans multiple SRS sections.
+        Each generation action MUST target a single declared section group.
+      severity: error
+
+    applies_to:
+      document_type: [SRS]
+      sections:
+        - Introduction
+        - Overall Description
+        - Functional Requirements
+        - Non-Functional Requirements
+        - Business Rules
+        - User Interface Requirements
+        - External Interface Requirements
+        - System Constraints
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+  # ==========================================================
+  # Appendices Generation Restriction
+  # ==========================================================
+  - rule:
+      id: GGC-SRS-APP-001
+      title: Appendices Are Not Generative Targets
+      description: >
+        AI MUST NOT generate appendix content by default.
+        Appendix generation MUST require explicit user instruction.
+      severity: error
+
+    applies_to:
+      document_type: [SRS]
+      sections:
+        - Traceability Policy
+        - Authoring and Structural Constraints
+        - Notes
+
+    intent:
+      category: generation
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+
+
+# ============================================================
+# Appendix: AIGD-CNL
+# ============================================================
+#
+# All rule.description fields MUST follow AIGD-CNL.
+#
+# ============================================================

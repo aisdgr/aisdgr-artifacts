@@ -6,7 +6,7 @@
 execution:
   id: CODE-BD-P03
   apply_as: boundary_engineer
-  constraint: >
+  normative: >
     Code execution MUST stop if the declared boundary
     resolves to an empty execution target set.
 
@@ -14,7 +14,7 @@ execution:
 governance:
   version: "1.0.0"
   status: draft
-  owner: asdgr
+  owner: aisdgr
 
   # -------------------------------------------------------------------------
   # Intent

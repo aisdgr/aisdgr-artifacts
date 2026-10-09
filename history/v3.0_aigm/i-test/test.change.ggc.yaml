@@ -1,0 +1,18 @@
+policy:
+  name: generate-policy.change.test
+  intent:
+    type: change
+    target: test
+
+generation:
+  scope:
+    - existing_test_files_only
+
+rules:
+  - Update tests to reflect finalized specifications
+  - Maintain original test structure and intent
+  - Avoid expanding coverage beyond defined scope
+
+constraints:
+  - No new test scenarios unless specified
+  - No behavior inference from implementation

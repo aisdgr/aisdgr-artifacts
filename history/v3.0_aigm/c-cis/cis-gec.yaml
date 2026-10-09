@@ -1,0 +1,240 @@
+# ============================================================
+# CIS Governance Enforcement Constraints (GEC)
+# ============================================================
+# Governance rules for Conceptual Implementation Specification (CIS).
+#
+# CIS defines conceptual decision structures.
+# CIS MUST NOT define execution flow or implementation logic.
+#
+# Rules follow:
+# - aigdmm-rule-unified.yaml
+# - AIGD-CNL
+# - Semantic section grouping based on cis-template.md
+# ============================================================
+
+meta:                             # core
+  spec: AIGDMM-RULE               # core
+  version: 1.0                    # core
+  rule_set: gec                   # option
+  owner: aigdmm                   # option
+  status: active                  # option
+
+
+rules:
+
+  # ==========================================================
+  # Change History
+  # ==========================================================
+  - rule:
+      id: GEC-CIS-CH-001
+      title: Change History Is Informative Only
+      description: >
+        The Change History section MUST be informative only.
+        The Change History section MUST NOT define conceptual rules or logic.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Change History
+
+    intent:
+      category: structure
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Introduction
+  # ==========================================================
+  - rule:
+      id: GEC-CIS-INTRO-001
+      title: Introduction Is Descriptive Only
+      description: >
+        Introduction sections MUST be descriptive only.
+        Introduction sections MUST NOT define conceptual rules or logic.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Introduction
+        - Purpose
+        - Scope
+        - Definitions, Acronyms, Abbreviations
+        - References
+
+    intent:
+      category: structure
+      risk: ambiguity
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Conceptual Model Overview
+  # ==========================================================
+  - rule:
+      id: GEC-CIS-CMO-001
+      title: Conceptual Model Overview Defines Boundaries Only
+      description: >
+        The conceptual model overview MUST define conceptual perspective and boundaries.
+        The conceptual model overview MUST NOT encode behavior or execution logic.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Conceptual Model Overview
+        - Concept Perspective
+        - Concept Boundaries
+
+    intent:
+      category: structure
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Meta Definitions
+  # ==========================================================
+  - rule:
+      id: GEC-CIS-META-001
+      title: Meta Definitions Must Remain Neutral
+      description: >
+        Meta definitions MUST define neutral conceptual keys only.
+        Meta definitions MUST NOT encode behavior, logic, or decision rules.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Meta Definitions
+        - Meta List
+
+    intent:
+      category: safety
+      risk: leakage
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Rule Specifications
+  # ==========================================================
+  - rule:
+      id: GEC-CIS-RULE-001
+      title: Rule Specifications Define Condition to Outcome Only
+      description: >
+        Each rule specification MUST define condition-to-outcome mapping only.
+        Rule specifications MUST NOT define execution flow or processing order.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Rule Specifications
+        - Rule Group
+
+    intent:
+      category: safety
+      risk: ambiguity
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Rule Structure Enforcement
+  # ==========================================================
+  - rule:
+      id: GEC-CIS-RULE-STRUCT-001
+      title: Rule Structure Fields Are Mandatory
+      description: >
+        Each rule MUST declare Description, Referenced Meta, Condition, Outcome, and Trace.
+        No additional fields MUST be introduced.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Rule Specifications
+        - RULE
+
+    intent:
+      category: structure
+      risk: ambiguity
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Traceability
+  # ==========================================================
+  - rule:
+      id: GEC-CIS-TRACE-001
+      title: Conceptual Rules Must Declare Traceability
+      description: >
+        Each conceptual rule MUST declare explicit traceability.
+        Trace references MUST be identifiable and resolvable.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Trace
+
+    intent:
+      category: safety
+      risk: ambiguity
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+  # ==========================================================
+  # Appendix A – Authoring Rules
+  # ==========================================================
+  - rule:
+      id: GEC-CIS-APP-A-001
+      title: Authoring Rules Are Mandatory
+      description: >
+        CIS authoring rules MUST be strictly followed.
+        Free-form narrative outside defined structures MUST NOT be used.
+      severity: error
+
+    applies_to:
+      document_type: [CIS]
+      sections:
+        - Authoring Rules
+
+    intent:
+      category: structure
+      risk: drift
+
+    roles:
+      enforced_on: [ai]
+      exempt: [human]
+
+
+# ============================================================
+# Appendix: AIGD-CNL
+# ============================================================
+#
+# All rule.description fields MUST follow AIGD-CNL.
+#
+# ============================================================

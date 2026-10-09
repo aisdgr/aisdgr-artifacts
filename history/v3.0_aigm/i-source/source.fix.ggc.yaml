@@ -1,0 +1,88 @@
+policy:
+  name: code_fix_generate_policy
+  version: 1.1
+  domain: code
+  type: generate
+  driver: none
+  scope: xim_defined
+
+match:
+  execution_intent:
+    type: fix
+    target: code
+
+authority:
+  source: xim_scope
+  description: >
+    Fix generate is allowed only to create minimal code required for defect correction.
+    Boundaries are strictly limited to the scope declared in XIM.
+    No document authority is involved.
+
+rules:
+
+  - id: GEN-FIX-001
+    description: Allow generating minimal production source code required to resolve a defect within XIM scope.
+    effect: allow
+
+  - id: GEN-FIX-002
+    description: Generated code MUST be strictly limited to defect correction and MUST NOT expand scope.
+    constraints:
+      scope_expansion: forbidden
+      new_feature_intent: forbidden
+
+  - id: GEN-FIX-003
+    description: Generated code MUST be created only within the paths/modules/symbols declared in XIM SCOPE.
+    constraints:
+      scope_enforcement: strict
+      scope_inference: forbidden
+      generated_location_outside_scope: forbidden
+
+  - id: GEN-FIX-004
+    description: Fix generate MUST NOT create or modify any documentation artifacts.
+    constraints:
+      forbidden_artifacts:
+        - document
+        - spec
+        - srs
+        - sts
+        - sds
+        - cis
+        - cas
+        - css
+
+  - id: GEN-FIX-005
+    description: Fix generate MUST NOT create or modify any test artifacts.
+    constraints:
+      forbidden_artifacts:
+        - test_code
+        - test_data
+        - test_output
+
+  - id: GEN-FIX-006
+    description: Generated code MUST preserve existing Trace annotations if present, but MUST NOT introduce new Trace requirements.
+    constraints:
+      preserve_existing_trace: true
+      require_trace: false
+
+  - id: GEN-FIX-007
+    description: Generated code SHOULD include comments explaining defect context and fix rationale.
+    constraints:
+      require_code_comment: true
+
+verification:
+  methods:
+    - scope_check
+    - diff_classification
+    - static_analysis
+    - test_execution
+
+on_violation:
+  action: reject
+  message: Execution violates fix generate policy (pure code-level fix only).
+
+report:
+  require:
+    - xim_scope_reference
+    - generated_files
+    - fix_summary
+    - violated_rule_ids
