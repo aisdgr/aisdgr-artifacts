@@ -18,7 +18,7 @@
 | `rule_library/rules/`                      | `aisdgr/rules/`   | `c36fb8d…`    | Byte-preserving move                                | BRA                  |
 | `rule_library/ruleset/`                    | `aisdgr/ruleset/` | `c36fb8d…`    | Byte-preserving move; inherited findings documented | BRA                  |
 | `specification_templates/schema/*.yaml`    | `templates/*.yaml` | `c36fb8d…`   | Byte-preserving move                                | VSS                  |
-| `specification_templates/examples/*.md`    | `templates/*.md`   | `c36fb8d…`   | Byte-preserving move                                | VSS                  |
+| `specification_templates/examples/*.md`    | `templates/*.md`   | `c36fb8d…`   | Replaced with concrete, newly authored examples     | VSS                  |
 | `archive/history/`                         | `history/`        | `c36fb8d…`    | Byte-preserving move of complete selected snapshot  | Historical research  |
 | Repository navigation and provenance files | None              | New curation  | Newly authored                                      | Repository-level     |
 
@@ -52,3 +52,7 @@ Imported artifact bytes were not rewritten during the final layout move.
 Newly authored README, citation, ignore, line-ending, source-map, validation,
 and checksum files are repository curation material. See
 [`VALIDATION.md`](VALIDATION.md) for known source inconsistencies.
+
+The six Markdown VSS authoring templates were subsequently replaced by a
+coherent Identity Service example and renamed from `*.template.md` to
+`*.example.md`. The YAML template definitions remain byte-preserving imports.

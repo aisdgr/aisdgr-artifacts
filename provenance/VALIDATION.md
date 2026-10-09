@@ -22,8 +22,10 @@ current artifact semantics.
 - The BRA and archive artifact subtrees (`rule_library/schema`,
   `rule_library/rules`, `rule_library/ruleset`, and `archive/history`) have the
   same Git tree objects as their mapped paths at legacy commit `c36fb8d…`.
-  The VSS files are byte-identical to source `templates/`, split by format into
-  `specification_templates/schema/` and `specification_templates/examples/`.
+  The VSS YAML files under `specification_templates/schema/` are byte-identical
+  to source `templates/`. The Markdown files under
+  `specification_templates/examples/` are newly authored concrete examples and
+  are not asserted to be source-identical.
 - Thirteen relative links in 17 current/navigation Markdown files were checked;
   none were broken. Historical archive links were not rewritten and are outside
   this current-link assertion.
