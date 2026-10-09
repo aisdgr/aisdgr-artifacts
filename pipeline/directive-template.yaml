@@ -1,0 +1,28 @@
+directive:
+  meta:
+    id: <PIPELINE_ID>                 # MUST: unique pipeline identifier
+    name: <PIPELINE_NAME>             # MUST: short, human-readable name
+    version: 1.0                      # MUST: directive schema version
+    description: >                    # SHOULD: intent of this pipeline
+      Describe what this pipeline is intended to accomplish.
+
+  pipeline:
+    mode: manual                      # MUST: manual | auto | schedule
+
+    # Only required when mode = schedule
+    # Ignored by engine if mode != schedule
+    schedule:
+      type: once | cron               # MUST when present
+      at: "<ISO-8601 datetime>"       # REQUIRED when type = once
+      expression: "<cron expression>" # REQUIRED when type = cron
+      timezone: "UTC"                 # SHOULD, default UTC
+
+    tasks:
+      - id: <XIM_ID>                  # MUST: unique within this directive
+        ref: <relative/path/to.xim>   # MUST: path relative to this directive
+        depends_on: []                # MUST: empty array if no dependency
+
+      - id: <XIM_ID>
+        ref: <relative/path/to.xim>
+        depends_on:
+          - <XIM_ID>
