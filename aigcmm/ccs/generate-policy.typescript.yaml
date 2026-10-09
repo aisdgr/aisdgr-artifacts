@@ -1,0 +1,220 @@
+meta:
+  document: CCS
+  layer: language
+  id: CCS-TYPESCRIPT
+  version: 1.1.0
+  status: Stable
+  owner: AIGD Foundation (Proposed)
+
+scope:
+  language: typescript
+  level: language
+
+applies_with:
+  - CCS_Core.yaml
+  - CCS_JavaScript.yaml
+
+governance:
+  mutability: immutable              # MUST NOT be modified by AI
+  ai_role: enforce_and_comply        # AI must comply and may be validated
+  human_role: author_and_maintain
+
+description: |
+  CCS_TypeScript defines TypeScript-specific coding standards under the
+  AIGDMM Coding Constitution framework.
+
+  This document constrains how both AI and human developers
+  are allowed to write TypeScript code, emphasizing
+  type safety, explicit contracts, and compile-time correctness.
+
+references:
+  - TypeScript Handbook
+  - Effective TypeScript (Dan Vanderkam)
+
+standards:
+
+  # ------------------------------------------------------------
+  # CCS-TS-001
+  # ------------------------------------------------------------
+  - id: CCS-TS-001
+    title: Strict type checking enabled
+    severity: MUST
+
+    description: |
+      TypeScript projects MUST enable strict type checking.
+      Use of `any` MUST be avoided unless explicitly justified
+      and locally constrained.
+
+    applies_to:
+      language: typescript
+      compiler_options:
+        strict: required
+      any_usage: restricted
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Enforce compile-time guarantees and prevent unsafe assumptions.
+
+  # ------------------------------------------------------------
+  # CCS-TS-002
+  # ------------------------------------------------------------
+  - id: CCS-TS-002
+    title: Explicit type annotations for public APIs
+    severity: MUST
+
+    description: |
+      Public functions, methods, and exported values
+      MUST have explicit type annotations.
+      Inferred types MUST NOT be relied upon for public contracts.
+
+    applies_to:
+      language: typescript
+      element:
+        - public_api
+        - exported_symbol
+      typing: explicit_required
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Treat public type definitions as stable contracts.
+
+  # ------------------------------------------------------------
+  # CCS-TS-003
+  # ------------------------------------------------------------
+  - id: CCS-TS-003
+    title: Prefer interfaces and type aliases appropriately
+    severity: SHOULD
+
+    description: |
+      Interfaces SHOULD be used for object shape contracts.
+      Type aliases SHOULD be used for unions, intersections,
+      and complex composition types.
+
+    applies_to:
+      language: typescript
+      type_construct:
+        - interface
+        - type_alias
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve clarity and evolvability of type definitions.
+
+  # ------------------------------------------------------------
+  # CCS-TS-004
+  # ------------------------------------------------------------
+  - id: CCS-TS-004
+    title: No unsafe type assertions
+    severity: MUST
+
+    description: |
+      Unsafe type assertions (e.g. `as any`, double assertions)
+      MUST NOT be used.
+      Type narrowing MUST be achieved via explicit checks
+      or control flow analysis.
+
+    applies_to:
+      language: typescript
+      type_assertion: unsafe_forbidden
+      narrowing: explicit_only
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent bypassing the type system.
+
+  # ------------------------------------------------------------
+  # CCS-TS-005
+  # ------------------------------------------------------------
+  - id: CCS-TS-005
+    title: Explicit null and undefined handling
+    severity: MUST
+
+    description: |
+      Nullable values MUST be explicitly modeled.
+      Code MUST NOT assume presence without checks
+      when dealing with `null` or `undefined`.
+
+    applies_to:
+      language: typescript
+      nullability: explicit
+      strict_null_checks: required
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent runtime errors caused by invalid assumptions.
+
+  # ------------------------------------------------------------
+  # CCS-TS-006
+  # ------------------------------------------------------------
+  - id: CCS-TS-006
+    title: Type-safe async interfaces
+    severity: SHOULD
+
+    description: |
+      Asynchronous functions SHOULD have explicitly typed
+      Promise return values.
+      Promise chains SHOULD preserve type information end-to-end.
+
+    applies_to:
+      language: typescript
+      async_function: typed
+      promise_typing: preserved
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Maintain type safety across asynchronous boundaries.
+
+  # ------------------------------------------------------------
+  # CCS-TS-007
+  # ------------------------------------------------------------
+  - id: CCS-TS-007
+    title: Intent-revealing naming and documentation
+    severity: SHOULD
+
+    description: |
+      Public APIs, exported types, and non-trivial logic
+      SHOULD be named and documented to clearly express intent,
+      responsibilities, and constraints.
+
+      Documentation MUST explain "what" and "why",
+      and MUST NOT be used to justify correctness or approval.
+
+    applies_to:
+      language: typescript
+      element:
+        - public_api
+        - exported_type
+        - core_logic
+      documentation:
+        - tsdoc
+        - inline_comment
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve readability, review efficiency, and long-term maintenance.
+
+notes: |
+  CCS_TypeScript is a language-layer specification.
+  Runtime, framework, and build-system constraints
+  MUST be defined in CAS or CIS documents.

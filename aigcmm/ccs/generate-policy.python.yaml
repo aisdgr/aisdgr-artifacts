@@ -1,0 +1,186 @@
+meta:
+  document: CCS
+  layer: language
+  id: CCS-PYTHON
+  version: 1.1.0
+  status: Stable
+  owner: AIGD Foundation (Proposed)
+
+scope:
+  language: python
+  level: language
+
+applies_with:
+  - CCS_Core.yaml
+
+governance:
+  mutability: immutable            # MUST NOT be modified by AI
+  ai_role: enforce_and_comply      # AI must comply and may be validated
+  human_role: author_and_maintain
+
+description: |
+  CCS_Python defines Python-specific coding standards under the
+  AIGDMM Coding Constitution framework.
+
+  This document constrains how both AI and human developers
+  are allowed to write Python code, ensuring safety, readability,
+  and long-term maintainability.
+
+references:
+  - PEP 8 — Style Guide for Python Code
+  - PEP 257 — Docstring Conventions
+
+standards:
+
+  # ------------------------------------------------------------
+  # CCS-PY-001
+  # ------------------------------------------------------------
+  - id: CCS-PY-001
+    title: Explicitness over cleverness
+    severity: MUST
+
+    description: |
+      Python code MUST favor explicit, readable constructs
+      over compact or clever expressions that obscure intent.
+
+    applies_to:
+      language: python
+      construct: expression
+      readability: explicit
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Favor clarity and maintainability over brevity.
+
+  # ------------------------------------------------------------
+  # CCS-PY-002
+  # ------------------------------------------------------------
+  - id: CCS-PY-002
+    title: Explicit exception handling
+    severity: MUST
+
+    description: |
+      Exceptions MUST be handled explicitly.
+      Broad exception handling (e.g., bare `except`)
+      MUST NOT be used unless fully justified and documented.
+
+    applies_to:
+      language: python
+      construct: exception_handling
+      handler: explicit_only
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent hidden control flow and masked failures.
+
+  # ------------------------------------------------------------
+  # CCS-PY-003
+  # ------------------------------------------------------------
+  - id: CCS-PY-003
+    title: Typed data structures
+    severity: SHOULD
+
+    description: |
+      Data-only structures such as DTOs, Results, Reports, or Models
+      SHOULD be explicitly typed and immutable where practical.
+
+    applies_to:
+      language: python
+      element: class
+      purpose: data_container
+      mutability: immutable_preferred
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Promote safe and predictable data handling.
+
+  # ------------------------------------------------------------
+  # CCS-PY-004
+  # ------------------------------------------------------------
+  - id: CCS-PY-004
+    title: Boundary input validation
+    severity: SHOULD
+
+    description: |
+      External inputs (e.g., CLI arguments, API requests)
+      SHOULD be validated and typed at system boundaries.
+
+    applies_to:
+      language: python
+      input_boundary: external
+      validation: required
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Ensure correctness and robustness of external inputs.
+
+  # ------------------------------------------------------------
+  # CCS-PY-005
+  # ------------------------------------------------------------
+  - id: CCS-PY-005
+    title: Deterministic core logic
+    severity: MUST
+
+    description: |
+      Core logic MUST avoid hidden state, non-deterministic behavior,
+      or side effects that are not explicitly expressed.
+
+    applies_to:
+      language: python
+      behavior: deterministic
+      side_effects: explicit_only
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Maintain predictable and testable execution.
+
+  # ------------------------------------------------------------
+  # CCS-PY-006
+  # ------------------------------------------------------------
+  - id: CCS-PY-006
+    title: Intent-revealing comments and docstrings
+    severity: SHOULD
+
+    description: |
+      Public classes, core functions, and non-trivial logic blocks
+      SHOULD include concise comments or docstrings that explain intent,
+      inputs, and outputs, to support human review and maintenance.
+
+      Comments MUST describe "what" and "why",
+      and MUST NOT justify correctness or approval.
+
+    applies_to:
+      language: python
+      element:
+        - public_api
+        - core_logic
+      documentation:
+        - inline_comment
+        - docstring
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve human readability and review efficiency.
+
+notes: |
+  CCS_Python is a language-layer specification.
+  Violations indicate coding standard breaches
+  and MUST be surfaced during code review or audit.

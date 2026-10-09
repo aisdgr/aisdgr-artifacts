@@ -1,0 +1,215 @@
+meta:
+  document: CCS
+  layer: language
+  id: CCS-JAVASCRIPT
+  version: 1.1.0
+  status: Stable
+  owner: AIGD Foundation (Proposed)
+
+scope:
+  language: javascript
+  level: language
+
+applies_with:
+  - CCS_Core.yaml
+
+governance:
+  mutability: immutable              # MUST NOT be modified by AI
+  ai_role: enforce_and_comply        # AI must comply and may be validated
+  human_role: author_and_maintain
+
+description: |
+  CCS_JavaScript defines JavaScript-specific coding standards under the
+  AIGDMM Coding Constitution framework.
+
+  This document constrains how both AI and human developers
+  are allowed to write JavaScript code, with emphasis on
+  predictability, explicitness, and runtime safety.
+
+references:
+  - ECMAScript Language Specification
+  - MDN Web Docs — JavaScript Guide
+
+standards:
+
+  # ------------------------------------------------------------
+  # CCS-JS-001
+  # ------------------------------------------------------------
+  - id: CCS-JS-001
+    title: Explicit variable declaration
+    severity: MUST
+
+    description: |
+      Variables MUST be declared explicitly using `const` or `let`.
+      `var` MUST NOT be used.
+
+    applies_to:
+      language: javascript
+      variable_declaration:
+        allowed:
+          - const
+          - let
+        forbidden:
+          - var
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent scope leakage and implicit global variables.
+
+  # ------------------------------------------------------------
+  # CCS-JS-002
+  # ------------------------------------------------------------
+  - id: CCS-JS-002
+    title: Strict equality usage
+    severity: MUST
+
+    description: |
+      Strict equality (`===` and `!==`) MUST be used.
+      Loose equality (`==` and `!=`) MUST NOT be used.
+
+    applies_to:
+      language: javascript
+      equality:
+        required: strict
+        forbidden: loose
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Avoid implicit type coercion and ambiguous comparisons.
+
+  # ------------------------------------------------------------
+  # CCS-JS-003
+  # ------------------------------------------------------------
+  - id: CCS-JS-003
+    title: Explicit async control flow
+    severity: MUST
+
+    description: |
+      Asynchronous behavior MUST be expressed explicitly using
+      `async` / `await` or well-scoped Promise chains.
+      Implicit or fire-and-forget async patterns MUST NOT be used.
+
+    applies_to:
+      language: javascript
+      async_model: explicit
+      promise_handling: visible
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Preserve predictable execution order and error propagation.
+
+  # ------------------------------------------------------------
+  # CCS-JS-004
+  # ------------------------------------------------------------
+  - id: CCS-JS-004
+    title: Explicit error handling
+    severity: MUST
+
+    description: |
+      Errors MUST be handled explicitly.
+      Promise rejections or runtime errors
+      MUST NOT be silently ignored.
+
+    applies_to:
+      language: javascript
+      error_handling: explicit
+      promise_rejection: handled
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent silent failures in asynchronous flows.
+
+  # ------------------------------------------------------------
+  # CCS-JS-005
+  # ------------------------------------------------------------
+  - id: CCS-JS-005
+    title: Immutable data preference
+    severity: SHOULD
+
+    description: |
+      Data structures SHOULD be treated as immutable where practical.
+      Mutation SHOULD be minimized and clearly scoped.
+
+    applies_to:
+      language: javascript
+      data_structure: object_or_array
+      mutability: immutable_preferred
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve reasoning, reduce side effects, and simplify debugging.
+
+  # ------------------------------------------------------------
+  # CCS-JS-006
+  # ------------------------------------------------------------
+  - id: CCS-JS-006
+    title: No implicit globals or dynamic execution
+    severity: MUST
+
+    description: |
+      Code MUST NOT introduce implicit global variables.
+      Dynamic code execution mechanisms such as `eval`
+      or `new Function` MUST NOT be used.
+
+    applies_to:
+      language: javascript
+      globals: forbidden
+      dynamic_execution: forbidden
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent security risks and unpredictable runtime behavior.
+
+  # ------------------------------------------------------------
+  # CCS-JS-007
+  # ------------------------------------------------------------
+  - id: CCS-JS-007
+    title: Intent-revealing naming and documentation
+    severity: SHOULD
+
+    description: |
+      Public functions, modules, and non-trivial logic
+      SHOULD be named and documented to clearly express intent,
+      responsibilities, and constraints.
+
+      Documentation MUST explain "what" and "why",
+      and MUST NOT be used to justify correctness or approval.
+
+    applies_to:
+      language: javascript
+      element:
+        - public_api
+        - core_logic
+      documentation:
+        - jsdoc
+        - inline_comment
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve readability, review efficiency, and maintainability.
+
+notes: |
+  CCS_JavaScript is a language-layer specification.
+  Runtime-specific constraints (Node.js, Browser APIs)
+  and framework rules MUST be defined in CAS or CIS documents.

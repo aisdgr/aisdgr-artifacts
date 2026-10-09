@@ -1,0 +1,212 @@
+meta:
+  document: CCS
+  layer: language
+  id: CCS-GO
+  version: 1.1.0
+  status: Stable
+  owner: AIGD Foundation (Proposed)
+
+scope:
+  language: go
+  level: language
+
+applies_with:
+  - CCS_Core.yaml
+
+governance:
+  mutability: immutable              # MUST NOT be modified by AI
+  ai_role: enforce_and_comply        # AI must comply and may be validated
+  human_role: author_and_maintain
+
+description: |
+  CCS_Go defines Go-specific coding standards under the
+  AIGDMM Coding Constitution framework.
+
+  This document constrains how both AI and human developers
+  are allowed to write Go code, emphasizing simplicity,
+  explicit behavior, and predictable execution.
+
+references:
+  - Go Language Specification
+  - Effective Go
+
+standards:
+
+  # ------------------------------------------------------------
+  # CCS-GO-001
+  # ------------------------------------------------------------
+  - id: CCS-GO-001
+    title: Explicit error handling
+    severity: MUST
+
+    description: |
+      Errors MUST be handled explicitly.
+      Ignoring returned errors or using blank identifiers
+      to discard errors MUST NOT be allowed.
+
+    applies_to:
+      language: go
+      error_handling: explicit
+      ignored_errors: forbidden
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Ensure all failure paths are visible and reviewable.
+
+  # ------------------------------------------------------------
+  # CCS-GO-002
+  # ------------------------------------------------------------
+  - id: CCS-GO-002
+    title: Simple and explicit control flow
+    severity: MUST
+
+    description: |
+      Control flow MUST remain simple and explicit.
+      Deep nesting, complex boolean logic, or hidden flow
+      through defer misuse SHOULD be avoided.
+
+    applies_to:
+      language: go
+      control_flow: explicit
+      nesting: shallow_preferred
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Preserve readability and ease of reasoning.
+
+  # ------------------------------------------------------------
+  # CCS-GO-003
+  # ------------------------------------------------------------
+  - id: CCS-GO-003
+    title: Explicit concurrency ownership
+    severity: MUST
+
+    description: |
+      Concurrency using goroutines and channels
+      MUST clearly define ownership, lifecycle,
+      and termination conditions.
+
+    applies_to:
+      language: go
+      concurrency: explicit
+      goroutine_lifecycle: defined
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent goroutine leaks and race conditions.
+
+  # ------------------------------------------------------------
+  # CCS-GO-004
+  # ------------------------------------------------------------
+  - id: CCS-GO-004
+    title: Prefer composition over inheritance
+    severity: SHOULD
+
+    description: |
+      Go code SHOULD favor composition via structs
+      and interfaces rather than inheritance-like patterns.
+      Interfaces SHOULD remain small and focused.
+
+    applies_to:
+      language: go
+      composition: preferred
+      interface_size: small
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Maintain flexibility and reduce coupling.
+
+  # ------------------------------------------------------------
+  # CCS-GO-005
+  # ------------------------------------------------------------
+  - id: CCS-GO-005
+    title: Minimal and explicit interfaces
+    severity: SHOULD
+
+    description: |
+      Interfaces SHOULD be defined at the point of use
+      and MUST expose only the methods actually required.
+
+    applies_to:
+      language: go
+      interface_definition: minimal
+      abstraction: usage_driven
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve testability and decoupling.
+
+  # ------------------------------------------------------------
+  # CCS-GO-006
+  # ------------------------------------------------------------
+  - id: CCS-GO-006
+    title: Deterministic behavior and side effects
+    severity: MUST
+
+    description: |
+      Core logic MUST avoid hidden side effects
+      and non-deterministic behavior.
+      Side effects MUST be explicit and localized.
+
+    applies_to:
+      language: go
+      behavior: deterministic
+      side_effects: explicit_only
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Ensure predictable execution and easier debugging.
+
+  # ------------------------------------------------------------
+  # CCS-GO-007
+  # ------------------------------------------------------------
+  - id: CCS-GO-007
+    title: Intent-revealing naming and documentation
+    severity: SHOULD
+
+    description: |
+      Exported functions, types, and non-trivial logic
+      SHOULD be named and documented to clearly express intent,
+      responsibilities, and constraints.
+
+      Documentation MUST explain "what" and "why",
+      and MUST NOT be used to justify correctness or approval.
+
+    applies_to:
+      language: go
+      element:
+        - exported_api
+        - core_logic
+      documentation:
+        - godoc
+        - inline_comment
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve readability, review efficiency, and long-term maintenance.
+
+notes: |
+  CCS_Go is a language-layer specification.
+  Runtime behavior, deployment models, and framework usage
+  MUST be governed by CAS or CIS documents, not here.

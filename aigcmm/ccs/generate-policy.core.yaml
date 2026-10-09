@@ -1,0 +1,188 @@
+meta:
+  document: CCS
+  layer: core
+  id: CCS-CORE
+  version: 1.0.0
+  status: Stable
+  owner: AIGD Foundation (Proposed)
+
+governance:
+  mutability: immutable            # MUST NOT be modified by AI or automation
+  ai_role: enforce_only            # AI may only comply / validate
+  human_role: author_and_maintain
+  scope:
+    - all_languages
+    - all_code_generated_with_ai
+
+description: |
+  CCS_Core defines language-agnostic, constitution-level coding principles.
+  These rules establish the non-negotiable boundaries that both AI and human
+  developers MUST respect when producing or reviewing source code.
+
+  All language-specific CCS documents MUST apply this core standard.
+
+standards:
+
+  # ------------------------------------------------------------
+  # CCS-STD-001
+  # ------------------------------------------------------------
+  - id: CCS-STD-001
+    title: Deterministic and reproducible behavior
+    severity: MUST
+
+    description: |
+      Code MUST exhibit deterministic and reproducible behavior.
+      Hidden state, non-deterministic side effects, or time-dependent logic
+      MUST NOT exist unless explicitly modeled and documented.
+
+    applies_to:
+      behavior: deterministic
+      side_effects: explicit_only
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Ensure reproducibility, debuggability, and predictable execution.
+
+  # ------------------------------------------------------------
+  # CCS-STD-002
+  # ------------------------------------------------------------
+  - id: CCS-STD-002
+    title: Explicit control flow and state
+    severity: MUST
+
+    description: |
+      Control flow and state transitions MUST be explicit.
+      Implicit magic, reflection-based behavior, or hidden mutation
+      MUST NOT be used unless explicitly constrained by design.
+
+    applies_to:
+      control_flow: explicit
+      state_management: visible
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent opaque behavior that cannot be reliably reasoned about
+      by humans or AI reviewers.
+
+  # ------------------------------------------------------------
+  # CCS-STD-003
+  # ------------------------------------------------------------
+  - id: CCS-STD-003
+    title: No hidden external dependencies
+    severity: MUST
+
+    description: |
+      Code MUST NOT rely on undeclared external dependencies,
+      environment-specific assumptions, or implicit runtime context.
+
+    applies_to:
+      dependency: declared_only
+      environment: explicit
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Ensure portability and reduce environment-coupled failures.
+
+  # ------------------------------------------------------------
+  # CCS-STD-004
+  # ------------------------------------------------------------
+  - id: CCS-STD-004
+    title: Safe handling of sensitive data
+    severity: MUST
+
+    description: |
+      Sensitive data including secrets, credentials, tokens,
+      personal data, or internal confidential values
+      MUST NOT be logged, hard-coded, or exposed.
+
+    applies_to:
+      data_classification: sensitive_excluded
+      logging: restricted
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent accidental leakage of sensitive information,
+      especially from AI-generated code.
+
+  # ------------------------------------------------------------
+  # CCS-STD-005
+  # ------------------------------------------------------------
+  - id: CCS-STD-005
+    title: Intent-revealing structure
+    severity: SHOULD
+
+    description: |
+      Code SHOULD be structured to clearly reveal intent.
+      Naming, decomposition, and organization SHOULD favor clarity
+      over brevity or cleverness.
+
+    applies_to:
+      readability: intent_revealing
+      structure: decomposed
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve long-term maintainability and review efficiency.
+
+  # ------------------------------------------------------------
+  # CCS-STD-006
+  # ------------------------------------------------------------
+  - id: CCS-STD-006
+    title: Boundary validation and error visibility
+    severity: SHOULD
+
+    description: |
+      Inputs at system boundaries SHOULD be validated explicitly.
+      Errors SHOULD surface clearly and MUST NOT be silently ignored.
+
+    applies_to:
+      input_boundary: validated
+      error_handling: explicit
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent silent failures and undefined behavior propagation.
+
+  # ------------------------------------------------------------
+  # CCS-STD-007
+  # ------------------------------------------------------------
+  - id: CCS-STD-007
+    title: AI behavior limitation
+    severity: MUST
+
+    description: |
+      AI-generated code MUST comply with all CCS rules.
+      AI MUST NOT introduce constructs that obscure intent,
+      bypass governance, or weaken traceability.
+
+    applies_to:
+      ai_generation: constrained
+
+    roles:
+      - AI
+
+    intent: |
+      Ensure AI remains a constrained executor,
+      not an autonomous designer.
+
+notes: |
+  CCS_Core is a constitution-level specification.
+  Violations indicate governance failure rather than stylistic issues.

@@ -1,0 +1,188 @@
+meta:
+  document: CCS
+  layer: language
+  id: CCS-JAVA
+  version: 1.1.0
+  status: Stable
+  owner: AIGD Foundation (Proposed)
+
+scope:
+  language: java
+  level: language
+
+applies_with:
+  - CCS_Core.yaml
+
+governance:
+  mutability: immutable              # MUST NOT be modified by AI
+  ai_role: enforce_and_comply        # AI must comply and may be validated
+  human_role: author_and_maintain
+
+description: |
+  CCS_Java defines Java-specific coding standards under the
+  AIGDMM Coding Constitution framework.
+
+  This document constrains how both AI and human developers
+  are allowed to write Java code, focusing on explicitness,
+  type safety, and long-term maintainability.
+
+references:
+  - Java Language Specification (JLS)
+  - Effective Java (Joshua Bloch)
+
+standards:
+
+  # ------------------------------------------------------------
+  # CCS-JAVA-001
+  # ------------------------------------------------------------
+  - id: CCS-JAVA-001
+    title: Explicit type usage
+    severity: MUST
+
+    description: |
+      Java code MUST use explicit and appropriate types.
+      Overuse of raw types, unchecked casts, or suppressed warnings
+      MUST NOT be introduced.
+
+    applies_to:
+      language: java
+      type_system: explicit
+      generics: required
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Preserve compile-time safety and reduce runtime type errors.
+
+  # ------------------------------------------------------------
+  # CCS-JAVA-002
+  # ------------------------------------------------------------
+  - id: CCS-JAVA-002
+    title: Controlled use of inheritance
+    severity: SHOULD
+
+    description: |
+      Inheritance SHOULD be used sparingly.
+      Composition SHOULD be preferred over inheritance
+      unless polymorphic substitution is explicitly required.
+
+    applies_to:
+      language: java
+      construct: inheritance
+      preference: composition_over_inheritance
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Reduce coupling and improve maintainability.
+
+  # ------------------------------------------------------------
+  # CCS-JAVA-003
+  # ------------------------------------------------------------
+  - id: CCS-JAVA-003
+    title: Explicit null handling
+    severity: MUST
+
+    description: |
+      Null handling MUST be explicit.
+      APIs SHOULD avoid returning null and SHOULD use
+      Optional or clearly documented null contracts.
+
+    applies_to:
+      language: java
+      nullability: explicit
+      optional_usage: preferred
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Prevent NullPointerException-driven failures.
+
+  # ------------------------------------------------------------
+  # CCS-JAVA-004
+  # ------------------------------------------------------------
+  - id: CCS-JAVA-004
+    title: Checked exception discipline
+    severity: SHOULD
+
+    description: |
+      Checked exceptions SHOULD be used to represent
+      recoverable conditions.
+      Exceptions MUST NOT be swallowed or silently ignored.
+
+    applies_to:
+      language: java
+      exception_model: explicit
+      handling: visible
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Preserve meaningful error propagation and handling.
+
+  # ------------------------------------------------------------
+  # CCS-JAVA-005
+  # ------------------------------------------------------------
+  - id: CCS-JAVA-005
+    title: Immutable data preference
+    severity: SHOULD
+
+    description: |
+      Data objects SHOULD be immutable where practical.
+      Mutable state MUST be minimized and clearly scoped.
+
+    applies_to:
+      language: java
+      element: data_object
+      mutability: immutable_preferred
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve thread-safety and reasoning simplicity.
+
+  # ------------------------------------------------------------
+  # CCS-JAVA-006
+  # ------------------------------------------------------------
+  - id: CCS-JAVA-006
+    title: Intent-revealing naming and documentation
+    severity: SHOULD
+
+    description: |
+      Public classes, methods, and non-trivial logic
+      SHOULD be named and documented to clearly express intent,
+      responsibilities, and constraints.
+
+      Documentation MUST explain "what" and "why",
+      and MUST NOT be used to justify correctness or approval.
+
+    applies_to:
+      language: java
+      element:
+        - public_api
+        - core_logic
+      documentation:
+        - javadoc
+        - inline_comment
+
+    roles:
+      - AI
+      - Human
+
+    intent: |
+      Improve readability, review efficiency, and long-term maintenance.
+
+notes: |
+  CCS_Java is a language-layer specification.
+  Framework-specific or runtime-specific constraints
+  MUST be defined in CAS or CIS documents, not here.
