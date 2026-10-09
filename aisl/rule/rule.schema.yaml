@@ -1,0 +1,170 @@
+# ==============================================================================
+# AISL Rule Schema
+# ------------------------------------------------------------------------------
+# Defines the structural model of a single AISL rule.
+#
+# A rule is the smallest normative unit that constrains AI behavior.
+# This schema defines structure only.
+# It MUST NOT define execution logic, policy enforcement,
+# risk evaluation, or decision flow.
+# ==============================================================================
+
+schema:
+  name: AISL Rule Schema
+  version: 1.1
+  description: >
+    Structural schema for AISL rules.
+    This schema defines how rules are identified, classified,
+    scoped, and described for AI execution.
+    It does not define how rules are enforced or executed.
+
+# ------------------------------------------------------------------------------
+# Rule Object
+# ------------------------------------------------------------------------------
+
+rule:
+  type: object
+  required:
+    - id
+    - description
+
+  properties:
+
+    # --------------------------------------------------------------------------
+    # Identity & Lifecycle
+    # --------------------------------------------------------------------------
+
+    id:                              # core
+      type: string
+      description: >
+        Unique identifier of the rule.
+        This identifier MUST be stable and MUST NOT be reused.
+
+    version:                         # optional
+      type: string
+      description: >
+        Version of the rule definition.
+        This field is descriptive only.
+
+    status:                          # optional
+      type: string
+      enum:
+        - draft
+        - active
+        - deprecated
+      description: >
+        Lifecycle status of the rule.
+        This field is descriptive only.
+
+    title:                           # optional
+      type: string
+      description: >
+        Short human-readable title summarizing the rule.
+
+    # --------------------------------------------------------------------------
+    # Normative Content
+    # --------------------------------------------------------------------------
+
+    description:                     # core
+      type: cnl
+      description: >
+        Normative rule description written in Controlled Natural Language (CNL).
+        This field is the ONLY source of behavioral constraints for AI.
+        AI MUST follow this description exactly and MUST NOT reinterpret it.
+
+    # --------------------------------------------------------------------------
+    # Intent (Design Rationale)
+    # --------------------------------------------------------------------------
+
+    intent:                          # optional
+      type: list
+      description: >
+        Structured natural language hints describing the intent,
+        rationale, or design concern behind the rule.
+        These hints are informational and non-normative.
+      item:
+        struct: object
+        constraints:
+          - EXACTLY_ONE_KEY
+        key:
+          type: string
+        value:
+          type: string
+
+    # --------------------------------------------------------------------------
+    # Roles
+    # --------------------------------------------------------------------------
+
+    roles:                           # optional
+      type: list
+      description: >
+        Structured natural language hints indicating relevant actors.
+        These hints MUST NOT be interpreted as enforcement,
+        authorization, or execution rules.
+      item:
+        struct: object
+        constraints:
+          - EXACTLY_ONE_KEY
+        key:
+          type: string
+        value:
+          type: string
+
+    # --------------------------------------------------------------------------
+    # Applicability Scope
+    # --------------------------------------------------------------------------
+
+    applies_to:                      # optional
+      type: list
+      description: >
+        Structured natural language hints describing when this rule applies.
+        Each entry represents one applicability predicate.
+        These hints provide context only and MUST NOT introduce
+        executable logic, inference, or value expansion.
+      item:
+        struct: object
+        constraints:
+          - EXACTLY_ONE_KEY
+        key:
+          type: string
+        value:
+          type: string
+
+    # --------------------------------------------------------------------------
+    # Risk Classification
+    # --------------------------------------------------------------------------
+
+    risk:                            # optional
+      type: string
+      enum:
+        - bias
+        - safety
+        - legal
+        - transparency
+        - security
+      description: >
+        High-level AI risk category that this rule is intended to address.
+        This field is descriptive only and MUST NOT affect AI behavior
+        or execution decisions.
+
+    severity:                        # optional
+      type: string
+      enum:
+        - low
+        - medium
+        - high
+        - critical
+      description: >
+        Informational severity classification of the rule.
+        This field is descriptive only and MUST NOT affect execution behavior.
+
+# ------------------------------------------------------------------------------
+# Explicit Non-Goals
+# ------------------------------------------------------------------------------
+
+non_goals:
+  - execution control
+  - policy decision logic
+  - risk scoring or prioritization
+  - enforcement mechanism
+  - runtime behavior modification

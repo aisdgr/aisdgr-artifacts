@@ -1,0 +1,156 @@
+# ==============================================================================
+# AISL Document Schema
+# ------------------------------------------------------------------------------
+# Defines the structural container model for AISL rule documents.
+#
+# A document declares:
+#   - its own identity and purpose (meta)
+#   - allowed applicability context (intent / roles / applies_to)
+#   - a list of rules governed by rule.schema.yaml
+#
+# This schema defines STRUCTURE ONLY.
+# It MUST NOT define rule semantics, execution behavior, or policy logic.
+# ==============================================================================
+
+schema:
+  name: AISL-Document-Schema
+  version: 1.1
+  description: >
+    Structural schema for AISL documents.
+    This schema defines document-level metadata, applicability context,
+    and the container structure for rules.
+    It does not define rule behavior or execution logic.
+
+# ==============================================================================
+# Document Root
+# ==============================================================================
+
+document:
+  struct: object
+  required:
+    - meta
+    - applicability_context
+    - rules
+
+  properties:
+
+    # --------------------------------------------------------------------------
+    # Document Metadata (Structural Only)
+    # --------------------------------------------------------------------------
+    meta:                            # core
+      type: object
+      description: >
+        Document-level metadata defining identity, purpose, and ownership
+        of this AISL document.
+      required:
+        - id
+        - title
+
+      properties:
+
+        id:                          # core, unique
+          type: string
+          description: >
+            Globally unique identifier for this document.
+
+        title:                       # core
+          type: string
+          description: >
+            Human-readable title of this document.
+
+        version:                     # optional
+          type: string
+          description: >
+            Version of this document.
+
+        status:                      # optional
+          type: string
+          enum:
+            - draft
+            - active
+            - deprecated
+          description: >
+            Lifecycle status of the document.
+
+        action:                      # optional
+          type: string
+          enum:
+            - generate
+            - modify
+            - decide
+            - recommend
+            - analyze
+          description: >
+            High-level classification of the primary AI action
+            associated with this document.
+            This field is descriptive only.
+
+        artifact:                    # optional (renamed semantics)
+          type: string
+          description: >
+            Target artifact category governed by this document
+            (e.g., document, code, configuration, test, model).
+
+        owner:                       # optional
+          type: string
+          description: >
+            Owner or responsible party of this document.
+
+      additional_properties: false
+
+    # --------------------------------------------------------------------------
+    # Applicability Context (Structural Vocabulary)
+    # --------------------------------------------------------------------------
+
+    applicability_context:           # core
+      type: object
+      description: >
+        Declares the allowed applicability context that rules
+        within this document may use.
+        This context constrains the keys and values that may appear
+        in rule.intent, rule.roles, and rule.applies_to.
+
+      properties:
+
+        intent:                      # 1. intent
+          type: map
+          description: >
+            Declares allowed intent dimensions and values
+            for rule.intent.
+          additional_properties:
+            type: list
+            item:
+              type: string
+
+        roles:                       # 2. roles
+          type: map
+          description: >
+            Declares allowed role dimensions and values
+            for rule.roles.
+          additional_properties:
+            type: list
+            item:
+              type: string
+
+        applies_to:                  # 3. applies_to
+          type: map
+          description: >
+            Declares allowed applicability dimensions and values
+            for rule.applies_to.
+          additional_properties:
+            type: list
+            item:
+              type: string
+
+      additional_properties: false
+
+    # --------------------------------------------------------------------------
+    # Rules
+    # --------------------------------------------------------------------------
+    rules:                           # core
+      type: list
+      description: >
+        List of rules contained in this document.
+        Each rule MUST conform to rule.schema.yaml.
+      item:
+        ref: rule.schema.yaml
