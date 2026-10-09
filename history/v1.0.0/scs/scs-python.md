@@ -152,3 +152,28 @@ Maintain predictable Python execution.
 
 #### severity
 MUST
+
+### SCS-PY-006 — Intent-revealing comments and docstrings
+
+#### description
+Public classes, core functions, and non-trivial logic blocks
+SHOULD include concise comments or docstrings that explain intent,
+inputs, and outputs, to support human review and maintenance.
+
+Comments MUST describe "what" and "why",
+and MUST NOT justify correctness or approval.
+
+#### applies_to
+- language: python
+- element: public_api | core_logic
+- documentation: inline_comment | docstring
+
+#### role
+- AI
+- Human
+
+#### intent
+Improve human readability and review efficiency.
+
+#### severity
+SHOULD
