@@ -1,0 +1,63 @@
+# ==============================================================================
+# CODE-ST-C03.yaml
+# Introduction of new functionality is forbidden unless explicitly allowed.
+# ==============================================================================
+
+execution:
+  id: CODE-ST-C03
+  apply_as: structure_engineer
+  normative: >
+    Code execution MUST NOT introduce new functionality
+    unless explicit permission for new functionality
+    has been declared.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_feature_creep
+      - block_implicit_requirement_expansion
+      - enforce_functional_scope_control
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - structure_validator
+      - behavior_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - functionality_introduction
+    risk:
+      - architecture
+      - correctness
+    severity:
+      - high
+    reason:
+      - unauthorized_new_functionality
+      - implicit_requirement_expansion
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - functional_scope_control
+      - architectural_stability
+      - auditability

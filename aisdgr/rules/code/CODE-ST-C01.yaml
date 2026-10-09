@@ -1,0 +1,61 @@
+# ==============================================================================
+# CODE-ST-C01.yaml
+# Unauthorized structural refactoring is forbidden.
+# ==============================================================================
+
+execution:
+  id: CODE-ST-C01
+  apply_as: structure_engineer
+  normative: >
+    Code execution MUST NOT perform any structural refactoring
+    unless explicit permission for structural refactoring
+    has been declared.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_unauthorized_structural_change
+      - enforce_structural_permission_boundary
+      - eliminate_implicit_refactoring
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - structure_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - structural_refactoring
+    risk:
+      - architecture
+    severity:
+      - high
+    reason:
+      - unauthorized_structural_refactor
+      - implicit_structure_change
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - architectural_stability
+      - execution_safety
+      - auditability

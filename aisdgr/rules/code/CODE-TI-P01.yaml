@@ -1,0 +1,62 @@
+# ==============================================================================
+# CODE-TI-P01.yaml
+# Test modifications MUST preserve original structure and intent.
+# ==============================================================================
+
+execution:
+  id: CODE-TI-P01
+  apply_as: test_integrity_engineer
+  normative: >
+    Test modifications MUST preserve the original
+    structure and intent of the tests.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_test_semantic_erosion
+      - preserve_test_intent_over_time
+      - avoid_accidental_behavior_redefinition
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - test_validator
+      - behavior_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - test_modification
+    risk:
+      - correctness
+      - maintainability
+    severity:
+      - medium
+    reason:
+      - test_structure_altered
+      - test_intent_eroded
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: gating
+    affected_capabilities:
+      - test_intent_preservation
+      - regression_stability
+      - auditability

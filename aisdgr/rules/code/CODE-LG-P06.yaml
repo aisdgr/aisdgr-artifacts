@@ -1,0 +1,55 @@
+# ==============================================================================
+# CODE-LG-P06.yaml
+# A rule-evaluation report MUST be generated.
+# ==============================================================================
+
+execution:
+  id: CODE-LG-P06
+  apply_as: governance_observer
+  normative: >
+    Each execution MUST generate a rule-evaluation report.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - expose_rule_application
+      - prevent_silent_governance
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    system:
+      - rule_evaluator
+      - report_generator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - rule_evaluation
+    risk:
+      - governance
+    severity:
+      - high
+    reason:
+      - missing_rule_report
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: enforce
+    affected_capabilities:
+      - governance_visibility
+      - auditability

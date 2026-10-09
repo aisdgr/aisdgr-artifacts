@@ -1,0 +1,63 @@
+# ==============================================================================
+# CODE-CN-C02.yaml
+# Undeclared requirements MUST not be inferred.
+# ==============================================================================
+
+execution:
+  id: CODE-CN-C02
+  apply_as: constraint_engineer
+  normative: >
+    Undeclared requirements MUST NOT be inferred
+    during code execution.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_requirement_inference
+      - preserve_requirement_authority
+      - eliminate_implicit_feature_assumption
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - requirement_validator
+      - constraint_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - requirement_resolution
+      - code_execution
+    risk:
+      - scope
+      - governance
+    severity:
+      - high
+    reason:
+      - inferred_requirement_detected
+      - implicit_feature_assumption
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - requirement_decidability
+      - execution_safety
+      - auditability

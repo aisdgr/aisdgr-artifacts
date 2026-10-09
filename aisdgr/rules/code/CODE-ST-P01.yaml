@@ -1,0 +1,60 @@
+# ==============================================================================
+# CODE-ST-P01.yaml
+# Permission for structural refactoring MUST be explicit.
+# ==============================================================================
+
+execution:
+  id: CODE-ST-P01
+  apply_as: structure_engineer
+  normative: >
+    Permission for structural refactoring MUST be
+    explicitly declared before execution.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_implicit_refactoring
+      - separate_structure_from_logic_change
+      - enforce_explicit_structural_intent
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - structure_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - structural_refactoring
+    risk:
+      - architecture
+    severity:
+      - high
+    reason:
+      - missing_structural_refactor_permission
+      - implicit_structure_change_risk
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: gating
+    affected_capabilities:
+      - architectural_stability
+      - change_predictability
+      - auditability

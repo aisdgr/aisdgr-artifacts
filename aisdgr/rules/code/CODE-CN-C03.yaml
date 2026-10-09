@@ -1,0 +1,63 @@
+# ==============================================================================
+# CODE-CN-C03.yaml
+# Undeclared validation targets MUST not be inferred.
+# ==============================================================================
+
+execution:
+  id: CODE-CN-C03
+  apply_as: constraint_engineer
+  normative: >
+    Undeclared validation targets MUST NOT be inferred
+    during code execution.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_validation_target_inference
+      - preserve_validation_authority
+      - eliminate_implicit_validation_scope
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - validation_target_validator
+      - constraint_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - validation_resolution
+      - code_execution
+    risk:
+      - scope
+      - governance
+    severity:
+      - high
+    reason:
+      - inferred_validation_target
+      - implicit_validation_scope
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - validation_decidability
+      - execution_safety
+      - auditability

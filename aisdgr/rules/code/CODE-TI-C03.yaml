@@ -1,0 +1,63 @@
+# ==============================================================================
+# CODE-TI-C03.yaml
+# Tests MUST NOT redefine expected behavior.
+# ==============================================================================
+
+execution:
+  id: CODE-TI-C03
+  apply_as: test_integrity_engineer
+  normative: >
+    Tests MUST NOT redefine expected behavior
+    of the production code.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_test_driven_behavior_redefinition
+      - preserve_behavioral_authority
+      - avoid_requirement_drift_via_tests
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - test_validator
+      - behavior_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - test_generation
+      - test_modification
+    risk:
+      - correctness
+      - governance
+    severity:
+      - high
+    reason:
+      - expected_behavior_redefined_by_test
+      - behavioral_authority_violation
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - behavioral_integrity
+      - requirement_stability
+      - auditability

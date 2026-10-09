@@ -1,0 +1,55 @@
+# ==============================================================================
+# CODE-BD-C02.yaml
+# Code MUST NOT access modules or resources outside the declared boundary.
+# ==============================================================================
+
+execution:
+  id: CODE-BD-C02
+  apply_as: boundary_engineer
+  normative: >
+    Code execution MUST NOT access any module or resource
+    that is not contained within the resolved execution boundary.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_boundary_escape
+      - enforce_resource_containment
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - boundary_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - code_execution
+    reason:
+      - access_outside_boundary
+      - boundary_violation
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - boundary_enforcement
+      - execution_safety
+      - auditability

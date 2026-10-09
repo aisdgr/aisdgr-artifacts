@@ -1,0 +1,63 @@
+# ==============================================================================
+# CODE-TI-C04.yaml
+# Tests MUST NOT infer requirements or behavior from implementation.
+# ==============================================================================
+
+execution:
+  id: CODE-TI-C04
+  apply_as: test_integrity_engineer
+  normative: >
+    Tests MUST NOT infer requirements or expected behavior
+    from the implementation of the production code.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_reverse_requirement_inference
+      - block_implementation_as_behavior_authority
+      - eliminate_inference_creep_via_tests
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - test_validator
+      - behavior_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - test_generation
+      - test_modification
+    risk:
+      - correctness
+      - governance
+    severity:
+      - high
+    reason:
+      - requirement_inferred_from_code
+      - implementation_as_authority
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - requirement_authority
+      - behavioral_integrity
+      - auditability

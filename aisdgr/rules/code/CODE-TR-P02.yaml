@@ -1,0 +1,62 @@
+# ==============================================================================
+# CODE-TR-P02.yaml
+# Trace IDs MUST be embedded in the actual code content.
+# ==============================================================================
+
+execution:
+  id: CODE-TR-P02
+  apply_as: traceability_engineer
+  normative: >
+    Trace IDs present in the output artifact MUST be embedded within
+    the source code artifact itself and MUST NOT exist solely outside
+    the source code artifact.
+
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - ensure_trace_is_code_resident
+      - prevent_external_or_implicit_trace_only
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_regulator
+    system:
+      - validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - code_generation
+      - code_modification
+    risk: traceability
+    severity: high
+    reason:
+      - trace_id_present_only_in_metadata
+      - trace_reference_not_embedded_in_code
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: foundational
+    affected_capabilities:
+      - traceability
+      - auditability
+      - accountability

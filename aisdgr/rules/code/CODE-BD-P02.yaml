@@ -1,0 +1,55 @@
+# ==============================================================================
+# CODE-BD-P02.yaml
+# Code execution MUST stop if declared boundaries conflict.
+# ==============================================================================
+
+execution:
+  id: CODE-BD-P02
+  apply_as: boundary_engineer
+  constraint: >
+    Code execution MUST stop if multiple declared boundaries
+    cannot be resolved into a single, deterministic execution scope.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_ambiguous_execution_scope
+      - avoid_conflicting_modification_targets
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - boundary_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - code_execution
+    reason:
+      - conflicting_boundaries
+      - ambiguous_execution_scope
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - boundary_enforcement
+      - execution_safety
+      - auditability

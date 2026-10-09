@@ -1,0 +1,56 @@
+# ==============================================================================
+# CODE-BD-C03.yaml
+# Code MUST NOT introduce undeclared external dependencies.
+# ==============================================================================
+
+execution:
+  id: CODE-BD-C03
+  apply_as: boundary_engineer
+  normative: >
+    Code execution MUST NOT introduce any external dependency
+    that is not explicitly declared within the resolved execution boundary.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_implicit_dependency_introduction
+      - enforce_dependency_containment
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - boundary_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - code_execution
+    reason:
+      - undeclared_dependency
+      - boundary_violation
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - boundary_enforcement
+      - execution_safety
+      - supply_chain_integrity
+      - auditability

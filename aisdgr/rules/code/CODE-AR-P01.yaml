@@ -1,0 +1,53 @@
+# ==============================================================================
+# CODE-AR-P01.yaml
+# Permission to create new artifacts MUST be explicitly defined.
+# ==============================================================================
+
+execution:
+  id: CODE-AR-P01
+  apply_as: artifact_engineer
+  normative: >
+    Permission to create new code artifacts
+    MUST be explicitly defined before execution.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_implicit_artifact_creation
+      - enforce_artifact_creation_clarity
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - artifact_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - artifact_creation
+    reason:
+      - artifact_creation_permission_missing
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: advisory
+    affected_capabilities:
+      - artifact_management
+      - execution_transparency

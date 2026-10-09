@@ -1,0 +1,63 @@
+# ==============================================================================
+# CODE-TI-C02.yaml
+# Test changes MUST NOT expand validation scope.
+# ==============================================================================
+
+execution:
+  id: CODE-TI-C02
+  apply_as: test_integrity_engineer
+  normative: >
+    Test changes MUST NOT expand the validation scope
+    beyond what has been explicitly declared.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: asdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_implicit_validation_expansion
+      - avoid_test_driven_requirement_growth
+      - preserve_declared_validation_boundary
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_executor
+    system:
+      - test_validator
+      - boundary_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - develop
+    scope:
+      - test_generation
+      - test_modification
+    risk:
+      - correctness
+      - scope
+    severity:
+      - high
+    reason:
+      - expanded_validation_scope
+      - implicit_test_requirement
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - validation_boundary_control
+      - requirement_stability
+      - auditability
