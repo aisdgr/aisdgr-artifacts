@@ -1,0 +1,63 @@
+# ==============================================================================
+# LANG-CC-TS-C02.yaml
+# Explicit API Types
+# Source: CCS-TS-002
+# ==============================================================================
+
+execution:
+  id: LANG-CC-TS-C02
+  apply_as: code_engineer
+  normative: >
+    Public functions, methods, and exported values MUST have
+    explicit type annotations. Inferred types MUST NOT be relied
+    upon for public contracts.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - treat_public_type_definitions_as_stable_contracts
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - api_type_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - typescript_public_api
+    language:
+      - typescript
+    risk:
+      - implicit_public_contract
+      - type_drift
+    severity:
+      - high
+    reason:
+      - api_type_explicitness
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - api_contract_safety
+      - public_interface_integrity

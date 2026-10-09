@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-JS-C03.yaml
+# No Implicit Globals or Dynamic Execution
+# Source: CCS-JS-006
+# ==============================================================================
+
+execution:
+  id: LANG-CC-JS-C03
+  apply_as: code_engineer
+  normative: >
+    Code MUST NOT introduce implicit global variables. Dynamic code
+    execution mechanisms such as eval or new Function MUST NOT be used.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_security_risks
+      - prevent_unpredictable_runtime_behavior
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - security_scanner
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - javascript_globals
+      - javascript_dynamic_execution
+    language:
+      - javascript
+    risk:
+      - security_vulnerability
+      - code_injection
+    severity:
+      - critical
+    reason:
+      - global_and_eval_prohibition
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - security
+      - runtime_predictability

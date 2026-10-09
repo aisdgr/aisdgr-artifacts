@@ -1,0 +1,63 @@
+# ==============================================================================
+# LANG-CC-TS-C03.yaml
+# No Unsafe Type Assertions
+# Source: CCS-TS-004
+# ==============================================================================
+
+execution:
+  id: LANG-CC-TS-C03
+  apply_as: code_engineer
+  normative: >
+    Unsafe type assertions (e.g., as any, double assertions) MUST
+    NOT be used. Type narrowing MUST be achieved via explicit checks
+    or control flow analysis.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_bypassing_type_system
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - assertion_checker
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - typescript_type_assertions
+    language:
+      - typescript
+    risk:
+      - type_system_bypass
+      - runtime_type_mismatch
+    severity:
+      - high
+    reason:
+      - assertion_safety
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - type_system_integrity
+      - runtime_type_safety

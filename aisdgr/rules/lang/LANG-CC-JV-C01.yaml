@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-JV-C01.yaml
+# Explicit Types
+# Source: CCS-JAVA-001
+# ==============================================================================
+
+execution:
+  id: LANG-CC-JV-C01
+  apply_as: code_engineer
+  normative: >
+    Java code MUST use explicit and appropriate types. Overuse of
+    raw types, unchecked casts, or suppressed warnings MUST NOT
+    be introduced.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - preserve_compile_time_safety
+      - reduce_runtime_type_errors
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - type_checker
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - java_type_system
+    language:
+      - java
+    risk:
+      - type_safety_violation
+      - runtime_class_cast
+    severity:
+      - high
+    reason:
+      - type_explicitness
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - type_safety
+      - compile_time_verification

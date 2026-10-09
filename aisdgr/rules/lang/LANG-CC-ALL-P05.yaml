@@ -1,0 +1,63 @@
+# ==============================================================================
+# LANG-CC-ALL-P05.yaml
+# Deterministic Behavior
+# Source: CCS-STD-001
+# ==============================================================================
+
+execution:
+  id: LANG-CC-ALL-P05
+  apply_as: code_engineer
+  normative: >
+    Code MUST exhibit deterministic and reproducible behavior.
+    Hidden state, non-deterministic side effects, or time-dependent
+    logic MUST NOT exist unless explicitly modeled and documented.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - ensure_reproducibility
+      - predictable_execution
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - behavior_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - all_languages
+    language:
+      - all
+    risk:
+      - non_deterministic_execution
+    severity:
+      - high
+    reason:
+      - behavioral_uncertainty
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - reproducibility
+      - debuggability

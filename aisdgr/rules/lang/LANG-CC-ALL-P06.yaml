@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-ALL-P06.yaml
+# Explicit Control Flow
+# Source: CCS-STD-002, CCS-STD-003
+# ==============================================================================
+
+execution:
+  id: LANG-CC-ALL-P06
+  apply_as: code_engineer
+  normative: >
+    Control flow and state transitions MUST be explicit.
+    Code MUST NOT rely on undeclared external dependencies,
+    environment-specific assumptions, or implicit runtime context.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_opaque_behavior
+      - no_hidden_dependencies
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - dependency_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - all_languages
+    language:
+      - all
+    risk:
+      - hidden_control_flow
+      - implicit_dependency
+    severity:
+      - high
+    reason:
+      - execution_opacity
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - code_transparency
+      - portability

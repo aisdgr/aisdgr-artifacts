@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-GO-C02.yaml
+# Minimal Interfaces
+# Source: CCS-GO-004, CCS-GO-005
+# ==============================================================================
+
+execution:
+  id: LANG-CC-GO-C02
+  apply_as: code_engineer
+  normative: >
+    Interfaces MUST be minimal and MUST expose only the methods
+    actually required. Interfaces SHOULD be defined at the point
+    of use.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - improve_testability
+      - reduce_coupling
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - interface_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - go_interface_design
+    language:
+      - go
+    risk:
+      - over_abstraction
+      - tight_coupling
+    severity:
+      - medium
+    reason:
+      - interface_minimality
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: advisory
+    affected_capabilities:
+      - testability
+      - decoupling

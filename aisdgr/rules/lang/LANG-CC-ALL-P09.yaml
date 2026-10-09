@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-ALL-P09.yaml
+# Intent-Revealing Structure
+# Source: CCS-STD-005
+# ==============================================================================
+
+execution:
+  id: LANG-CC-ALL-P09
+  apply_as: code_engineer
+  normative: >
+    Code SHOULD be structured to clearly reveal intent. Naming,
+    decomposition, and organization SHOULD favor clarity over
+    brevity or cleverness.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - improve_maintainability
+      - long_term_review_efficiency
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - readability_checker
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+      - code_review
+    scope:
+      - all_languages
+    language:
+      - all
+    risk:
+      - obscured_intent
+    severity:
+      - medium
+    reason:
+      - maintainability_degradation
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: advisory
+    affected_capabilities:
+      - code_readability
+      - maintenance_cost

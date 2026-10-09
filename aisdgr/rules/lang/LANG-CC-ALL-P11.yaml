@@ -1,0 +1,62 @@
+# ==============================================================================
+# LANG-CC-ALL-P11.yaml
+# Boundary Validation
+# Source: CCS-STD-006
+# ==============================================================================
+
+execution:
+  id: LANG-CC-ALL-P11
+  apply_as: code_engineer
+  normative: >
+    Inputs at system boundaries SHOULD be validated explicitly.
+    Validation logic SHOULD be clearly located and typed.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_undefined_behavior_propagation
+      - robustness_at_boundaries
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - boundary_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - all_languages
+    language:
+      - all
+    risk:
+      - unvalidated_input
+    severity:
+      - medium
+    reason:
+      - boundary_weakness
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: advisory
+    affected_capabilities:
+      - input_safety
+      - robustness

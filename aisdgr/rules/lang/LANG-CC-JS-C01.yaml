@@ -1,0 +1,63 @@
+# ==============================================================================
+# LANG-CC-JS-C01.yaml
+# Explicit Variable Declaration
+# Source: CCS-JS-001
+# ==============================================================================
+
+execution:
+  id: LANG-CC-JS-C01
+  apply_as: code_engineer
+  normative: >
+    Variables MUST be declared explicitly using const or let.
+    var MUST NOT be used.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_scope_leakage
+      - no_implicit_globals
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - lint_checker
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - javascript_variable_declaration
+    language:
+      - javascript
+    risk:
+      - scope_leakage
+      - hoisting_issue
+    severity:
+      - high
+    reason:
+      - variable_declaration_explicitness
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - scope_safety
+      - variable_control

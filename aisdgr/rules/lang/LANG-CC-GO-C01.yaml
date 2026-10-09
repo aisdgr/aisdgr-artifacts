@@ -1,0 +1,63 @@
+# ==============================================================================
+# LANG-CC-GO-C01.yaml
+# Concurrency Ownership
+# Source: CCS-GO-003
+# ==============================================================================
+
+execution:
+  id: LANG-CC-GO-C01
+  apply_as: code_engineer
+  normative: >
+    Concurrency using goroutines and channels MUST clearly define
+    ownership, lifecycle, and termination conditions.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_goroutine_leaks
+      - prevent_race_conditions
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - concurrency_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - go_concurrency
+    language:
+      - go
+    risk:
+      - goroutine_leak
+      - data_race
+    severity:
+      - high
+    reason:
+      - concurrency_safety
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - concurrency_safety
+      - runtime_reliability

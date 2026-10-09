@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-ALL-P03.yaml
+# Explicit Governance
+# Source: CGG-PR-003
+# ==============================================================================
+
+execution:
+  id: LANG-CC-ALL-P03
+  apply_as: code_engineer
+  normative: >
+    AI MUST NOT act on implicit intent or inferred authority.
+    All AI behavior MUST be derived from explicitly declared constraints
+    or instructions.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - no_ai_action_without_explicit_governance
+      - prevent_inferred_authority
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - explicit_complier
+    human:
+      - governance_author
+    system:
+      - governance_enforcer
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+      - code_review
+    scope:
+      - all_languages
+    language:
+      - all
+    risk:
+      - unauthorized_ai_action
+    severity:
+      - high
+    reason:
+      - implicit_intent_violation
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - governance_integrity
+      - authorization_boundary

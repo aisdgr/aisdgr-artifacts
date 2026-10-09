@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-PY-C01.yaml
+# Explicit Exception Handling
+# Source: CCS-PY-002
+# ==============================================================================
+
+execution:
+  id: LANG-CC-PY-C01
+  apply_as: code_engineer
+  normative: >
+    Exceptions MUST be handled explicitly. Broad exception handling
+    (e.g., bare except) MUST NOT be used unless fully justified
+    and documented.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_hidden_control_flow
+      - prevent_masked_failures
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - exception_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - python_exception_handling
+    language:
+      - python
+    risk:
+      - masked_exception
+      - hidden_control_flow
+    severity:
+      - high
+    reason:
+      - exception_explicitness
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - error_traceability
+      - control_flow_visibility

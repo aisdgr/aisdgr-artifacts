@@ -1,0 +1,67 @@
+# ==============================================================================
+# LANG-CC-ALL-P04.yaml
+# Violation Visibility
+# Source: CGG-PR-004, CGG-ENF-002, CGG-ENF-003
+# ==============================================================================
+
+execution:
+  id: LANG-CC-ALL-P04
+  apply_as: code_engineer
+  normative: >
+    Violations of coding standards MUST be surfaced explicitly and
+    MUST NOT be silently corrected or hidden. AI execution MAY
+    continue in the presence of violations, but violations MUST
+    remain visible and traceable.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - visibility_over_silent_correction
+      - violations_are_evidence_not_noise
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - violation_reporter
+    human:
+      - violation_reviewer
+    system:
+      - violation_tracker
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+      - code_review
+      - validation
+    scope:
+      - all_languages
+    language:
+      - all
+    risk:
+      - silent_mutation
+      - governance_evidence_loss
+    severity:
+      - high
+    reason:
+      - violation_visibility_required
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - audit_trail
+      - governance_transparency

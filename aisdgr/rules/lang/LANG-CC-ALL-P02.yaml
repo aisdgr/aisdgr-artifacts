@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-ALL-P02.yaml
+# Validity vs Correctness
+# Source: CGG-PR-002
+# ==============================================================================
+
+execution:
+  id: LANG-CC-ALL-P02
+  apply_as: code_engineer
+  normative: >
+    AI MUST ensure structural validity of generated code and MUST NOT
+    assume semantic correctness. Semantic and business correctness
+    are human responsibilities.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - validity_and_correctness_are_distinct_responsibilities
+      - ai_responsible_for_structural_validity_only
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - structural_validator
+    human:
+      - semantic_reviewer
+    system:
+      - validity_checker
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+      - code_review
+    scope:
+      - all_languages
+    language:
+      - all
+    risk:
+      - semantic_overreach
+    severity:
+      - high
+    reason:
+      - ai_exceeding_validity_scope
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - code_quality_assurance
+      - review_scope_boundary

@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-JV-C02.yaml
+# Controlled Inheritance
+# Source: CCS-JAVA-002
+# ==============================================================================
+
+execution:
+  id: LANG-CC-JV-C02
+  apply_as: code_engineer
+  normative: >
+    Inheritance SHOULD be used sparingly. Composition SHOULD be
+    preferred over inheritance unless polymorphic substitution
+    is explicitly required.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - reduce_coupling
+      - improve_maintainability
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - structure_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - java_class_design
+    language:
+      - java
+    risk:
+      - deep_inheritance_hierarchy
+      - fragile_base_class
+    severity:
+      - medium
+    reason:
+      - inheritance_control
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: advisory
+    affected_capabilities:
+      - maintainability
+      - coupling_reduction

@@ -1,0 +1,63 @@
+# ==============================================================================
+# LANG-CC-JV-C04.yaml
+# Exception Discipline
+# Source: CCS-JAVA-004
+# ==============================================================================
+
+execution:
+  id: LANG-CC-JV-C04
+  apply_as: code_engineer
+  normative: >
+    Exceptions MUST NOT be swallowed or silently ignored. Checked
+    exceptions SHOULD be used to represent recoverable conditions.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - preserve_meaningful_error_propagation
+      - prevent_hidden_failure
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - exception_flow_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - java_exception_handling
+    language:
+      - java
+    risk:
+      - swallowed_exception
+      - masked_failure
+    severity:
+      - high
+    reason:
+      - exception_transparency
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - error_traceability
+      - failure_visibility

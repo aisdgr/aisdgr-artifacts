@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-RS-C03.yaml
+# Lifetime Contracts
+# Source: CCS-RS-006
+# ==============================================================================
+
+execution:
+  id: LANG-CC-RS-C03
+  apply_as: code_engineer
+  normative: >
+    Public APIs SHOULD make ownership and lifetime expectations
+    explicit through type signatures and documentation.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - clarify_api_usage
+      - prevent_misuse_by_callers
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - api_contract_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - rust_public_api
+      - rust_lifetime_annotations
+    language:
+      - rust
+    risk:
+      - implicit_lifetime_assumption
+      - api_misuse
+    severity:
+      - medium
+    reason:
+      - lifetime_explicitness
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: advisory
+    affected_capabilities:
+      - api_usability
+      - contract_clarity

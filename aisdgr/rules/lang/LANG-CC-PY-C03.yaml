@@ -1,0 +1,63 @@
+# ==============================================================================
+# LANG-CC-PY-C03.yaml
+# Boundary Validation
+# Source: CCS-PY-004
+# ==============================================================================
+
+execution:
+  id: LANG-CC-PY-C03
+  apply_as: code_engineer
+  normative: >
+    External inputs (e.g., CLI arguments, API requests) SHOULD be
+    validated and typed at system boundaries.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - ensure_correctness_of_external_inputs
+      - robustness_at_boundaries
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - boundary_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - python_input_validation
+    language:
+      - python
+    risk:
+      - unvalidated_input
+      - injection_attack
+    severity:
+      - medium
+    reason:
+      - input_safety
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: advisory
+    affected_capabilities:
+      - input_safety
+      - robustness

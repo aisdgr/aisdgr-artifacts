@@ -1,0 +1,63 @@
+# ==============================================================================
+# LANG-CC-RS-C02.yaml
+# No Unsafe Code
+# Source: CCS-RS-002
+# ==============================================================================
+
+execution:
+  id: LANG-CC-RS-C02
+  apply_as: code_engineer
+  normative: >
+    Use of unsafe code MUST be avoided. If unsafe is required,
+    its scope MUST be minimal and explicitly justified and documented.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - preserve_rust_safety_guarantees
+      - maintain_audibility
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - unsafe_scanner
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - rust_unsafe_blocks
+    language:
+      - rust
+    risk:
+      - undefined_behavior
+      - memory_safety_bypass
+    severity:
+      - critical
+    reason:
+      - unsafe_minimization
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - safety_guarantees
+      - audit_trail

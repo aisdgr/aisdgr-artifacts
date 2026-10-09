@@ -1,0 +1,61 @@
+# ==============================================================================
+# LANG-CC-JV-C03.yaml
+# Explicit Null Handling
+# Source: CCS-JAVA-003
+# ==============================================================================
+
+execution:
+  id: LANG-CC-JV-C03
+  apply_as: code_engineer
+  normative: >
+    Null handling MUST be explicit. APIs SHOULD avoid returning null
+    and SHOULD use Optional or clearly documented null contracts.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_nullpointerexception_failures
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - null_safety_checker
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - java_null_safety
+    language:
+      - java
+    risk:
+      - nullpointerexception
+    severity:
+      - high
+    reason:
+      - null_safety
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - runtime_safety
+      - null_pointer_prevention

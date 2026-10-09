@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-ALL-P07.yaml
+# Sensitive Data Safety
+# Source: CCS-STD-004
+# ==============================================================================
+
+execution:
+  id: LANG-CC-ALL-P07
+  apply_as: code_engineer
+  normative: >
+    Sensitive data including secrets, credentials, tokens, personal data,
+    or internal confidential values MUST NOT be logged, hard-coded,
+    or exposed in generated code.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - prevent_sensitive_data_leakage
+      - ai_generated_code_security
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - security_reviewer
+    system:
+      - security_scanner
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - all_languages
+    language:
+      - all
+    risk:
+      - data_leakage
+      - security_breach
+    severity:
+      - critical
+    reason:
+      - sensitive_data_exposure
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - data_security
+      - compliance

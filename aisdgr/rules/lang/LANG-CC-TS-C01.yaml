@@ -1,0 +1,64 @@
+# ==============================================================================
+# LANG-CC-TS-C01.yaml
+# Strict Type Checking
+# Source: CCS-TS-001
+# ==============================================================================
+
+execution:
+  id: LANG-CC-TS-C01
+  apply_as: code_engineer
+  normative: >
+    TypeScript projects MUST enable strict type checking. Use of
+    any MUST be avoided unless explicitly justified and locally
+    constrained.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - enforce_compile_time_guarantees
+      - prevent_unsafe_assumptions
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - type_checker
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - typescript_type_system
+    language:
+      - typescript
+    risk:
+      - type_safety_bypass
+      - any_usage
+    severity:
+      - high
+    reason:
+      - strict_typing
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - type_safety
+      - compile_time_verification

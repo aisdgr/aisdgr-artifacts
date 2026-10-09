@@ -1,0 +1,62 @@
+# ==============================================================================
+# LANG-CC-ALL-P10.yaml
+# Immutable Preference
+# Source: Cross-language abstraction (CCS-JAVA-005, CCS-JS-005, CCS-PY-003, CCS-RS-005)
+# ==============================================================================
+
+execution:
+  id: LANG-CC-ALL-P10
+  apply_as: code_engineer
+  normative: >
+    Data SHOULD be immutable where practical. Mutation MUST be
+    minimized and explicitly scoped.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - improve_reasoning_safety
+      - reduce_accidental_side_effects
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - mutability_analyzer
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - all_languages
+    language:
+      - all
+    risk:
+      - accidental_mutation
+    severity:
+      - medium
+    reason:
+      - state_safety
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: advisory
+    affected_capabilities:
+      - thread_safety
+      - debuggability

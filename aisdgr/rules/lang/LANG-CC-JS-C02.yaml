@@ -1,0 +1,62 @@
+# ==============================================================================
+# LANG-CC-JS-C02.yaml
+# Strict Equality
+# Source: CCS-JS-002
+# ==============================================================================
+
+execution:
+  id: LANG-CC-JS-C02
+  apply_as: code_engineer
+  normative: >
+    Strict equality (=== and !==) MUST be used. Loose equality
+    (== and !=) MUST NOT be used.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - avoid_implicit_type_coercion
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - lint_checker
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - javascript_comparison
+    language:
+      - javascript
+    risk:
+      - type_coercion_bug
+      - ambiguous_comparison
+    severity:
+      - high
+    reason:
+      - equality_strictness
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - type_safety
+      - comparison_correctness

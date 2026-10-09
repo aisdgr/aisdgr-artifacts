@@ -1,0 +1,65 @@
+# ==============================================================================
+# LANG-CC-RS-C01.yaml
+# Ownership Correctness
+# Source: CCS-RS-001
+# ==============================================================================
+
+execution:
+  id: LANG-CC-RS-C01
+  apply_as: code_engineer
+  normative: >
+    Code MUST respect Rust ownership and borrowing rules. Lifetimes,
+    mutability, and aliasing MUST be explicit and enforced by
+    the compiler.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - guarantee_memory_safety
+      - prevent_data_races
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - borrow_checker
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - rust_ownership
+      - rust_borrowing
+    language:
+      - rust
+    risk:
+      - memory_safety_violation
+      - data_race
+    severity:
+      - critical
+    reason:
+      - ownership_correctness
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - memory_safety
+      - concurrency_safety

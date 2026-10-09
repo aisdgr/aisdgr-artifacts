@@ -1,0 +1,65 @@
+# ==============================================================================
+# LANG-CC-ALL-P01.yaml
+# Constrained Execution
+# Source: CGG-PR-001, CCS-STD-007, CGG-ENF-001
+# ==============================================================================
+
+execution:
+  id: LANG-CC-ALL-P01
+  apply_as: code_engineer
+  normative: >
+    AI MUST act as a constrained executor and MUST comply with all
+    applicable coding standards. AI MUST NOT reinterpret, weaken,
+    or bypass declared constraints.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - ai_is_constrained_executor_not_autonomous_designer
+      - enforce_full_compliance_with_coding_standards
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_complier
+    human:
+      - standard_author
+    system:
+      - compliance_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+      - code_review
+    scope:
+      - all_languages
+      - all_ai_generated_code
+    language:
+      - all
+    risk:
+      - governance_bypass
+    severity:
+      - high
+    reason:
+      - ai_autonomy_overreach
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - code_governance
+      - standard_compliance

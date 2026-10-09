@@ -1,0 +1,63 @@
+# ==============================================================================
+# LANG-CC-PY-C02.yaml
+# Deterministic Logic
+# Source: CCS-PY-005
+# ==============================================================================
+
+execution:
+  id: LANG-CC-PY-C02
+  apply_as: code_engineer
+  normative: >
+    Core logic MUST avoid hidden state, non-deterministic behavior,
+    or side effects that are not explicitly expressed.
+
+governance:
+  version: "1.0.0"
+  status: draft
+  owner: aisdgr
+
+  # -------------------------------------------------------------------------
+  # Intent
+  # -------------------------------------------------------------------------
+  intent:
+    rationale:
+      - maintain_predictable_execution
+      - ensure_testability
+
+  # -------------------------------------------------------------------------
+  # Responsibilities
+  # -------------------------------------------------------------------------
+  responsibilities:
+    ai:
+      - code_generator
+    human:
+      - code_reviewer
+    system:
+      - behavior_validator
+
+  # -------------------------------------------------------------------------
+  # Applicability Context
+  # -------------------------------------------------------------------------
+  applicability_context:
+    stage:
+      - code_generation
+    scope:
+      - python_core_logic
+    language:
+      - python
+    risk:
+      - hidden_state
+      - non_deterministic_result
+    severity:
+      - high
+    reason:
+      - deterministic_enforcement
+
+  # -------------------------------------------------------------------------
+  # Governance Impact
+  # -------------------------------------------------------------------------
+  governance_impact:
+    level: blocking
+    affected_capabilities:
+      - reproducibility
+      - testability
