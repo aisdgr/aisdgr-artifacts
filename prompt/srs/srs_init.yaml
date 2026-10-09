@@ -1,0 +1,22 @@
+id: srs_init_v1
+document: SRS
+mode: init
+
+permissions:
+  generate:
+    srs: true
+    car: false
+    acr: false
+
+inputs:
+  - name: goal
+    type: text
+    required: true
+
+outputs:
+  - name: srs
+    format: markdown
+
+constraints:
+  - MUST follow SRS standard structure
+  - MUST NOT assume design or implementation

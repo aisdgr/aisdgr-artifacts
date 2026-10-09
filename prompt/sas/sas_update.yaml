@@ -1,0 +1,12 @@
+id: sas_update
+type: update
+artifact: SAS
+inputs:
+  - approved_change
+  - srs
+  - sas
+outputs:
+  - sas
+rules:
+  validate: false
+  generate_car: false

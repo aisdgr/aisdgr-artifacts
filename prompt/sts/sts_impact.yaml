@@ -1,0 +1,17 @@
+id: sts_impact
+type: analysis
+artifact: STS
+
+inputs:
+  - approved_change
+  - srs
+  - sas
+  - sds
+  - sts
+
+outputs:
+  - sts_impact
+
+rules:
+  modify_artifact: false
+  generate_car: false

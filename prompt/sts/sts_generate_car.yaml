@@ -1,0 +1,32 @@
+id: sts_generate_car
+type: responsibility
+artifact: STS
+
+description: >
+  Generate Change Analysis Report (CAR) for STS
+  AFTER validation (check & audit) has completed successfully.
+
+inputs:
+  - approved_change
+  - sts
+  - check_report
+  - audit_report
+
+outputs:
+  - sts_car
+
+rules:
+  require_validation: true
+  validation_sources:
+    - check_report
+    - audit_report
+  generate_car: true
+  modify_artifact: false
+
+responsibility:
+  producer: required
+  gatekeeper: optional
+
+notes:
+  - MUST NOT run before validation
+  - CAR is the sole responsibility artifact for STS

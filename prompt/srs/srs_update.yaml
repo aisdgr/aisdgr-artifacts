@@ -1,0 +1,34 @@
+id: srs_update_v1
+document: SRS
+mode: update
+
+permissions:
+  generate:
+    srs: true
+    car: true
+    acr: false
+
+responsibility:
+  producer:
+    - structure_valid
+    - format_valid
+    - checkable
+
+inputs:
+  - name: change_request
+    type: text
+    required: true
+  - name: srs
+    type: file
+    format: markdown
+    required: true
+
+outputs:
+  - name: srs
+    format: markdown
+  - name: car
+    format: markdown
+
+constraints:
+  - MUST preserve SRS required sections
+  - MUST NOT assume audit pass

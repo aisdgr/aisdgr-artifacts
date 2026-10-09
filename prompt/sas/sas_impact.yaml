@@ -1,0 +1,12 @@
+id: sas_impact
+type: analysis
+artifact: SAS
+inputs:
+  - approved_change
+  - srs
+  - sas
+outputs:
+  - sas_impact
+rules:
+  modify_artifact: false
+  generate_car: false

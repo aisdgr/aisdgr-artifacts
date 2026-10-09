@@ -1,0 +1,16 @@
+id: sds_impact
+type: analysis
+artifact: SDS
+
+inputs:
+  - approved_change
+  - srs
+  - sas
+  - sds
+
+outputs:
+  - sds_impact
+
+rules:
+  modify_artifact: false
+  generate_car: false

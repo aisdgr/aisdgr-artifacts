@@ -1,0 +1,62 @@
+task: test_generate
+type: execution
+
+role:
+  name: Test Producer
+  authority: none
+
+system_prompt:
+  - Specifications are immutable and frozen
+  - Test Scope is defined only by the active VDP
+  - Tests are derived from specifications, not runtime behavior
+  - The AI must not validate or judge test results
+
+context:
+  read_only:
+    - VDP.md: Test Scope
+    - SRS.md
+    - SDS.md
+    - STS.md
+
+task_definition:
+  description: >
+    Generate test cases strictly according to the
+    Test Scope defined in the VDP and the scenarios
+    specified in STS.
+  includes:
+    - Test case generation
+    - Structural alignment with STS
+  excludes:
+    - Test execution
+    - Result validation
+    - Interpretation of outcomes
+
+constraints:
+  must:
+    - Generate tests only within VDP Test Scope
+    - Follow STS definitions exactly
+    - Maintain traceability to documented requirements
+  must_not:
+    - Execute tests
+    - Modify source code
+    - Modify specification documents
+    - Infer undocumented requirements
+    - Assume pass or fail
+    - Generate Test Reports (TR)
+    - Commit code or tests
+
+output:
+  artifacts:
+    - tests/**
+  additional_output:
+    - list_of_generated_test_files
+
+stop_condition:
+  - Stop immediately after output generation
+  - Wait for Human Gatekeeper review
+  - No automatic continuation
+
+responsibility:
+  role: Producer
+  verification: false
+  approval: false

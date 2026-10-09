@@ -1,0 +1,25 @@
+id: srs_impact_v1
+document: SRS
+mode: impact
+
+permissions:
+  generate:
+    srs: false
+    car: false
+    acr: false
+
+inputs:
+  - name: change_request
+    type: text
+    required: true
+  - name: srs
+    type: file
+    format: markdown
+    required: true
+
+outputs:
+  - name: impact_report
+    format: markdown
+
+constraints:
+  - MUST NOT modify SRS

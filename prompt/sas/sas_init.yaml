@@ -1,0 +1,10 @@
+id: sas_init
+type: generate
+artifact: SAS
+inputs:
+  - srs
+outputs:
+  - sas
+rules:
+  validate: false
+  generate_car: false

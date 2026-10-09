@@ -1,0 +1,23 @@
+id: vdp_init
+type: plan
+artifact: VDP
+
+description: >
+  Generate initial Version Development Plan (VDP) from version baseline documents
+  on the target version branch. VDP schedules Code/Test/Run-Test scope.
+
+inputs:
+  - version_branch
+  - baseline_srs
+  - baseline_sas
+  - baseline_sds
+  - baseline_sts
+
+outputs:
+  - vdp
+
+rules:
+  validate: false
+  generate_car: false
+  generate_tr: false
+  baseline_only: true

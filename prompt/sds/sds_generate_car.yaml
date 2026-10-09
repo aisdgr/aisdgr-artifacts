@@ -1,0 +1,32 @@
+id: sds_generate_car
+type: responsibility
+artifact: SDS
+
+description: >
+  Generate Change Analysis Report (CAR) for SDS
+  AFTER validation (check & audit) has completed successfully.
+
+inputs:
+  - approved_change
+  - sds
+  - check_report
+  - audit_report
+
+outputs:
+  - sds_car
+
+rules:
+  require_validation: true
+  validation_sources:
+    - check_report
+    - audit_report
+  generate_car: true
+  modify_artifact: false
+
+responsibility:
+  producer: required
+  gatekeeper: optional
+
+notes:
+  - MUST NOT run before validation
+  - CAR is the sole responsibility artifact for SDS

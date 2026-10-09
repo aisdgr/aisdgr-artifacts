@@ -1,0 +1,14 @@
+id: sds_init
+type: generate
+artifact: SDS
+
+inputs:
+  - srs
+  - sas
+
+outputs:
+  - sds
+
+rules:
+  validate: false
+  generate_car: false

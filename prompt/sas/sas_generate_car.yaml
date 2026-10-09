@@ -1,0 +1,12 @@
+id: sas_generate_car
+type: responsibility
+artifact: SAS
+inputs:
+  - approved_change
+  - sas
+  - check_report
+  - audit_report
+outputs:
+  - sas_car
+rules:
+  require_validation: true

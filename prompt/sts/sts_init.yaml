@@ -1,0 +1,15 @@
+id: sts_init
+type: generate
+artifact: STS
+
+inputs:
+  - srs
+  - sas
+  - sds
+
+outputs:
+  - sts
+
+rules:
+  validate: false
+  generate_car: false

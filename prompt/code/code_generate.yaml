@@ -1,0 +1,58 @@
+task: code_generate
+type: execution
+
+role:
+  name: Code Producer
+  authority: none
+
+system_prompt:
+  - Specifications are immutable
+  - Code Scope is defined only by the active VDP
+  - The AI must not validate or approve correctness
+  - The AI must not reinterpret requirements
+
+context:
+  read_only:
+    - VDP.md: Code Scope
+    - SRS.md
+    - SDS.md
+
+task_definition:
+  description: >
+    Generate source code strictly according to the
+    Code Scope defined in the VDP.
+  includes:
+    - Initial code generation
+    - Structural alignment with SRS and SDS
+  excludes:
+    - Validation
+    - Testing
+    - Verification
+
+constraints:
+  must:
+    - Generate code only within VDP Code Scope
+    - Follow SRS and SDS definitions exactly
+  must_not:
+    - Validate or approve results
+    - Execute or generate tests
+    - Generate Test Reports (TR)
+    - Commit code
+    - Infer missing requirements
+    - Add placeholder or mock logic beyond specifications
+
+output:
+  artifacts:
+    - src/**
+  additional_output:
+    - list_of_modified_files
+
+stop_condition:
+  - Stop immediately after output generation
+  - Wait for Human Gatekeeper review
+  - No automatic continuation
+
+responsibility:
+  role: Producer
+  verification: false
+  approval: false

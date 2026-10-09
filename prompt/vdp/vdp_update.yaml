@@ -1,0 +1,25 @@
+id: vdp_update
+type: plan_update
+artifact: VDP
+
+description: >
+  Update VDP using version baseline documents on the target branch and the baseline diff
+  from previous baseline_commit to current HEAD. CARs are NOT required inputs.
+
+inputs:
+  - version_branch
+  - vdp
+  - baseline_srs
+  - baseline_sas
+  - baseline_sds
+  - baseline_sts
+  - baseline_diff
+
+outputs:
+  - vdp
+
+rules:
+  validate: false
+  generate_car: false
+  generate_tr: false
+  baseline_only: true

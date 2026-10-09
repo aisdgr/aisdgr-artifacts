@@ -1,0 +1,34 @@
+id: srs_generate_car
+type: responsibility
+artifact: SRS
+
+description: >
+  Generate Change Analysis Report (CAR) for SRS
+  AFTER validation (check & audit) has completed successfully.
+  This pattern establishes producer responsibility for the SRS change.
+
+inputs:
+  - approved_change        # approved_change.txt
+  - srs                    # docs/SRS.md
+  - check_report           # reports/SRS_check.md
+  - audit_report           # reports/SRS_audit.md
+
+outputs:
+  - srs_car                # reports/SRS_CAR.md
+
+rules:
+  require_validation: true
+  validation_sources:
+    - check_report
+    - audit_report
+  generate_car: true
+  modify_artifact: false
+
+responsibility:
+  producer: required
+  gatekeeper: optional
+
+notes:
+  - This pattern MUST NOT be executed before validation.
+  - CAR represents responsibility establishment for document changes.
+  - If validation reports are missing or failed, execution MUST stop.
