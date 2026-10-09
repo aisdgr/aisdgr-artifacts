@@ -1,0 +1,85 @@
+# TES — TASK EXECUTION SPECIFICATION
+
+## ID
+
+TES-[SCOPE]-[SERIAL]
+
+---
+
+## DESCRIPTION
+
+---
+
+## GOAL
+
+---
+
+## EXECUTION MODE / TYPE
+
+- MODE
+  - <ANALYSIS | CHAT | EXECUTION>
+
+- TYPE
+  - <ADD | CHANGE | FIX | REFACTOR>
+
+---
+
+## BOUNDARY
+
+---
+
+## SOURCE INPUT
+
+### SYSTEM
+- <KIND>:<NAME>:<PATH>
+
+### USER
+- <KIND>:<NAME>:<PATH>
+
+---
+
+## RESULT CONDITION (OPTIONAL)
+
+---
+
+### SUCCESS CONDITION
+
+**SCENARIO-BASED**
+
+Scenario <NAME>:
+- GIVEN <CONTEXT>
+- WHEN <EVENT>
+- THEN <EXPECTED OUTCOME>
+
+**REFERENCE-BASED**
+
+- <KIND>:<ID>
+- <KIND>:<ID>
+
+---
+
+### FAILURE SEMANTICS
+
+---
+
+### POST-RESULT HANDLING
+
+- ON SUCCESS:
+  - <CONTINUE | COMPLETE>
+
+- ON FAILURE:
+  - <RETRY | ABORT | ESCALATE>
+
+---
+
+## OUTPUT ARTIFACT
+
+- TYPE
+  - <DOCUMENT | SOURCE_CODE | TEST_CODE>
+
+- PATH
+  - <PATH>
+
+- LANGUAGE
+  - <EN-US | ZH-TW | JA-JP | ...>
+  - <PYTHON | TS | JAVA | GO | ...>
